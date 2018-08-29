@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "coverage": true,
+    "node_modules": true
+  },
+  "search.exclude": {
+    "data": true,
+    "dist": true,
+    "test/browser": true
+  }
+}

@@ -1,0 +1,166 @@
+import formattingTokens from './tokens'
+
+const match1 = /\d/ // 0 - 9
+const match2 = /\d\d/ // 00 - 99
+const match3 = /\d{3}/ // 000 - 999
+const match4 = /\d{4}/ // 0000 - 9999
+const match1to2 = /\d\d?/ // 0 - 99
+const matchSigned = /[+-]?\d+/ // -inf - inf
+const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
+const matchAbbreviation = /[A-Z]{3,4}/ // CET
+
+const parseTokenExpressions = {}
+const parseTokenFunctions = {}
+const parsers = {}
+
+function correctDayPeriod (time) {
+  const { afternoon } = time
+  if (afternoon !== undefined) {
+    const { hours } = time
+    if (afternoon) {
+      if (hours < 12) {
+        time.hours += 12
+      }
+    } else {
+      if (hours === 12) {
+        time.hours = 0
+      }
+    }
+    delete time.afternoon
+  }
+}
+
+function makeParser (format) {
+  const array = format.match(formattingTokens)
+  const { length } = array
+  for (let i = 0; i < length; ++i) {
+    const token = array[i]
+    const regex = parseTokenExpressions[token]
+    const parser = parseTokenFunctions[token]
+    if (parser) {
+      array[i] = { regex, parser }
+    } else {
+      array[i] = token.replace(/^\[|\]$/g, '')
+    }
+  }
+  return function (input) {
+    const time = {}
+    for (let i = 0, start = 0; i < length; ++i) {
+      const token = array[i]
+      if (typeof token === 'string') {
+        if (input.indexOf(token, start) !== start) {
+          const found = input.substr(start, token.length)
+          throw new Error(`Expected "${token}" at character ${start}, found "${found}".`)
+        }
+        start += token.length
+      } else {
+        const { regex, parser } = token
+        const part = input.substr(start)
+        const match = regex.exec(part)
+        if (!match || match.index !== 0) {
+          throw new Error(`Matching "${regex}" at character ${start} failed with "${part}".`)
+        }
+        const found = match[0]
+        parser.call(time, found)
+        start += found.length
+      }
+    }
+    correctDayPeriod(time)
+    return time
+  }
+}
+
+function parse (input, format) {
+  let parser = parsers[format]
+  if (!parser) {
+    parser = parsers[format] = makeParser(format)
+  }
+  return parser(input)
+}
+
+function addExpressionToken (token, regex) {
+  parseTokenExpressions[token] = regex
+}
+
+function addParseToken (token, property) {
+  if (typeof token === 'string') {
+    token = [token]
+  }
+  const callback = typeof property === 'string' ? function (input) {
+    this[property] = +input
+  } : property
+  for (let i = 0, length = token.length; i < length; ++i) {
+    parseTokenFunctions[token[i]] = callback
+  }
+}
+
+function offsetFromString (string) {
+  const matches = (string || '').match(matchOffset)
+  if (matches === null) {
+    return null
+  }
+  const chunk = matches[matches.length - 1] || []
+  const parts = (chunk + '').match(/([+-]|\d\d)/g) || ['-', 0, 0]
+  const minutes = +(parts[1] * 60) + +parts[2]
+  return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes
+}
+
+addExpressionToken('A', /[AP]M/i)
+addParseToken(['A'], function (input) {
+  this.afternoon = input === 'PM'
+})
+
+addExpressionToken('S', match1)
+addExpressionToken('SS', match2)
+addExpressionToken('SSS', match3)
+for (let token = 'S', factor = 100; factor >= 1; token += 'S', factor /= 10) {
+  addParseToken(token, function (input) {
+    this.milliseconds = +input * factor
+  })
+}
+
+addExpressionToken('s', match1to2)
+addExpressionToken('ss', match2)
+addParseToken(['s', 'ss'], 'seconds')
+
+addExpressionToken('m', match1to2)
+addExpressionToken('mm', match2)
+addParseToken(['m', 'mm'], 'minutes')
+
+addExpressionToken('H', match1to2)
+addExpressionToken('h', match1to2)
+addExpressionToken('HH', match2)
+addExpressionToken('hh', match2)
+addParseToken(['H', 'HH', 'h', 'hh'], 'hours')
+
+addExpressionToken('D', match1to2)
+addExpressionToken('DD', match2)
+addParseToken(['D', 'DD'], 'day')
+
+addExpressionToken('M', match1to2)
+addExpressionToken('MM', match2)
+addParseToken(['M', 'MM'], 'month')
+
+addExpressionToken('Y', matchSigned)
+addExpressionToken('YY', match2)
+addExpressionToken('YYYY', match4)
+addParseToken(['Y', 'YYYY'], 'year')
+addParseToken('YY', function (input) {
+  input = +input
+  this.year = input + (input > 68 ? 1900 : 2000)
+})
+
+addExpressionToken('z', matchAbbreviation)
+addParseToken('z', function (input) {
+  const zone = this.zone || (this.zone = {})
+  zone.abbreviation = input
+})
+
+addExpressionToken('Z', matchOffset)
+addExpressionToken('ZZ', matchOffset)
+addParseToken(['Z', 'ZZ'], function (input) {
+  const zone = this.zone || (this.zone = {})
+  zone.offset = offsetFromString(input)
+})
+
+export default parse

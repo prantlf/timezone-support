@@ -1,0 +1,77 @@
+{
+  "name": "timezone-support",
+  "version": "0.0.1",
+  "description": "Low-level time zone listing and date converting. Serves for adding time support to high-level date libraries.",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "standard --verbose",
+    "compile": "rollup -c",
+    "compile:debug": "rollup -c rollup.config-debug.js",
+    "build": "npm run lint && npm run compile",
+    "build:debug": "npm run lint && npm run compile:debug",
+    "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
+    "check:debug": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage --coverageReporters=html",
+    "check:browser": "jest --testPathPattern browser.test.js",
+    "test": "npm run lint && npm run check",
+    "cover": "npm run build:debug && npm run check:debug",
+    "generate:browser-tests": "node util/generate-browser-tests",
+    "all": "npm run build && npm run check && npm run generate:browser-tests && npm run check:browser"
+  },
+  "standard": {
+    "ignore": [
+      "dist",
+      "src/data.js"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "test"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "dist/*.js"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 85,
+        "branches": 70,
+        "functions": 85,
+        "lines": 95
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prantlf/timezone-support.git"
+  },
+  "keywords": [
+    "timezone",
+    "tzdata",
+    "convert",
+    "offset",
+    "date",
+    "time"
+  ],
+  "author": "Ferdinand Prantl <prantlf@gmail.com> (http://prantl.tk/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prantlf/timezone-support/issues"
+  },
+  "homepage": "https://github.com/prantlf/timezone-support#readme",
+  "devDependencies": {
+    "connect": "^3.6.6",
+    "fs-extra": "^7.0.0",
+    "jasmine-core": "^3.2.1",
+    "jest": "^23.5.0",
+    "moment-timezone": "^0.5.21",
+    "puppeteer": "^1.7.0",
+    "rollup": "^0.65.0",
+    "rollup-plugin-terser": "^1.0.1",
+    "serve-static": "^1.13.2",
+    "standard": "^11.0.1",
+    "tiny-glob": "^0.2.2"
+  }
+}
