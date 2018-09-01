@@ -78,15 +78,15 @@ function addExpressionToken (token, regex) {
   parseTokenExpressions[token] = regex
 }
 
-function addParseToken (token, property) {
-  if (typeof token === 'string') {
-    token = [token]
+function addParseToken (tokens, property) {
+  if (typeof tokens === 'string') {
+    tokens = [ tokens ]
   }
   const callback = typeof property === 'string' ? function (input) {
     this[property] = +input
   } : property
-  for (let i = 0, length = token.length; i < length; ++i) {
-    parseTokenFunctions[token[i]] = callback
+  for (let token of tokens) {
+    parseTokenFunctions[token] = callback
   }
 }
 

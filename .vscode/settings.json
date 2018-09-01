@@ -4,8 +4,8 @@
     "node_modules": true
   },
   "search.exclude": {
-    "data": true,
-    "dist": true,
-    "test/browser": true
+    "**/src/lookup/data.js": true,
+    "**/dist/**": true,
+    "**/test/browser/**": true
   }
 }

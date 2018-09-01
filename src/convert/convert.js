@@ -23,11 +23,16 @@ function setTimeZone (time, timeZone) {
   return time
 }
 
-function getZonedTime (unixTime, timeZone) {
+function getZonedTime (date, timeZone) {
+  const gotUnixTime = typeof date === 'number'
+  const unixTime = gotUnixTime ? date : date.valueOf()
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
-  const time = getUTCTime(unixTime - offset * 60000)
-  const zone = { abbreviation, offset }
-  return { ...time, zone }
+  if (gotUnixTime || offset) {
+    date = new Date(unixTime - offset * 60000)
+  }
+  const time = getUTCTime(date)
+  time.zone = { abbreviation, offset }
+  return time
 }
 
 function getUnixTime (time, timeZone) {

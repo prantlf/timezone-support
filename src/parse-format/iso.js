@@ -22,7 +22,8 @@ function parseISOTime (input) {
 
 function changeToUTC (time) {
   const unixTime = getUnixTimeFromUTC(time)
-  return getUTCTime(unixTime + time.zone.offset * 60000)
+  const date = new Date(unixTime + time.zone.offset * 60000)
+  return getUTCTime(date)
 }
 
 function padToTwo (number) {

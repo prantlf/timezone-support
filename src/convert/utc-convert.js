@@ -2,8 +2,7 @@ function getUnixTimeFromUTC ({ year, month, day, hours, minutes, seconds = 0, mi
   return Date.UTC(year, month - 1, day, hours, minutes, seconds, milliseconds)
 }
 
-function getUTCTime (unixTime) {
-  const date = new Date(unixTime)
+function getUTCTime (date) {
   const year = date.getUTCFullYear()
   const month = date.getUTCMonth() + 1
   const day = date.getUTCDate()

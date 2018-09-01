@@ -30,13 +30,14 @@
     "lint": "standard --verbose",
     "compile": "rollup -c",
     "compile:debug": "rollup -c rollup.config-debug.js",
-    "build": "npm run lint && npm run compile",
-    "build:debug": "npm run lint && npm run compile:debug",
+    "build": "run-s lint compile",
+    "build:debug": "run-s lint compile:debug",
     "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
     "check:browser": "jest --testPathPattern browser.test.js",
-    "test": "npm run lint && npm run check",
+    "test": "run-s lint check",
+    "benchmark": "node perf",
     "generate:browser-tests": "node util/generate-browser-tests",
-    "all": "npm run build && npm run check && npm run generate:browser-tests && npm run check:browser"
+    "all": "run-s build check generate:browser-tests check:browser"
   },
   "standard": {
     "ignore": [
@@ -69,11 +70,13 @@
     }
   },
   "devDependencies": {
+    "benchmark": "^2.1.4",
     "connect": "^3.6.6",
     "fs-extra": "^7.0.0",
     "jasmine-core": "^3.2.1",
     "jest": "^23.5.0",
     "moment-timezone": "^0.5.21",
+    "npm-run-all": "^4.1.3",
     "puppeteer": "^1.7.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.65.0",
