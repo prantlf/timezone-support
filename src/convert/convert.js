@@ -23,11 +23,6 @@ function setTimeZone (time, timeZone) {
   return time
 }
 
-function changeTimeZone (time, timeZone) {
-  const unixTime = getUnixTimeForUTCTime(time)
-  return getZonedTime(unixTime + time.zone.offset * 60000, timeZone)
-}
-
 function getZonedTime (unixTime, timeZone) {
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   const time = getUTCTimeForUnixTime(unixTime - offset * 60000)
@@ -41,4 +36,4 @@ function getUnixTime (time, timeZone) {
   return unixTime + zone.offset * 60000
 }
 
-export { setTimeZone, changeTimeZone, getZonedTime, getUnixTime }
+export { setTimeZone, getZonedTime, getUnixTime }
