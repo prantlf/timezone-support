@@ -1,7 +1,4 @@
-import { getUTCZone } from '../lookup/utc'
-import {
-  getUnixTimeForUTCTime, getUTCTimeForUnixTime, changeTimeZoneToUTC
-} from './utc-convert'
+import { getUnixTimeForUTCTime, getUTCTimeForUnixTime } from './utc-convert'
 
 function findTransitionIndex (unixTime, timeZone) {
   const { untils } = timeZone
@@ -26,11 +23,6 @@ function setTimeZone (time, timeZone) {
   return time
 }
 
-function setTimeZoneToUTC (time) {
-  time.zone = getUTCZone()
-  return time
-}
-
 function changeTimeZone (time, timeZone) {
   const unixTime = getUnixTimeForUTCTime(time)
   return getZonedTime(unixTime + time.zone.offset * 60000, timeZone)
@@ -41,12 +33,6 @@ function getZonedTime (unixTime, timeZone) {
   const time = getUTCTimeForUnixTime(unixTime - offset * 60000)
   const zone = { abbreviation, offset }
   return { ...time, zone }
-}
-
-function getUTCTime (unixTime) {
-  const utcTime = getUTCTimeForUnixTime(unixTime)
-  const zone = getUTCZone()
-  return { ...utcTime, zone }
 }
 
 function getNativeDate (time, timeZone) {
@@ -61,12 +47,5 @@ function getUnixTime (time, timeZone) {
 }
 
 export default {
-  setTimeZone,
-  setTimeZoneToUTC,
-  changeTimeZone,
-  changeTimeZoneToUTC,
-  getZonedTime,
-  getUTCTime,
-  getNativeDate,
-  getUnixTime
+  setTimeZone, changeTimeZone, getZonedTime, getNativeDate, getUnixTime
 }

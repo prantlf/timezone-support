@@ -1,10 +1,9 @@
-import { getUTCZone } from '../lookup/utc'
-import { changeTimeZoneToUTC } from '../convert/utc-convert'
+import { getUnixTimeForUTCTime, getUTCTimeForUnixTime } from '../convert/utc-convert'
 
 const isoWithLetters = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{3}))?(?:Z|\+00:00)$/
 const isoWithoutLetters = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(\d{3})Z$/
 
-function parseUTCTimeFromISO (input) {
+function parseISOTime (input) {
   const expression = input.indexOf('-') > 0 ? isoWithLetters : isoWithoutLetters
   const match = expression.exec(input)
   if (match) {
@@ -15,9 +14,14 @@ function parseUTCTimeFromISO (input) {
     const minutes = parseInt(match[5])
     const seconds = parseInt(match[6])
     const milliseconds = parseInt(match[7])
-    const zone = getUTCZone()
+    const zone = { abbreviation: 'UTC', offset: 0 }
     return { year, month, day, hours, minutes, seconds, milliseconds, zone }
   }
+}
+
+function changeToUTC (time) {
+  const unixTime = getUnixTimeForUTCTime(time)
+  return getUTCTimeForUnixTime(unixTime + time.zone.offset * 60000)
 }
 
 function padToTwo (number) {
@@ -28,8 +32,8 @@ function padToThree (number) {
   return number > 99 ? number : number > 9 ? '0' + number : '00' + number
 }
 
-function formatZonedTimeToISO (time) {
-  let { year, month, day, hours, minutes, seconds, milliseconds } = changeTimeZoneToUTC(time)
+function formatISOTime (time) {
+  let { year, month, day, hours, minutes, seconds, milliseconds } = changeToUTC(time)
   hours = padToTwo(hours)
   minutes = padToTwo(minutes)
   seconds = padToTwo(seconds)
@@ -37,4 +41,4 @@ function formatZonedTimeToISO (time) {
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`
 }
 
-export default { parseUTCTimeFromISO, formatZonedTimeToISO }
+export default { parseISOTime, formatISOTime }

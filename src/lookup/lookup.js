@@ -37,18 +37,6 @@ function findTimeZone (alias) {
   return timeZone
 }
 
-const utc = {
-  name: 'Etc/UTC',
-  abbreviations: [ 'UTC' ],
-  offsets: [ 0 ],
-  untils: [ Infinity ],
-  population: 0
-}
-
-function getUTC () {
-  return utc
-}
-
 function addTimeZone (input) {
   const timeZone = typeof input === 'string' ? unpack(input) : input
   const { name } = timeZone
@@ -63,5 +51,5 @@ function linkTimeZone (input) {
 }
 
 export default {
-  initializeTimeZones, listTimeZones, findTimeZone, getUTC, addTimeZone, linkTimeZone
+  initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone
 }

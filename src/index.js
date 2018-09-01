@@ -4,11 +4,11 @@ import iso from './parse-format/iso'
 import data from './lookup/data'
 
 const {
-  initializeTimeZones, listTimeZones, findTimeZone, getUTC, addTimeZone, linkTimeZone
+  initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone
 } = lookup
 
 initializeTimeZones(data)
 
 export default {
-  listTimeZones, findTimeZone, getUTC, addTimeZone, linkTimeZone, ...convert, ...iso
+  listTimeZones, findTimeZone, addTimeZone, linkTimeZone, ...convert, ...iso
 }

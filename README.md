@@ -27,5 +27,5 @@ const berlinDate = getZonedTime(originalDate.valueOf(), berlin)
 // Scenario: convert time in a chosen time zone to the UTC timestamp
 const berlin = findTimeZone('Europe/Berlin')
 const berlinDate = { ... }
-const utcDate = new Date(getUnixTime(berlinlDate, berlin))
+const utcDate = getNativeDate(berlinlDate, berlin))
 ```

@@ -1,5 +1,3 @@
-import { getUTCZone } from '../lookup/utc'
-
 function getUnixTimeForUTCTime ({ year, month, day, hours, minutes, seconds = 0, milliseconds = 0 }) {
   return Date.UTC(year, month - 1, day, hours, minutes, seconds, milliseconds)
 }
@@ -16,13 +14,6 @@ function getUTCTimeForUnixTime (unixTime) {
   return { year, month, day, hours, minutes, seconds, milliseconds }
 }
 
-function changeTimeZoneToUTC (time) {
-  const unixTime = getUnixTimeForUTCTime(time)
-  const utcTime = getUTCTimeForUnixTime(unixTime + time.zone.offset * 60000)
-  const zone = getUTCZone()
-  return { ...utcTime, zone }
-}
-
 export {
-  getUnixTimeForUTCTime, getUTCTimeForUnixTime, changeTimeZoneToUTC
+  getUnixTimeForUTCTime, getUTCTimeForUnixTime
 }
