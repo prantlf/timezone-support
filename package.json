@@ -32,13 +32,11 @@
     "compile:debug": "rollup -c rollup.config-debug.js",
     "build": "npm run lint && npm run compile",
     "build:debug": "npm run lint && npm run compile:debug",
-    "check": "jest --testPathIgnorePatterns \"browser.test.js\"",
-    "check:debug": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
+    "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
     "check:browser": "jest --testPathPattern browser.test.js",
     "test": "npm run lint && npm run check",
-    "coverage": "npm run build:debug && npm run check:debug",
     "generate:browser-tests": "node util/generate-browser-tests",
-    "all": "npm run lint && npm run compile:debug && npm run check:debug && npm run compile && npm run check && npm run generate:browser-tests && npm run check:browser"
+    "all": "npm run build && npm run check && npm run generate:browser-tests && npm run check:browser"
   },
   "standard": {
     "ignore": [
@@ -55,7 +53,7 @@
     ],
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
-      "dist/*.js"
+      "dist/!(lookup-convert).js"
     ],
     "coverageReporters": [
       "html",
@@ -77,6 +75,7 @@
     "jest": "^23.5.0",
     "moment-timezone": "^0.5.21",
     "puppeteer": "^1.7.0",
+    "rimraf": "^2.6.2",
     "rollup": "^0.65.0",
     "rollup-plugin-terser": "^1.0.1",
     "serve-static": "^1.13.2",
