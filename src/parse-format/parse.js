@@ -5,6 +5,7 @@ const match2 = /\d\d/ // 00 - 99
 const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
+const matchAMPM = /[AP]M/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
 const matchAbbreviation = /[A-Z]{3,4}/ // CET
@@ -32,6 +33,9 @@ function correctDayPeriod (time) {
 
 function makeParser (format) {
   const array = format.match(formattingTokens)
+  if (!array) {
+    throw new Error(`Invalid format: "${format}".`)
+  }
   const { length } = array
   for (let i = 0; i < length; ++i) {
     const token = array[i]
@@ -49,8 +53,8 @@ function makeParser (format) {
       const token = array[i]
       if (typeof token === 'string') {
         if (input.indexOf(token, start) !== start) {
-          const found = input.substr(start, token.length)
-          throw new Error(`Expected "${token}" at character ${start}, found "${found}".`)
+          const part = input.substr(start, token.length)
+          throw new Error(`Expected "${token}" at character ${start}, found "${part}".`)
         }
         start += token.length
       } else {
@@ -60,9 +64,9 @@ function makeParser (format) {
         if (!match || match.index !== 0) {
           throw new Error(`Matching "${regex}" at character ${start} failed with "${part}".`)
         }
-        const found = match[0]
-        parser.call(time, found)
-        start += found.length
+        const value = match[0]
+        parser.call(time, value)
+        start += value.length
       }
     }
     correctDayPeriod(time)
@@ -87,17 +91,12 @@ function addParseToken (token, property) {
 }
 
 function offsetFromString (string) {
-  const matches = (string || '').match(matchOffset)
-  if (matches === null) {
-    return null
-  }
-  const chunk = matches[matches.length - 1] || []
-  const parts = (chunk + '').match(/([+-]|\d\d)/g) || ['-', 0, 0]
+  const parts = string.match(/([+-]|\d\d)/g)
   const minutes = +(parts[1] * 60) + +parts[2]
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes
 }
 
-addExpressionToken('A', /[AP]M/i)
+addExpressionToken('A', matchAMPM)
 addParseToken(['A'], function (input) {
   this.afternoon = input === 'PM'
 })

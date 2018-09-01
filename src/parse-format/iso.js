@@ -1,22 +1,23 @@
 import { getUnixTimeForUTCTime, getUTCTimeForUnixTime } from '../convert/utc-convert'
 
-const isoWithLetters = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{3}))?(?:Z|\+00:00)$/
-const isoWithoutLetters = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(\d{3})Z$/
+const isoWithLetters = /^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.(\d{3}))?(?:Z|\+00:00)$/
+const isoWithoutLetters = /^(\d{4})(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)(\d{3})Z$/
 
 function parseISOTime (input) {
   const expression = input.indexOf('-') > 0 ? isoWithLetters : isoWithoutLetters
   const match = expression.exec(input)
-  if (match) {
-    const year = parseInt(match[1])
-    const month = parseInt(match[2])
-    const day = parseInt(match[3])
-    const hours = parseInt(match[4])
-    const minutes = parseInt(match[5])
-    const seconds = parseInt(match[6])
-    const milliseconds = parseInt(match[7])
-    const zone = { abbreviation: 'UTC', offset: 0 }
-    return { year, month, day, hours, minutes, seconds, milliseconds, zone }
+  if (!match) {
+    throw new Error(`Invalid ISO 8601 time: "${input}".`)
   }
+  const year = parseInt(match[1])
+  const month = parseInt(match[2])
+  const day = parseInt(match[3])
+  const hours = parseInt(match[4])
+  const minutes = parseInt(match[5])
+  const seconds = parseInt(match[6])
+  const milliseconds = parseInt(match[7])
+  const zone = { abbreviation: 'UTC', offset: 0 }
+  return { year, month, day, hours, minutes, seconds, milliseconds, zone }
 }
 
 function changeToUTC (time) {
@@ -41,4 +42,4 @@ function formatISOTime (time) {
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`
 }
 
-export default { parseISOTime, formatISOTime }
+export { parseISOTime, formatISOTime }

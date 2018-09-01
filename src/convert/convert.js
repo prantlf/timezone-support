@@ -46,6 +46,6 @@ function getUnixTime (time, timeZone) {
   return unixTime + zone.offset * 60000
 }
 
-export default {
+export {
   setTimeZone, changeTimeZone, getZonedTime, getNativeDate, getUnixTime
 }

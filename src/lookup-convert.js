@@ -1,4 +1,22 @@
-import lookup from './lookup/lookup'
-import convert from './convert/convert'
+import {
+  initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone
+} from './lookup/lookup'
+import {
+  setTimeZone, changeTimeZone, getZonedTime, getNativeDate, getUnixTime
+} from './convert/convert'
+import { parseISOTime, formatISOTime } from './parse-format/iso'
 
-export default { ...lookup, ...convert }
+export {
+  initializeTimeZones,
+  listTimeZones,
+  findTimeZone,
+  addTimeZone,
+  linkTimeZone,
+  setTimeZone,
+  changeTimeZone,
+  getZonedTime,
+  getNativeDate,
+  getUnixTime,
+  parseISOTime,
+  formatISOTime
+}

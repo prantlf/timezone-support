@@ -38,12 +38,14 @@ it('parses a string with padded numbers', () => {
 })
 
 it('parses a string with with no padding needed, 24-hour mode', () => {
-  const time = parseZonedTime('234 13 2018', 'SSS H YYYY')
+  const time = parseZonedTime('234 13 69 +0000', 'SSS H YY Z')
   expect(typeof time === 'object').toBeTruthy()
-  const { year, hours, milliseconds } = time
-  expect(year).toEqual(2018)
+  const { year, hours, milliseconds, zone } = time
+  expect(year).toEqual(1969)
   expect(hours).toEqual(13)
   expect(milliseconds).toEqual(234)
+  expect(typeof zone === 'object').toBeTruthy()
+  expect(zone.offset).toEqual(0)
 })
 
 it('parses a string with padded numbers, 24-hour mode', () => {
@@ -60,7 +62,38 @@ it('recognizes midnight', () => {
   expect(hours).toEqual(0)
 })
 
+it('recognizes noon', () => {
+  const time = parseZonedTime('12 PM', 'hh A')
+  expect(typeof time === 'object').toBeTruthy()
+  const { hours } = time
+  expect(hours).toEqual(12)
+})
+
+it('format parser caching code works', () => {
+  parseZonedTime('2018', 'YYYY')
+  const time = parseZonedTime('2018', 'YYYY')
+  expect(typeof time === 'object').toBeTruthy()
+  const { year } = time
+  expect(year).toEqual(2018)
+})
+
 it('leaves non-token parts of the format intact', () => {
   const time = parseZonedTime(' S:/-.() SS h ', ' [S]:/-.()[ SS h ]')
   expect(typeof time === 'object').toBeTruthy()
+})
+
+it('throws an error for an invalid format', () => {
+  expect(() => parseZonedTime('B', 'C')).toThrow()
+})
+
+it('throws an error for an unmatched token part', () => {
+  expect(() => parseZonedTime('A', 'H')).toThrow()
+})
+
+it('throws an error for an unmatched non-token part', () => {
+  expect(() => parseZonedTime('B', '[C]')).toThrow()
+})
+
+it('throws an error for invalid time zone offset', () => {
+  expect(() => parseZonedTime('D', 'Z')).toThrow()
 })

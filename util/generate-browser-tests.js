@@ -20,6 +20,9 @@ async function readTest (file) {
 function formatPage (template, contentIndex, content) {
   const module = content[0]
   const match = /require\('..\/dist\/([^']+)'\)/.exec(module)
+  if (!match) {
+    throw new Error('Statement requiring the code module not found.')
+  }
   const name = match[1]
   const variable = name === 'index' ? 'support' : name
   content[0] = module.replace(/require\('..\/dist\/[^']+'\)/, 'window[\'timezone-' + variable + '\']')
@@ -45,5 +48,6 @@ function formatPage (template, contentIndex, content) {
     }
   } catch (error) {
     console.error(error)
+    process.exitCode = 1
   }
 })()

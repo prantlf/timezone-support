@@ -11,5 +11,6 @@ const { readFile, outputFile } = require('fs-extra')
     outputFile(module, `export default ${content}`)
   } catch (error) {
     console.error(error)
+    process.exitCode = 1
   }
 })()

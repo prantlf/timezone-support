@@ -1,4 +1,4 @@
-import unpack from './unpack'
+import { unpack } from './unpack'
 
 let zones
 let names
@@ -46,10 +46,8 @@ function addTimeZone (input) {
 }
 
 function linkTimeZone (input) {
-  const [ name, alias ] = input === 'string' ? input.split('|') : input
+  const [ name, alias ] = typeof input === 'string' ? input.split('|') : input
   links[alias] = name
 }
 
-export default {
-  initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone
-}
+export { initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone }

@@ -46,3 +46,8 @@ it('leaves non-token parts of the format intact', () => {
   const string = formatZonedTime({}, ' [S]:/-.()[ SS h ]')
   expect(string).toEqual(' S:/-.() SS h ')
 })
+
+it('formats 00:00 as 12:00 AM', () => {
+  const string = formatZonedTime({ hours: 0 }, 'h')
+  expect(string).toEqual('12')
+})

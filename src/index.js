@@ -1,14 +1,24 @@
-import lookup from './lookup/lookup'
-import convert from './convert/convert'
-import iso from './parse-format/iso'
-import data from './lookup/data'
-
-const {
+import {
   initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone
-} = lookup
+} from './lookup/lookup'
+import {
+  setTimeZone, changeTimeZone, getZonedTime, getNativeDate, getUnixTime
+} from './convert/convert'
+import { parseISOTime, formatISOTime } from './parse-format/iso'
+import data from './lookup/data'
 
 initializeTimeZones(data)
 
-export default {
-  listTimeZones, findTimeZone, addTimeZone, linkTimeZone, ...convert, ...iso
+export {
+  listTimeZones,
+  findTimeZone,
+  addTimeZone,
+  linkTimeZone,
+  setTimeZone,
+  changeTimeZone,
+  getZonedTime,
+  getNativeDate,
+  getUnixTime,
+  parseISOTime,
+  formatISOTime
 }

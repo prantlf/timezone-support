@@ -14,6 +14,4 @@ function getUTCTimeForUnixTime (unixTime) {
   return { year, month, day, hours, minutes, seconds, milliseconds }
 }
 
-export {
-  getUnixTimeForUTCTime, getUTCTimeForUnixTime
-}
+export { getUnixTimeForUTCTime, getUTCTimeForUnixTime }

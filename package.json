@@ -2,6 +2,29 @@
   "name": "timezone-support",
   "version": "0.0.1",
   "description": "Low-level time zone listing and date converting. Serves for adding time support to high-level date libraries.",
+  "author": {
+    "name": "Ferdinand Prantl",
+    "email": "prantlf@gmail.com",
+    "url": "http://prantl.tk"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/prantlf/timezone-support/blob/master/LICENSE"
+    }
+  ],
+  "homepage": "https://github.com/prantlf/timezone-support#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prantlf/timezone-support.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prantlf/timezone-support/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
   "main": "dist/index.js",
   "scripts": {
     "lint": "standard --verbose",
@@ -9,13 +32,13 @@
     "compile:debug": "rollup -c rollup.config-debug.js",
     "build": "npm run lint && npm run compile",
     "build:debug": "npm run lint && npm run compile:debug",
-    "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
-    "check:debug": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage --coverageReporters=html",
+    "check": "jest --testPathIgnorePatterns \"browser.test.js\"",
+    "check:debug": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
     "check:browser": "jest --testPathPattern browser.test.js",
     "test": "npm run lint && npm run check",
-    "cover": "npm run build:debug && npm run check:debug",
+    "coverage": "npm run build:debug && npm run check:debug",
     "generate:browser-tests": "node util/generate-browser-tests",
-    "all": "npm run build && npm run check && npm run generate:browser-tests && npm run check:browser"
+    "all": "npm run lint && npm run compile:debug && npm run check:debug && npm run compile && npm run check && npm run generate:browser-tests && npm run check:browser"
   },
   "standard": {
     "ignore": [
@@ -35,35 +58,18 @@
       "dist/*.js"
     ],
     "coverageReporters": [
+      "html",
       "lcov"
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 85,
-        "branches": 70,
-        "functions": 80,
-        "lines": 95
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
       }
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prantlf/timezone-support.git"
-  },
-  "keywords": [
-    "timezone",
-    "tzdata",
-    "convert",
-    "offset",
-    "date",
-    "time"
-  ],
-  "author": "Ferdinand Prantl <prantlf@gmail.com> (http://prantl.tk/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/prantlf/timezone-support/issues"
-  },
-  "homepage": "https://github.com/prantlf/timezone-support#readme",
   "devDependencies": {
     "connect": "^3.6.6",
     "fs-extra": "^7.0.0",
@@ -76,5 +82,13 @@
     "serve-static": "^1.13.2",
     "standard": "^11.0.1",
     "tiny-glob": "^0.2.2"
-  }
+  },
+  "keywords": [
+    "timezone",
+    "tzdata",
+    "convert",
+    "offset",
+    "date",
+    "time"
+  ]
 }

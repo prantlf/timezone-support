@@ -11,5 +11,6 @@ const { readJson, outputFile } = require('fs-extra')
     outputFile(module, `export default ${JSON.stringify(content)}`)
   } catch (error) {
     console.error(error)
+    process.exitCode = 1
   }
 })()

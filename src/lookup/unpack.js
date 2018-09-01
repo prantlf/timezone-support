@@ -26,6 +26,7 @@ function unpackBase60 (string) {
     out = (60 * out) + num
   }
   // handle digits after the decimal
+  // istanbul ignore next
   for (let i = 0, length = fractional.length; i < length; ++i) {
     const num = charCodeToInt(fractional.charCodeAt(i))
     multiplier = multiplier / 60
@@ -74,4 +75,4 @@ function unpack (string) {
   return { name, abbreviations, offsets, untils, population }
 }
 
-export default unpack
+export { unpack }
