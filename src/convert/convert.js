@@ -35,17 +35,10 @@ function getZonedTime (unixTime, timeZone) {
   return { ...time, zone }
 }
 
-function getNativeDate (time, timeZone) {
-  const unixTime = getUnixTime(time, timeZone)
-  return new Date(unixTime)
-}
-
 function getUnixTime (time, timeZone) {
   const unixTime = getUnixTimeForUTCTime(time)
   const zone = time.zone || getTransition(unixTime, timeZone)
   return unixTime + zone.offset * 60000
 }
 
-export {
-  setTimeZone, changeTimeZone, getZonedTime, getNativeDate, getUnixTime
-}
+export { setTimeZone, changeTimeZone, getZonedTime, getUnixTime }
