@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { initializeTimeZones, listTimeZones, findTimeZone } = require('../dist/lookup-convert')
+const { populateTimeZones, listTimeZones, findTimeZone } = require('../dist/lookup-convert')
 const data = {
   zones: [
     'Europe/Berlin|CET CEST CEMT|-10 -20 -30|01010101010101210101210101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010|-2aFe0 11d0 1iO0 11A0 1o00 11A0 Qrc0 6i00 WM0 1fA0 1cM0 1cM0 1cM0 kL0 Nc0 m10 WM0 1ao0 1cp0 dX0 jz0 Dd0 1io0 17c0 1fA0 1a00 1ehA0 1a00 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|41e5'
@@ -10,20 +10,20 @@ const data = {
   ]
 }
 
-let initialized
-function ensureInitialization () {
-  if (!initialized) {
-    initializeTimeZones(data)
-    initialized = true
+let populated
+function ensureTimeZones () {
+  if (!populated) {
+    populateTimeZones(data)
+    populated = true
   }
 }
 
 it('is exported as a function', () => {
-  expect(typeof initializeTimeZones === 'function').toBeTruthy()
+  expect(typeof populateTimeZones === 'function').toBeTruthy()
 })
 
 it('populates time zone names', () => {
-  ensureInitialization()
+  ensureTimeZones()
   const timeZones = listTimeZones()
   expect(Array.isArray(timeZones)).toBeTruthy()
   expect(timeZones.length).toEqual(1)
@@ -31,13 +31,13 @@ it('populates time zone names', () => {
 })
 
 it('populates time zone data', () => {
-  ensureInitialization()
+  ensureTimeZones()
   const berlin = findTimeZone('Europe/Berlin')
   expect(typeof berlin === 'object').toBeTruthy()
 })
 
 it('populates time zone aliases', () => {
-  ensureInitialization()
+  ensureTimeZones()
   const berlin = findTimeZone('Etc/Test')
   expect(typeof berlin === 'object').toBeTruthy()
   expect(berlin.name).toEqual('Europe/Berlin')

@@ -1,4 +1,4 @@
-import { getUnixTimeForUTCTime, getUTCTimeForUnixTime } from '../convert/utc-convert'
+import { getUnixTimeFromUTC, getUTCTime } from '../convert/utc-convert'
 
 const isoWithLetters = /^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.(\d{3}))?(?:Z|\+00:00)$/
 const isoWithoutLetters = /^(\d{4})(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)(\d{3})Z$/
@@ -21,8 +21,8 @@ function parseISOTime (input) {
 }
 
 function changeToUTC (time) {
-  const unixTime = getUnixTimeForUTCTime(time)
-  return getUTCTimeForUnixTime(unixTime + time.zone.offset * 60000)
+  const unixTime = getUnixTimeFromUTC(time)
+  return getUTCTime(unixTime + time.zone.offset * 60000)
 }
 
 function padToTwo (number) {

@@ -5,7 +5,7 @@ let names
 let links
 let instances
 
-function initializeTimeZones (data) {
+function populateTimeZones (data) {
   zones = {}
   names = data.zones.map(packed => {
     const name = packed.substr(0, packed.indexOf('|'))
@@ -37,17 +37,4 @@ function findTimeZone (alias) {
   return timeZone
 }
 
-function addTimeZone (input) {
-  const timeZone = typeof input === 'string' ? unpack(input) : input
-  const { name } = timeZone
-  names.push(name)
-  names.sort()
-  return instances[name] = timeZone // eslint-disable-line no-return-assign
-}
-
-function linkTimeZone (input) {
-  const [ name, alias ] = typeof input === 'string' ? input.split('|') : input
-  links[alias] = name
-}
-
-export { initializeTimeZones, listTimeZones, findTimeZone, addTimeZone, linkTimeZone }
+export { populateTimeZones, listTimeZones, findTimeZone }

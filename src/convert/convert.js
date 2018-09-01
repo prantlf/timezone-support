@@ -1,4 +1,4 @@
-import { getUnixTimeForUTCTime, getUTCTimeForUnixTime } from './utc-convert'
+import { getUnixTimeFromUTC, getUTCTime } from './utc-convert'
 
 function findTransitionIndex (unixTime, timeZone) {
   const { untils } = timeZone
@@ -17,7 +17,7 @@ function getTransition (unixTime, timeZone) {
 }
 
 function setTimeZone (time, timeZone) {
-  const unixTime = getUnixTimeForUTCTime(time)
+  const unixTime = getUnixTimeFromUTC(time)
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   time.zone = { abbreviation, offset }
   return time
@@ -25,13 +25,13 @@ function setTimeZone (time, timeZone) {
 
 function getZonedTime (unixTime, timeZone) {
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
-  const time = getUTCTimeForUnixTime(unixTime - offset * 60000)
+  const time = getUTCTime(unixTime - offset * 60000)
   const zone = { abbreviation, offset }
   return { ...time, zone }
 }
 
 function getUnixTime (time, timeZone) {
-  const unixTime = getUnixTimeForUTCTime(time)
+  const unixTime = getUnixTimeFromUTC(time)
   const zone = time.zone || getTransition(unixTime, timeZone)
   return unixTime + zone.offset * 60000
 }

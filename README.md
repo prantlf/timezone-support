@@ -1,31 +1,31 @@
 # Time Zone Support
 
-Low-level time zone listing and date converting. Serves for adding time support to high-level date libraries.
+Low-level time zone listing and date converting. Intended for adding time zone support to high-level date libraries, but also for direct application usage.
 
-* Tiny code base - 2.5 KB minified, 1.25 KB gzipped. Do not pack unnecessary weight in your application.
-* Packed time zone data - 175 KB minified, 22.5 KB gzipped. Single time zones and unpacked on demand.
+* Tiny code base - 3.5 KB minified, 1.5 KB gzipped. Do not pack unnecessary weight in your application.
+* Packed time zone data - 175 KB minified, 22.5 KB gzipped. Single time zones are unpacked on demand.
 * Generated from the official time zone database version 2018e. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
-* Time zone lookup and conversions separated from time parsing, formatting and manipulating. The latter is usually the task for a higher-level date library.
-
-The full and properly layered support for date handling consists of:
-
-* Interface for parsing, formatting and manipulating dates. For example: [day.js] with the [TimeZone plugin].
-* Time zone conversion support. For example: this library.
-* Time zone data. For example: [iana-tz-data].
+* Minimal interface for time zone lookup and conversions. Pparsing, formatting and manipulating dates is usually the task for a higher-level date library.
 
 ```js
-import { listTimeZones, findTimeZone, getZonedTime, getUnixTime } from 'timezone-support'
+const { listTimeZones, findTimeZone, getZonedTime, getUnixTime } = require('timezone-support')
 
-// Scenario: list names of supported time zones
+// Scenario: List names of time zones to choose from
 const timeZones = listTimeZones()
+// Contains [ name, ... ]
 
-// Scenario: convert a UTC timestamp to time in the chosen time zone
+// Scenario: Show stored UTC date in a chosen time zone
 const berlin = findTimeZone('Europe/Berlin')
-const originalDate = new Date()
-const berlinDate = getZonedTime(originalDate.valueOf(), berlin)
+const nativeDate = new Date('...')
+const unixTime = nativeDate.valueOf()
+const berlinTime = getZonedTime(unixTime, berlin)
+// Contains { year, month, day, hours, minutes, seconds,
+//            milliseconds, zone: { abbreviation, offset } }
 
-// Scenario: convert time in a chosen time zone to the UTC timestamp
+// Scenario: Convert time from a chosen time zone to UTC
 const berlin = findTimeZone('Europe/Berlin')
-const berlinDate = { ... }
-const utcDate = new Date(getUnixTime(berlinlDate, berlin))
+const berlinTime = { year, ... }
+const unixTime = getUnixTime(berlinTime, berlin)
+const nativeDate = new Date(unixTime).toISOString()
+// Contains UTC date in the ISO 8601 format
 ```
