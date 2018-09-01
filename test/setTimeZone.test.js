@@ -1,13 +1,13 @@
 /* global it, expect */
 
-const { getTimeZone, setTimeZone } = require('../dist/index')
+const { findTimeZone, setTimeZone } = require('../dist/index')
 
 it('is exported as a function', () => {
   expect(typeof setTimeZone === 'function').toBeTruthy()
 })
 
 it('sets the right time zone to the time object', () => {
-  const berlin = getTimeZone('Europe/Berlin')
+  const berlin = findTimeZone('Europe/Berlin')
   const berlinDate = setTimeZone({
     year: 2018,
     month: 1,

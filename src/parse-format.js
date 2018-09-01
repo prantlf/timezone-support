@@ -1,4 +1,4 @@
-import parse from './parse'
-import format from './format'
+import { parseZonedTime } from './parse-format/parse'
+import { formatZonedTime } from './parse-format/format'
 
-export default { parse, format }
+export default { parseZonedTime, formatZonedTime }

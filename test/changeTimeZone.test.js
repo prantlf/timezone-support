@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { getTimeZone, changeTimeZone } = require('../dist/index')
+const { findTimeZone, changeTimeZone } = require('../dist/index')
 
 it('is exported as a function', () => {
   expect(typeof changeTimeZone === 'function').toBeTruthy()
@@ -20,7 +20,7 @@ it('converts time in one time zone to another one', () => {
       offset: 0
     }
   }
-  const berlin = getTimeZone('Europe/Berlin')
+  const berlin = findTimeZone('Europe/Berlin')
   const berlinDate = changeTimeZone(londonDate, berlin)
   expect(typeof berlinDate === 'object').toBeTruthy()
   const { year, month, day, hours, minutes, seconds, milliseconds, zone } = berlinDate

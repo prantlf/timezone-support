@@ -25,14 +25,6 @@ function makeFormatter (format) {
   }
 }
 
-function format (time, format) {
-  let formatter = formatters[format]
-  if (!formatter) {
-    formatter = formatters[format] = makeFormatter(format)
-  }
-  return formatter(time)
-}
-
 function zeroFill (number, targetLength) {
   number = number.toString()
   const zerosToFill = targetLength - number.length
@@ -80,4 +72,12 @@ function addTimeZoneFormatToken (token, separator) {
 addTimeZoneFormatToken('Z', ':')
 addTimeZoneFormatToken('ZZ', '')
 
-export default format
+function formatZonedTime (time, format) {
+  let formatter = formatters[format]
+  if (!formatter) {
+    formatter = formatters[format] = makeFormatter(format)
+  }
+  return formatter(time)
+}
+
+export { formatZonedTime }

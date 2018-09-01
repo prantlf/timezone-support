@@ -1,5 +1,5 @@
 coverage
 dist
 node_modules
-src/data.js
+src/lookup/data.js
 test/browser

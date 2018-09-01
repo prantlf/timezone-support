@@ -24,7 +24,7 @@ function listTimeZones () {
   return names
 }
 
-function getTimeZone (alias) {
+function findTimeZone (alias) {
   const name = links[alias] || alias
   let timeZone = instances[name]
   if (!timeZone) {
@@ -35,6 +35,18 @@ function getTimeZone (alias) {
     timeZone = instances[name] = unpack(packed)
   }
   return timeZone
+}
+
+const utc = {
+  name: 'Etc/UTC',
+  abbreviations: [ 'UTC' ],
+  offsets: [ 0 ],
+  untils: [ Infinity ],
+  population: 0
+}
+
+function getUTC () {
+  return utc
 }
 
 function addTimeZone (input) {
@@ -51,5 +63,5 @@ function linkTimeZone (input) {
 }
 
 export default {
-  initializeTimeZones, listTimeZones, getTimeZone, addTimeZone, linkTimeZone
+  initializeTimeZones, listTimeZones, findTimeZone, getUTC, addTimeZone, linkTimeZone
 }

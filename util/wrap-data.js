@@ -7,7 +7,7 @@ const { readFile, outputFile } = require('fs-extra')
     const data = join(__dirname, '../node_modules/moment-timezone/data/packed/latest.json')
     const content = await readFile(data, {encoding: 'utf-8'})
     console.log(`Writing time zone data module...`)
-    const module = join(__dirname, '../src/data.js')
+    const module = join(__dirname, '../src/lookup/data.js')
     outputFile(module, `export default ${content}`)
   } catch (error) {
     console.error(error)

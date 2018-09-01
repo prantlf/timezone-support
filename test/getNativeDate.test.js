@@ -1,9 +1,9 @@
 /* global it, expect */
 
-const { createDate } = require('../dist/lookup-convert')
+const { getNativeDate } = require('../dist/lookup-convert')
 
 it('is exported as a function', () => {
-  expect(typeof createDate === 'function').toBeTruthy()
+  expect(typeof getNativeDate === 'function').toBeTruthy()
 })
 
 it('creates a Date object from a zoned time object', () => {
@@ -20,7 +20,7 @@ it('creates a Date object from a zoned time object', () => {
       offset: 600
     }
   }
-  const date = createDate(honoluluTime)
+  const date = getNativeDate(honoluluTime)
   expect(date.getUTCFullYear()).toEqual(2017)
   expect(date.getUTCMonth()).toEqual(11 - 1)
   expect(date.getUTCDate()).toEqual(15)

@@ -20,9 +20,12 @@
   "standard": {
     "ignore": [
       "dist",
-      "src/data.js"
+      "src/lookup/data.js"
     ]
   },
+  "files": [
+    "dist"
+  ],
   "jest": {
     "roots": [
       "test"
@@ -38,7 +41,7 @@
       "global": {
         "statements": 85,
         "branches": 70,
-        "functions": 85,
+        "functions": 80,
         "lines": 95
       }
     }

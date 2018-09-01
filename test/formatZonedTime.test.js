@@ -1,9 +1,9 @@
 /* global it, expect */
 
-const { format } = require('../dist/parse-format')
+const { formatZonedTime } = require('../dist/parse-format')
 
 it('is exported as a function', () => {
-  expect(typeof format === 'function').toBeTruthy()
+  expect(typeof formatZonedTime === 'function').toBeTruthy()
 })
 
 it('formats a time object to a string with no padding needed', () => {
@@ -20,7 +20,7 @@ it('formats a time object to a string with no padding needed', () => {
       offset: 600
     }
   }
-  const string = format(honoluluDate, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
+  const string = formatZonedTime(honoluluDate, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
   expect(string).toEqual('PM 2 23 234 18 18 17 17 11 11 23 23 15 15 11 11 2017 17 2017 HST -10:00 -1000')
 })
 
@@ -38,11 +38,11 @@ it('pads single digits with zeros', () => {
       offset: -60
     }
   }
-  const string = format(berlinDate, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
+  const string = formatZonedTime(berlinDate, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
   expect(string).toEqual('AM 0 00 004 5 05 3 03 9 09 9 09 2 02 1 01 1 01 0001 CET +01:00 +0100')
 })
 
 it('leaves non-token parts of the format intact', () => {
-  const string = format({}, ' [S]:/-.()[ SS h ]')
+  const string = formatZonedTime({}, ' [S]:/-.()[ SS h ]')
   expect(string).toEqual(' S:/-.() SS h ')
 })

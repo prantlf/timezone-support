@@ -1,13 +1,13 @@
 /* global it, expect */
 
-const { parse } = require('../dist/parse-format')
+const { parseZonedTime } = require('../dist/parse-format')
 
 it('is exported as a function', () => {
-  expect(typeof parse === 'function').toBeTruthy()
+  expect(typeof parseZonedTime === 'function').toBeTruthy()
 })
 
 it('parses a string with no padding needed', () => {
-  const time = parse('PM 2 18 17 11 15 11 2017 HST -10:00', 'A S s m h D M Y z Z')
+  const time = parseZonedTime('PM 2 18 17 11 15 11 2017 HST -10:00', 'A S s m h D M Y z Z')
   expect(typeof time === 'object').toBeTruthy()
   const { year, month, day, hours, minutes, seconds, milliseconds, zone } = time
   expect(year).toEqual(2017)
@@ -23,7 +23,7 @@ it('parses a string with no padding needed', () => {
 })
 
 it('parses a string with padded numbers', () => {
-  const time = parse('AM 03 08 07 01 05 01 07 +0100', 'A SS ss mm hh DD MM YY ZZ')
+  const time = parseZonedTime('AM 03 08 07 01 05 01 07 +0100', 'A SS ss mm hh DD MM YY ZZ')
   expect(typeof time === 'object').toBeTruthy()
   const { year, month, day, hours, minutes, seconds, milliseconds, zone } = time
   expect(year).toEqual(2007)
@@ -38,7 +38,7 @@ it('parses a string with padded numbers', () => {
 })
 
 it('parses a string with with no padding needed, 24-hour mode', () => {
-  const time = parse('234 13 2018', 'SSS H YYYY')
+  const time = parseZonedTime('234 13 2018', 'SSS H YYYY')
   expect(typeof time === 'object').toBeTruthy()
   const { year, hours, milliseconds } = time
   expect(year).toEqual(2018)
@@ -47,13 +47,20 @@ it('parses a string with with no padding needed, 24-hour mode', () => {
 })
 
 it('parses a string with padded numbers, 24-hour mode', () => {
-  const time = parse('03', 'HH')
+  const time = parseZonedTime('03', 'HH')
   expect(typeof time === 'object').toBeTruthy()
   const { hours } = time
   expect(hours).toEqual(3)
 })
 
+it('recognizes midnight', () => {
+  const time = parseZonedTime('12 AM', 'h A')
+  expect(typeof time === 'object').toBeTruthy()
+  const { hours } = time
+  expect(hours).toEqual(0)
+})
+
 it('leaves non-token parts of the format intact', () => {
-  const time = parse(' S:/-.() SS h ', ' [S]:/-.()[ SS h ]')
+  const time = parseZonedTime(' S:/-.() SS h ', ' [S]:/-.()[ SS h ]')
   expect(typeof time === 'object').toBeTruthy()
 })

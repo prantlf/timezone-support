@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { getTimeZone, linkTimeZone } = require('../dist/index')
+const { findTimeZone, linkTimeZone } = require('../dist/index')
 
 it('is exported as a function', () => {
   expect(typeof linkTimeZone === 'function').toBeTruthy()
@@ -8,7 +8,7 @@ it('is exported as a function', () => {
 
 it('link a time zone to a custom alias', () => {
   linkTimeZone(['Europe/Berlin', 'Etc/Test'])
-  const test = getTimeZone('Etc/Test')
+  const test = findTimeZone('Etc/Test')
   expect(typeof test === 'object').toBeTruthy()
   expect(test.name).toEqual('Europe/Berlin')
 })

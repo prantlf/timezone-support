@@ -70,14 +70,6 @@ function makeParser (format) {
   }
 }
 
-function parse (input, format) {
-  let parser = parsers[format]
-  if (!parser) {
-    parser = parsers[format] = makeParser(format)
-  }
-  return parser(input)
-}
-
 function addExpressionToken (token, regex) {
   parseTokenExpressions[token] = regex
 }
@@ -163,4 +155,12 @@ addParseToken(['Z', 'ZZ'], function (input) {
   zone.offset = offsetFromString(input)
 })
 
-export default parse
+function parseZonedTime (input, format) {
+  let parser = parsers[format]
+  if (!parser) {
+    parser = parsers[format] = makeParser(format)
+  }
+  return parser(input)
+}
+
+export { parseZonedTime }

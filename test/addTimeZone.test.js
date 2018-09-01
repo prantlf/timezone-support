@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { getTimeZone, addTimeZone } = require('../dist/index')
+const { findTimeZone, addTimeZone } = require('../dist/index')
 
 it('is exported as a function', () => {
   expect(typeof addTimeZone === 'function').toBeTruthy()
@@ -15,7 +15,7 @@ it('adds a custom time zone', () => {
     population: 0
   })
   expect(typeof test === 'object').toBeTruthy()
-  const test2 = getTimeZone('Etc/Test')
+  const test2 = findTimeZone('Etc/Test')
   expect(test2).toBe(test)
 })
 

@@ -14,18 +14,18 @@ The full and properly layered support for date handling consists of:
 * Time zone data. For example: [iana-tz-data].
 
 ```js
-import { listTimeZones, getTimeZone, convertToTimeZone, computeTimestamp } from 'timezone-support'
+import { listTimeZones, findTimeZone, getZonedTime, getUnixTime } from 'timezone-support'
 
 // Scenario: list names of supported time zones
 const timeZones = listTimeZones()
 
 // Scenario: convert a UTC timestamp to time in the chosen time zone
-const berlin = getTimeZone('Europe/Berlin')
+const berlin = findTimeZone('Europe/Berlin')
 const originalDate = new Date()
-const berlinDate = convertToTimeZone(originalDate.valueOf(), berlin)
+const berlinDate = getZonedTime(originalDate.valueOf(), berlin)
 
 // Scenario: convert time in a chosen time zone to the UTC timestamp
-const berlin = getTimeZone('Europe/Berlin')
+const berlin = findTimeZone('Europe/Berlin')
 const berlinDate = { ... }
-const utcDate = new Date(computeTimestamp(berlinlDate, berlin))
+const utcDate = new Date(getUnixTime(berlinlDate, berlin))
 ```
