@@ -251,7 +251,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 2018-09-02   v0.0.1   Initial release
+* 2018-09-03   v1.0.0   Initial release
 
 ## License
 
