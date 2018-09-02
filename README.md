@@ -261,3 +261,5 @@ Licensed under the MIT license.
 [NodeJS]: http://nodejs.org/
 [NPM]: https://www.npmjs.com/
 [RequireJS]: https://requirejs.org/
+[day.js]: https://github.com/iamkun/dayjs
+[date-fns]: https://github.com/date-fns/date-fns
