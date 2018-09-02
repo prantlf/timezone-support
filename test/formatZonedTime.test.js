@@ -42,6 +42,23 @@ it('pads single digits with zeros', () => {
   expect(string).toEqual('AM 0 00 004 5 05 3 03 9 09 9 09 2 02 1 01 1 01 0001 CET +01:00 +0100')
 })
 
+it('pads pairs of digits with zeros', () => {
+  const berlinDate = {
+    year: 67,
+    milliseconds: 34
+  }
+  const string = formatZonedTime(berlinDate, 'YYYY SSS')
+  expect(string).toEqual('0067 034')
+})
+
+it('pads triplets of digits with zeros', () => {
+  const berlinDate = {
+    year: 967
+  }
+  const string = formatZonedTime(berlinDate, 'YYYY')
+  expect(string).toEqual('0967')
+})
+
 it('leaves non-token parts of the format intact', () => {
   const string = formatZonedTime({}, ' [S]:/-.()[ SS h ]')
   expect(string).toEqual(' S:/-.() SS h ')

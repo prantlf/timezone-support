@@ -1,5 +1,5 @@
 const createSuite = require('./createSuite')
-const { getUnixTime, formatISOTime } = require('../dist')
+const { getUnixTime } = require('../dist')
 
 const year = 2018
 const month = 9
@@ -24,6 +24,5 @@ function formatISOTimeUsingUnixTime () {
 
 createSuite('Formatting an ISO 8601 string...')
   .add('Date:toISOString', formatISOTimeUsingDate)
-  .add('formatISOTime', () => formatISOTime(time))
   .add('getUnixTime + Date:toISOString', formatISOTimeUsingUnixTime)
   .start()

@@ -1,4 +1,5 @@
 import formattingTokens from './tokens'
+import { padWithZeros } from './padding'
 
 const formatTokenFunctions = {}
 const formatters = {}
@@ -24,13 +25,6 @@ function makeFormatter (format) {
   }
 }
 
-function zeroFill (number, targetLength) {
-  number = number.toString()
-  const zerosToFill = targetLength - number.length
-  const padding = Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1)
-  return padding + number
-}
-
 const addFormatToken = function (token, padded, property) {
   const callback = typeof property === 'string' ? function () {
     return this[property]
@@ -40,7 +34,7 @@ const addFormatToken = function (token, padded, property) {
   }
   if (padded) {
     formatTokenFunctions[padded[0]] = function () {
-      return zeroFill(callback.call(this), padded[1])
+      return padWithZeros(callback.call(this), padded[1])
     }
   }
 }
@@ -64,7 +58,7 @@ function addTimeZoneFormatToken (token, separator) {
     let offset = -this.zone.offset
     const sign = offset < 0 ? '-' : '+'
     offset = Math.abs(offset)
-    return sign + zeroFill(Math.floor(offset / 60), 2) + separator + zeroFill(offset % 60, 2)
+    return sign + padWithZeros(Math.floor(offset / 60), 2) + separator + padWithZeros(offset % 60, 2)
   })
 }
 

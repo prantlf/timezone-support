@@ -1,5 +1,5 @@
 const createSuite = require('./createSuite')
-const { findTimeZone, getZonedTime, parseISOTime } = require('../dist')
+const { findTimeZone, getZonedTime } = require('../dist')
 
 const utc = findTimeZone('Etc/UTC')
 const input = '2018-09-01T18:01:36.386Z'
@@ -24,6 +24,5 @@ function parseISOTimeUsingDateValue () {
 
 createSuite('Parsing an ISO 8601 string...')
   .add('Date:constructor', parseISOTimeUsingDate)
-  .add('parseISOTime', () => parseISOTime(input))
   .add('Date:constructor + getZonedTime', parseISOTimeUsingDateValue)
   .start()

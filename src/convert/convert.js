@@ -1,5 +1,3 @@
-import { getUnixTimeFromUTC, getUTCTime } from './utc-convert'
-
 function findTransitionIndex (unixTime, timeZone) {
   const { untils } = timeZone
   for (let i = 0, length = untils.length; i < length; ++i) {
@@ -14,6 +12,21 @@ function getTransition (unixTime, timeZone) {
   const abbreviation = timeZone.abbreviations[transitionIndex]
   const offset = timeZone.offsets[transitionIndex]
   return { abbreviation, offset }
+}
+
+function getUnixTimeFromUTC ({ year, month, day, hours, minutes, seconds = 0, milliseconds = 0 }) {
+  return Date.UTC(year, month - 1, day, hours, minutes, seconds, milliseconds)
+}
+
+function getUTCTime (date) {
+  const year = date.getUTCFullYear()
+  const month = date.getUTCMonth() + 1
+  const day = date.getUTCDate()
+  const hours = date.getUTCHours()
+  const minutes = date.getUTCMinutes()
+  const seconds = date.getUTCSeconds()
+  const milliseconds = date.getUTCMilliseconds()
+  return { year, month, day, hours, minutes, seconds, milliseconds }
 }
 
 function setTimeZone (time, timeZone) {

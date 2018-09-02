@@ -12,20 +12,19 @@ const { listTimeZones, findTimeZone, getZonedTime, getUnixTime } = require('time
 
 // Scenario: List names of time zones to choose from
 const timeZones = listTimeZones()
-// Contains [ name, ... ]
+// Contains array of canonical time zone names: [ name, ... ]
 
-// Scenario: Show stored UTC date in a chosen time zone
+// Scenario: Show a date stored in UTC in a chosen time zone
 const berlin = findTimeZone('Europe/Berlin')
-const nativeDate = new Date('...')
-const unixTime = nativeDate.valueOf()
-const berlinTime = getZonedTime(unixTime, berlin)
-// Contains { year, month, day, hours, minutes, seconds,
-//            milliseconds, zone: { abbreviation, offset } }
+const nativeDate = new Date('...Z')
+const berlinTime = getZonedTime(nativeDate, berlin)
+// Contains time with zone: { year, month, day, hours, minutes,
+//   seconds, milliseconds, zone: { abbreviation, offset } }
 
 // Scenario: Convert time from a chosen time zone to UTC
 const berlin = findTimeZone('Europe/Berlin')
 const berlinTime = { year, ... }
 const unixTime = getUnixTime(berlinTime, berlin)
 const nativeDate = new Date(unixTime).toISOString()
-// Contains UTC date in the ISO 8601 format
+// Contains UTC date in the ISO 8601 format: '...Z'
 ```

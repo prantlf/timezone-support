@@ -2,6 +2,7 @@
 .gitignore
 .npmignore
 .vscode
+perf
 rollup.config*
 test
 util
