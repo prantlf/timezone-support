@@ -91,10 +91,10 @@
     "puppeteer": "^1.7.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.65.0",
-    "rollup-plugin-terser": "^1.0.1",
+    "rollup-plugin-terser": "^2.0.2",
     "semantic-release": "^15.9.12",
     "serve-static": "^1.13.2",
-    "standard": "^11.0.1",
+    "standard": "^12.0.1",
     "tiny-glob": "^0.2.2",
     "travis-deploy-once": "^5.0.7"
   },

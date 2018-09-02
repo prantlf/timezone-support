@@ -28,7 +28,7 @@ const customMatchers = {
 beforeAll(done => {
   jasmine.addMatchers(customMatchers)
   server = connect()
-    .use(serve(join(__dirname, '..'), {etag: false}))
+    .use(serve(join(__dirname, '..'), { etag: false }))
     .listen(port, async () => {
       browser = await puppeteer.launch({
         headless: true,

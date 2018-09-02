@@ -11,12 +11,12 @@ const browserTests = join(tests, 'browser')
 
 async function readTemplate () {
   console.log(`Reading browser test template...`)
-  const template = await readFile(join(tests, 'browser.html'), {encoding: 'utf-8'})
+  const template = await readFile(join(tests, 'browser.html'), { encoding: 'utf-8' })
   return template.split('\n')
 }
 
 async function readTest (file) {
-  let content = await readFile(join(tests, file), {encoding: 'utf-8'})
+  let content = await readFile(join(tests, file), { encoding: 'utf-8' })
   content = content.split('\n')
   return content.slice(2, content.length - 1)
 }
@@ -42,7 +42,7 @@ function formatPage (template, contentIndex, content) {
     await rimraf(browserTests)
     const template = await readTemplate()
     const scriptIndex = template.indexOf('</head>')
-    const files = await glob('*.test.js', {cwd: tests})
+    const files = await glob('*.test.js', { cwd: tests })
     for (let file of files) {
       if (file !== 'browser.test.js') {
         console.log(`Processing test ${file}...`)
