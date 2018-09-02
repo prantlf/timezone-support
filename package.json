@@ -78,6 +78,11 @@
     "benchmark": "^2.1.4",
     "connect": "^3.6.6",
     "coveralls": "^3.0.2",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
     "fs-extra": "^7.0.0",
     "jasmine-core": "^3.2.1",
     "jest": "^23.5.0",
@@ -87,11 +92,11 @@
     "rimraf": "^2.6.2",
     "rollup": "^0.65.0",
     "rollup-plugin-terser": "^1.0.1",
+    "semantic-release": "^15.9.12",
     "serve-static": "^1.13.2",
     "standard": "^11.0.1",
     "tiny-glob": "^0.2.2",
-    "travis-deploy-once": "^5.0.7",
-    "semantic-release": "^15.9.12"
+    "travis-deploy-once": "^5.0.7"
   },
   "keywords": [
     "timezone",
