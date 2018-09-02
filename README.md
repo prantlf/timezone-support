@@ -34,7 +34,6 @@ Low-level time zone listing and date converting. Intended for adding time zone s
 
 ## Synopsis
 
-
 ```js
 const {
   listTimeZones, findTimeZone, getZonedTime, getUnixTime
@@ -197,7 +196,7 @@ See the function [parseZonedTime](#parseZonedTime) for more information.
 Date pickers usually supply the date, which the user selected and the time zone is implied from user settings. The time zone should be set to such date before it is returned from the editing control.
 
 ```js
-const { setTimeZone } = require('timezone-support')
+const { findTimeZone, setTimeZone } = require('timezone-support')
 const berlin = findTimeZone('Europe/Berlin')
 
 // Time object with the date parts without time zone

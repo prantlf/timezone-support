@@ -52,7 +52,8 @@
     ]
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "jest": {
     "roots": [
