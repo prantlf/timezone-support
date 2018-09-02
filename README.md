@@ -18,7 +18,14 @@ Low-level time zone listing and date converting. Intended for adding time zone s
 
 - [Synopsis](#synopsis)
 - [Installation and Loading](#installation-and-loading)
+  - [Specific Environments](#specific-environments)
 - [Usage Scenarios](#usage-scenarios)
+  - [List all available time zones](#list-all-available-time-zones)
+  - [Convert a date from UTC to a specific time zone](#convert-a-date-from-utc-to-a-specific-time-zone)
+  - [Convert a date from a specific time zone to UTC](#convert-a-date-from-a-specific-time-zone-to-utc)
+  - [Format a date/time to a custom string](#format-a-datetime-to-a-custom-string)
+  - [Parse a date/time from a custom string](#parse-a-datetime-from-a-custom-string)
+  - [Set time zone to a zone-less date](#set-time-zone-to-a-zoneless-date)
 - [API Reference](#api-reference)
 - [Library Integrations](#library-integrations)
 - [Contributing](#contributing)
@@ -51,13 +58,13 @@ const nativeDate = new Date(getUnixTime(berlinTime, berlin))
 
 ## Installation and Loading
 
-This module can be installed in your project using [NPM].
+This module can be installed in your project using [NPM]. Make sure, that you use [Node.js] version 8 or newer.
 
 ```sh
 $ npm i timezone-support --save
 ```
 
-### Module Loading
+### Specific Environments
 
 Load the main module in an application using CommonJS modules:
 
@@ -94,7 +101,7 @@ Load the main module in the browser with [RequireJS]:
 </script>
 ```
 
-## Usage
+## Usage Scenarios
 
 The minimal, but powerful API of this module provides functionality for both date/time-supporting libraries and end-user applications.
 
@@ -237,12 +244,7 @@ Offers a minimal date parsing and formatting support, if you want to use this li
 ## Library Integrations
 
 ### Day.js
-
-TODO
-
 ### date-fns
-
-TODO
 
 ## Contributing
 
@@ -258,7 +260,7 @@ Copyright (c) 2018 Ferdinand Prantl
 
 Licensed under the MIT license.
 
-[NodeJS]: http://nodejs.org/
+[Node.js]: http://nodejs.org/
 [NPM]: https://www.npmjs.com/
 [RequireJS]: https://requirejs.org/
 [day.js]: https://github.com/iamkun/dayjs
