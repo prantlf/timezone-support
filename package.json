@@ -27,7 +27,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "lint": "standard --verbose",
     "generate": "node util/wrap-data-minified",
     "generate:debug": "node util/wrap-data",
