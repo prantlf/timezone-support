@@ -13,7 +13,7 @@ function parseZonedTimeUsingDate () {
   const minutes = date.getMinutes()
   const seconds = date.getSeconds()
   const milliseconds = date.getMilliseconds()
-  const zone = { abbreviation: 'CEDT', offset: -120 }
+  const zone = { abbreviation: 'CEST', offset: -120 }
   return { year, month, day, hours, minutes, seconds, milliseconds, zone }
 }
 

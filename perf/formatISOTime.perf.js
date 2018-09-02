@@ -8,7 +8,7 @@ const hours = 18
 const minutes = 1
 const seconds = 36
 const milliseconds = 386
-const zone = { abbreviation: 'CEDT', offset: -120 }
+const zone = { abbreviation: 'CEST', offset: -120 }
 const time = { year, month, day, hours, minutes, seconds, milliseconds, zone }
 
 function formatISOTimeUsingDate () {
