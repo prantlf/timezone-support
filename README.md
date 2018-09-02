@@ -25,7 +25,7 @@ Low-level time zone listing and date converting. Intended for adding time zone s
   - [Convert a date from a specific time zone to UTC](#convert-a-date-from-a-specific-time-zone-to-utc)
   - [Format a date/time to a custom string](#format-a-datetime-to-a-custom-string)
   - [Parse a date/time from a custom string](#parse-a-datetime-from-a-custom-string)
-  - [Set time zone to a zone-less date](#set-time-zone-to-a-zoneless-date)
+  - [Set time zone to a zone-less date](#set-time-zone-to-a-zone-less-date)
 - [API Reference](#api-reference)
 - [Library Integrations](#library-integrations)
 - [Contributing](#contributing)
