@@ -1,13 +1,18 @@
-/* global it, expect */
+/* global beforeAll, it, expect */
 
 const { findTimeZone, getZonedTime } = require('../dist/index')
+
+let berlin
+
+beforeAll(() => {
+  berlin = findTimeZone('Europe/Berlin')
+})
 
 it('is exported as a function', () => {
   expect(typeof getZonedTime === 'function').toBeTruthy()
 })
 
 it('converts the UNIX time to the correct time object', () => {
-  const berlin = findTimeZone('Europe/Berlin')
   const utcDate = new Date(Date.UTC(2018, 0, 2, 9, 30, 15, 234))
   const berlinDate = getZonedTime(utcDate.valueOf(), berlin)
   expect(typeof berlinDate === 'object').toBeTruthy()
@@ -25,7 +30,6 @@ it('converts the UNIX time to the correct time object', () => {
 })
 
 it('recognizes daylight-saving time', () => {
-  const berlin = findTimeZone('Europe/Berlin')
   const utcDate = new Date(Date.UTC(2018, 6, 2, 9, 30, 15, 234))
   const berlinDate = getZonedTime(utcDate.valueOf(), berlin)
   expect(typeof berlinDate === 'object').toBeTruthy()
@@ -43,7 +47,6 @@ it('recognizes daylight-saving time', () => {
 })
 
 it('accepts a Date object instead of a numeric UNIX time', () => {
-  const berlin = findTimeZone('Europe/Berlin')
   const utcDate = new Date(Date.UTC(2018, 6, 2, 9, 30, 15, 234))
   const berlinDate = getZonedTime(utcDate, berlin)
   expect(typeof berlinDate === 'object').toBeTruthy()

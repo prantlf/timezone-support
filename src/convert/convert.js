@@ -24,16 +24,40 @@ function getUTCTime (date) {
   const day = date.getUTCDate()
   const hours = date.getUTCHours()
   const minutes = date.getUTCMinutes()
-  const seconds = date.getUTCSeconds()
-  const milliseconds = date.getUTCMilliseconds()
+  const seconds = date.getUTCSeconds() || 0
+  const milliseconds = date.getUTCMilliseconds() || 0
   return { year, month, day, hours, minutes, seconds, milliseconds }
 }
 
-function setTimeZone (time, timeZone) {
+function getLocalTime (date) {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds()
+  const milliseconds = date.getMilliseconds()
+  return { year, month, day, hours, minutes, seconds, milliseconds }
+}
+
+function setTimeZone (time, timeZone, options) {
+  if (time instanceof Date) {
+    const { useUTC } = options || {}
+    let extract
+    if (useUTC === true) {
+      extract = getUTCTime
+    } else if (useUTC === false) {
+      extract = getLocalTime
+    } else {
+      throw new Error('Source of the date parts missing.')
+    }
+    time = extract(time)
+  }
   const unixTime = getUnixTimeFromUTC(time)
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
-  time.zone = { abbreviation, offset }
-  return time
+  const zone = { abbreviation, offset }
+  const { year, month, day, hours, minutes, seconds = 0, milliseconds = 0 } = time
+  return { year, month, day, hours, minutes, seconds, milliseconds, zone }
 }
 
 function getZonedTime (date, timeZone) {
@@ -50,7 +74,14 @@ function getZonedTime (date, timeZone) {
 
 function getUnixTime (time, timeZone) {
   const unixTime = getUnixTimeFromUTC(time)
-  const zone = time.zone || getTransition(unixTime, timeZone)
+  let { zone } = time
+  if (zone) {
+    if (timeZone) {
+      throw new Error('Two time zones specified.')
+    }
+  } else {
+    zone = getTransition(unixTime, timeZone)
+  }
   return unixTime + zone.offset * 60000
 }
 
