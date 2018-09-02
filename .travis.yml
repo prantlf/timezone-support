@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+node_js:
+  - '10'
+  - '8'
+env:
+  - COVERALLS_SERVICE_NAME=travis-pro
+  - COVERALLS_REPO_TOKEN=ROuhu82sk60lcLuysFPPTKMAjWkKdU5QI
+after_success:
+  - npm run coverage
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

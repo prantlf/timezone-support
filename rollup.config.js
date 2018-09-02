@@ -1,27 +1,7 @@
 import { terser } from 'rollup-plugin-terser'
+import { cjs } from './rollup.config-cjs'
 
-export default [
-  {
-    input: 'src/index.js',
-    output: {
-      file: 'dist/index.js',
-      format: 'cjs'
-    }
-  },
-  {
-    input: 'src/lookup-convert.js',
-    output: {
-      file: 'dist/lookup-convert.js',
-      format: 'cjs'
-    }
-  },
-  {
-    input: 'src/parse-format.js',
-    output: {
-      file: 'dist/parse-format.js',
-      format: 'cjs'
-    }
-  },
+export default cjs.concat([
   {
     input: 'src/index.js',
     output: {
@@ -58,4 +38,4 @@ export default [
       terser()
     ]
   }
-]
+])

@@ -27,6 +27,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
+    "prepublish": "npm run build",
     "lint": "standard --verbose",
     "compile": "rollup -c",
     "compile:debug": "rollup -c rollup.config-debug.js",
@@ -34,10 +35,11 @@
     "build:debug": "run-s lint compile:debug",
     "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
     "check:browser": "jest --testPathPattern browser.test.js",
-    "test": "run-s lint check",
     "benchmark": "node perf",
     "generate:browser-tests": "node util/generate-browser-tests",
-    "all": "run-s build check generate:browser-tests check:browser"
+    "coverage": "test `node --version | cut -c 2` -eq 8 && cat coverage/lcov.info | coveralls",
+    "test": "run-s check generate:browser-tests check:browser",
+    "test:debug": "run-s lint check"
   },
   "standard": {
     "ignore": [
@@ -57,7 +59,6 @@
       "dist/!(lookup-convert).js"
     ],
     "coverageReporters": [
-      "html",
       "lcov"
     ],
     "coverageThreshold": {

@@ -1,26 +1,5 @@
-export default [
-  {
-    input: 'src/index.js',
-    output: {
-      file: 'dist/index.js',
-      format: 'cjs',
-      sourcemap: 'inline'
-    }
-  },
-  {
-    input: 'src/lookup-convert.js',
-    output: {
-      file: 'dist/lookup-convert.js',
-      format: 'cjs',
-      sourcemap: 'inline'
-    }
-  },
-  {
-    input: 'src/parse-format.js',
-    output: {
-      file: 'dist/parse-format.js',
-      format: 'cjs',
-      sourcemap: 'inline'
-    }
-  }
-]
+import { cjs } from './rollup.config-cjs'
+
+cjs.forEach(module => module.sourcemap = 'inline') // eslint-disable-line no-return-assign
+
+export default cjs
