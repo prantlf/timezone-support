@@ -16,10 +16,6 @@ function getTransition (unixTime, timeZone) {
   return { abbreviation, offset }
 }
 
-function attachEpoch (time, unixTime) {
-  Object.defineProperty(time, 'epoch', { value: unixTime })
-}
-
 function setTimeZone (time, timeZone, options) {
   if (time instanceof Date) {
     const { useUTC } = options || {}
@@ -39,7 +35,6 @@ function setTimeZone (time, timeZone, options) {
   const unixTime = getUnixTimeFromUTC(time)
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   time.zone = { abbreviation, offset }
-  attachEpoch(time, unixTime)
   return time
 }
 
@@ -52,7 +47,7 @@ function getZonedTime (date, timeZone) {
   }
   const time = getUTCTime(date)
   time.zone = { abbreviation, offset }
-  attachEpoch(time, unixTime)
+  Object.defineProperty(time, 'epoch', { value: unixTime })
   return time
 }
 

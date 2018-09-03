@@ -5,7 +5,7 @@ const { findTimeZone, setTimeZone } = require('../dist/index')
 let berlin
 
 function checkTime (time, checkSeconds) {
-  const { year, month, day, hours, minutes, seconds, milliseconds, zone, epoch } = time
+  const { year, month, day, hours, minutes, seconds, milliseconds, zone } = time
   expect(year).toEqual(2018)
   expect(month).toEqual(1)
   expect(day).toEqual(2)
@@ -14,11 +14,9 @@ function checkTime (time, checkSeconds) {
   if (checkSeconds) {
     expect(seconds).toEqual(40)
     expect(milliseconds).toEqual(50)
-    expect(epoch).toEqual(1514889040050)
   } else {
     expect(seconds).toEqual(0)
     expect(milliseconds).toEqual(0)
-    expect(epoch).toEqual(1514889000000)
   }
   expect(typeof zone === 'object').toBeTruthy()
   expect(zone.abbreviation).toEqual('CET')
