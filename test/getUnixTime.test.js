@@ -84,6 +84,17 @@ it('recognizes daylight-saving time', () => {
   expect(unixTime).toEqual(epoch)
 })
 
+it('checks, that other time zone is specified, if required', () => {
+  const berlinTime = {
+    year: 2018,
+    month: 7,
+    day: 2,
+    hours: 11,
+    minutes: 30
+  }
+  expect(() => getUnixTime(berlinTime)).toThrow()
+})
+
 it('checks, that only one time zone is requested to convert from', () => {
   const berlinTime = {
     year: 2018,

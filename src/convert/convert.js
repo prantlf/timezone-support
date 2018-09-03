@@ -1,4 +1,4 @@
-import { getUnixTimeFromUTC, getUTCTime, getLocalTime } from './utc-date'
+import { getUnixTimeFromUTC, getUTCTime, getDateTime } from './utc-date'
 
 function findTransitionIndex (unixTime, timeZone) {
   const { untils } = timeZone
@@ -22,16 +22,7 @@ function attachEpoch (time, unixTime) {
 
 function setTimeZone (time, timeZone, options) {
   if (time instanceof Date) {
-    const { useUTC } = options || {}
-    let extract
-    if (useUTC === true) {
-      extract = getUTCTime
-    } else if (useUTC === false) {
-      extract = getLocalTime
-    } else {
-      throw new Error('Source of the date parts missing.')
-    }
-    time = extract(time)
+    time = getDateTime(time, options)
   } else {
     const { year, month, day, hours, minutes, seconds = 0, milliseconds = 0 } = time
     time = { year, month, day, hours, minutes, seconds, milliseconds }
@@ -39,7 +30,7 @@ function setTimeZone (time, timeZone, options) {
   const unixTime = getUnixTimeFromUTC(time)
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   time.zone = { abbreviation, offset }
-  attachEpoch(time, unixTime)
+  attachEpoch(time, unixTime + offset * 60000)
   return time
 }
 
@@ -60,16 +51,19 @@ function getUnixTime (time, timeZone) {
   let { zone, epoch } = time
   if (epoch) {
     if (timeZone) {
-      throw new Error('Both epoch and other time zone specified.')
+      throw new Error('Both epoch and other time zone specified. Omit the other one.')
     }
     return epoch
   }
   const unixTime = getUnixTimeFromUTC(time)
   if (zone) {
     if (timeZone) {
-      throw new Error('Two time zones specified.')
+      throw new Error('Both own and other time zones specified. Omit the other one.')
     }
   } else {
+    if (!timeZone) {
+      throw new Error('Missing other time zone.')
+    }
     zone = getTransition(unixTime, timeZone)
   }
   return unixTime + zone.offset * 60000

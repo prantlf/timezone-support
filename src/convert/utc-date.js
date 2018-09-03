@@ -25,4 +25,17 @@ function getLocalTime (date) {
   return { year, month, day, hours, minutes, seconds, milliseconds }
 }
 
-export { getUnixTimeFromUTC, getUTCTime, getLocalTime }
+function getDateTime (date, options) {
+  const { useUTC } = options || {}
+  let extract
+  if (useUTC === true) {
+    extract = getUTCTime
+  } else if (useUTC === false) {
+    extract = getLocalTime
+  } else {
+    throw new Error('Extract local or UTC date? Set useUTC option.')
+  }
+  return extract(date)
+}
+
+export { getUnixTimeFromUTC, getUTCTime, getDateTime }

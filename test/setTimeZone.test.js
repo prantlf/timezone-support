@@ -14,11 +14,11 @@ function checkTime (time, checkSeconds) {
   if (checkSeconds) {
     expect(seconds).toEqual(40)
     expect(milliseconds).toEqual(50)
-    expect(epoch).toEqual(1514889040050)
+    expect(epoch).toEqual(1514885440050)
   } else {
     expect(seconds).toEqual(0)
     expect(milliseconds).toEqual(0)
-    expect(epoch).toEqual(1514889000000)
+    expect(epoch).toEqual(1514885400000)
   }
   expect(typeof zone === 'object').toBeTruthy()
   expect(zone.abbreviation).toEqual('CET')
@@ -59,7 +59,7 @@ it('extracts the time from date parts in the local time zone representation', ()
   checkTime(berlinTime, false)
 })
 
-it('requests the source of date parts, if a date object uis supplied', () => {
+it('requests the source of date parts, if a date object is supplied', () => {
   const zonelessDate = new Date()
   expect(() => setTimeZone(zonelessDate, berlin)).toThrow()
   expect(() => setTimeZone(zonelessDate, berlin, {})).toThrow()
