@@ -9,7 +9,7 @@
 
 [![NPM Downloads](https://nodei.co/npm/timezone-support.png?downloads=true&stars=true)](https://www.npmjs.com/package/timezone-support)
 
-Low-level time zone listing and date converting. Intended for adding time zone support to high-level date libraries, but also for direct application usage.
+Lightweight time zone listing and date converting. Intended for adding time zone support to high-level date libraries, but also for direct application usage.
 
 * Tiny code base - 3.5 KB minified, 1.5 KB gzipped. Do not pack unnecessary weight in your application.
 * Packed time zone data - 175 KB minified, 22.5 KB gzipped. Single time zones are unpacked on demand.
@@ -251,7 +251,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 2018-09-03   v1.0.0   Initial release
+* 2018-09-02   v1.0.0   Initial release
 
 ## License
 

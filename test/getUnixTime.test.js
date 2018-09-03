@@ -13,7 +13,7 @@ it('is exported as a function', () => {
 })
 
 it('converts the time object to the correct UNIX time', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 2018,
     month: 1,
     day: 2,
@@ -26,14 +26,14 @@ it('converts the time object to the correct UNIX time', () => {
       offset: -60
     }
   }
-  const unixTime = getUnixTime(berlinDate)
+  const unixTime = getUnixTime(berlinTime)
   expect(typeof unixTime === 'number').toBeTruthy()
-  const utcDate = new Date(Date.UTC(2018, 0, 2, 9, 30, 15, 234))
-  expect(unixTime).toEqual(utcDate.valueOf())
+  const epoch = Date.UTC(2018, 0, 2, 9, 30, 15, 234)
+  expect(unixTime).toEqual(epoch)
 })
 
 it('accepts an explicit time zone as a parameter', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 2018,
     month: 1,
     day: 2,
@@ -42,14 +42,14 @@ it('accepts an explicit time zone as a parameter', () => {
     seconds: 15,
     milliseconds: 234
   }
-  const unixTime = getUnixTime(berlinDate, berlin)
+  const unixTime = getUnixTime(berlinTime, berlin)
   expect(typeof unixTime === 'number').toBeTruthy()
-  const utcDate = new Date(Date.UTC(2018, 0, 2, 9, 30, 15, 234))
-  expect(unixTime).toEqual(utcDate.valueOf())
+  const epoch = Date.UTC(2018, 0, 2, 9, 30, 15, 234)
+  expect(unixTime).toEqual(epoch)
 })
 
 it('seconds and milliseconds are optional in the time object', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 2018,
     month: 1,
     day: 2,
@@ -60,14 +60,14 @@ it('seconds and milliseconds are optional in the time object', () => {
       offset: -60
     }
   }
-  const unixTime = getUnixTime(berlinDate)
+  const unixTime = getUnixTime(berlinTime)
   expect(typeof unixTime === 'number').toBeTruthy()
-  const utcDate = new Date(Date.UTC(2018, 0, 2, 9, 30))
-  expect(unixTime).toEqual(utcDate.valueOf())
+  const epoch = Date.UTC(2018, 0, 2, 9, 30)
+  expect(unixTime).toEqual(epoch)
 })
 
 it('recognizes daylight-saving time', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 2018,
     month: 7,
     day: 2,
@@ -78,14 +78,14 @@ it('recognizes daylight-saving time', () => {
       offset: -120
     }
   }
-  const unixTime = getUnixTime(berlinDate)
+  const unixTime = getUnixTime(berlinTime)
   expect(typeof unixTime === 'number').toBeTruthy()
-  const utcDate = new Date(Date.UTC(2018, 6, 2, 9, 30))
-  expect(unixTime).toEqual(utcDate.valueOf())
+  const epoch = Date.UTC(2018, 6, 2, 9, 30)
+  expect(unixTime).toEqual(epoch)
 })
 
 it('checks, that only one time zone is requested to convert from', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 2018,
     month: 7,
     day: 2,
@@ -96,5 +96,36 @@ it('checks, that only one time zone is requested to convert from', () => {
       offset: -120
     }
   }
-  expect(() => getUnixTime(berlinDate, berlin)).toThrow()
+  expect(() => getUnixTime(berlinTime, berlin)).toThrow()
+})
+
+it('returns the epoch, that only one time zone is requested to convert from', () => {
+  const berlinTime = {
+    year: 2018,
+    month: 7,
+    day: 2,
+    hours: 11,
+    minutes: 30,
+    epoch: 1530523800000,
+    zone: {
+      abbreviation: 'CEST',
+      offset: -120
+    }
+  }
+  const unixTime = getUnixTime(berlinTime)
+  expect(typeof unixTime === 'number').toBeTruthy()
+  const epoch = Date.UTC(2018, 6, 2, 9, 30)
+  expect(unixTime).toEqual(epoch)
+})
+
+it('checks, that other time zone is not requested if epoch is included', () => {
+  const berlinTime = {
+    year: 2018,
+    month: 7,
+    day: 2,
+    hours: 11,
+    minutes: 30,
+    epoch: 1530523800000
+  }
+  expect(() => getUnixTime(berlinTime, berlin)).toThrow()
 })

@@ -16,6 +16,10 @@ function getTransition (unixTime, timeZone) {
   return { abbreviation, offset }
 }
 
+function attachEpoch (time, unixTime) {
+  Object.defineProperty(time, 'epoch', { value: unixTime })
+}
+
 function setTimeZone (time, timeZone, options) {
   if (time instanceof Date) {
     const { useUTC } = options || {}
@@ -28,12 +32,15 @@ function setTimeZone (time, timeZone, options) {
       throw new Error('Source of the date parts missing.')
     }
     time = extract(time)
+  } else {
+    const { year, month, day, hours, minutes, seconds = 0, milliseconds = 0 } = time
+    time = { year, month, day, hours, minutes, seconds, milliseconds }
   }
   const unixTime = getUnixTimeFromUTC(time)
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
-  const zone = { abbreviation, offset }
-  const { year, month, day, hours, minutes, seconds = 0, milliseconds = 0 } = time
-  return { year, month, day, hours, minutes, seconds, milliseconds, zone }
+  time.zone = { abbreviation, offset }
+  attachEpoch(time, unixTime)
+  return time
 }
 
 function getZonedTime (date, timeZone) {
@@ -45,12 +52,19 @@ function getZonedTime (date, timeZone) {
   }
   const time = getUTCTime(date)
   time.zone = { abbreviation, offset }
+  attachEpoch(time, unixTime)
   return time
 }
 
 function getUnixTime (time, timeZone) {
+  let { zone, epoch } = time
+  if (epoch) {
+    if (timeZone) {
+      throw new Error('Both epoch and other time zone specified.')
+    }
+    return epoch
+  }
   const unixTime = getUnixTimeFromUTC(time)
-  let { zone } = time
   if (zone) {
     if (timeZone) {
       throw new Error('Two time zones specified.')

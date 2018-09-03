@@ -20,8 +20,8 @@ function getLocalTime (date) {
   const day = date.getDate()
   const hours = date.getHours()
   const minutes = date.getMinutes()
-  const seconds = date.getSeconds()
-  const milliseconds = date.getMilliseconds()
+  const seconds = date.getSeconds() || 0
+  const milliseconds = date.getMilliseconds() || 0
   return { year, month, day, hours, minutes, seconds, milliseconds }
 }
 

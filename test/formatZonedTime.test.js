@@ -7,7 +7,7 @@ it('is exported as a function', () => {
 })
 
 it('formats a time object to a string with no padding needed', () => {
-  const honoluluDate = {
+  const honoluluTime = {
     year: 2017,
     month: 11,
     day: 15,
@@ -20,12 +20,12 @@ it('formats a time object to a string with no padding needed', () => {
       offset: 600
     }
   }
-  const string = formatZonedTime(honoluluDate, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
+  const string = formatZonedTime(honoluluTime, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
   expect(string).toEqual('PM 2 23 234 18 18 17 17 11 11 23 23 15 15 11 11 2017 17 2017 HST -10:00 -1000')
 })
 
 it('pads single digits with zeros', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 1,
     month: 1,
     day: 2,
@@ -38,24 +38,24 @@ it('pads single digits with zeros', () => {
       offset: -60
     }
   }
-  const string = formatZonedTime(berlinDate, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
+  const string = formatZonedTime(berlinTime, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
   expect(string).toEqual('AM 0 00 004 5 05 3 03 9 09 9 09 2 02 1 01 1 01 0001 CET +01:00 +0100')
 })
 
 it('pads pairs of digits with zeros', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 67,
     milliseconds: 34
   }
-  const string = formatZonedTime(berlinDate, 'YYYY SSS')
+  const string = formatZonedTime(berlinTime, 'YYYY SSS')
   expect(string).toEqual('0067 034')
 })
 
 it('pads triplets of digits with zeros', () => {
-  const berlinDate = {
+  const berlinTime = {
     year: 967
   }
-  const string = formatZonedTime(berlinDate, 'YYYY')
+  const string = formatZonedTime(berlinTime, 'YYYY')
   expect(string).toEqual('0967')
 })
 

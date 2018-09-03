@@ -1,7 +1,7 @@
 {
   "name": "timezone-support",
   "version": "0.0.0-development",
-  "description": "Low-level time zone listing and date converting. Serves for adding time support to high-level date libraries.",
+  "description": "Lightweight time zone support for your applications or other date libraries.",
   "author": {
     "name": "Ferdinand Prantl",
     "email": "prantlf@gmail.com",

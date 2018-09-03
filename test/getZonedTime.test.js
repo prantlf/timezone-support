@@ -13,10 +13,10 @@ it('is exported as a function', () => {
 })
 
 it('converts the UNIX time to the correct time object', () => {
-  const utcDate = new Date(Date.UTC(2018, 0, 2, 9, 30, 15, 234))
-  const berlinDate = getZonedTime(utcDate.valueOf(), berlin)
-  expect(typeof berlinDate === 'object').toBeTruthy()
-  const { year, month, day, hours, minutes, seconds, milliseconds, zone } = berlinDate
+  const unixTime = Date.UTC(2018, 0, 2, 9, 30, 15, 234)
+  const berlinTime = getZonedTime(unixTime, berlin)
+  expect(typeof berlinTime === 'object').toBeTruthy()
+  const { year, month, day, hours, minutes, seconds, milliseconds, zone, epoch } = berlinTime
   expect(year).toEqual(2018)
   expect(month).toEqual(1)
   expect(day).toEqual(2)
@@ -27,13 +27,14 @@ it('converts the UNIX time to the correct time object', () => {
   expect(typeof zone === 'object').toBeTruthy()
   expect(zone.abbreviation).toEqual('CET')
   expect(zone.offset).toEqual(-60)
+  expect(epoch).toEqual(1514885415234)
 })
 
 it('recognizes daylight-saving time', () => {
-  const utcDate = new Date(Date.UTC(2018, 6, 2, 9, 30, 15, 234))
-  const berlinDate = getZonedTime(utcDate.valueOf(), berlin)
-  expect(typeof berlinDate === 'object').toBeTruthy()
-  const { year, month, day, hours, minutes, seconds, milliseconds, zone } = berlinDate
+  const unixTime = Date.UTC(2018, 6, 2, 9, 30, 15, 234)
+  const berlinTime = getZonedTime(unixTime.valueOf(), berlin)
+  expect(typeof berlinTime === 'object').toBeTruthy()
+  const { year, month, day, hours, minutes, seconds, milliseconds, zone, epoch } = berlinTime
   expect(year).toEqual(2018)
   expect(month).toEqual(7)
   expect(day).toEqual(2)
@@ -44,13 +45,14 @@ it('recognizes daylight-saving time', () => {
   expect(typeof zone === 'object').toBeTruthy()
   expect(zone.abbreviation).toEqual('CEST')
   expect(zone.offset).toEqual(-120)
+  expect(epoch).toEqual(1530523815234)
 })
 
 it('accepts a Date object instead of a numeric UNIX time', () => {
   const utcDate = new Date(Date.UTC(2018, 6, 2, 9, 30, 15, 234))
-  const berlinDate = getZonedTime(utcDate, berlin)
-  expect(typeof berlinDate === 'object').toBeTruthy()
-  const { year, month, day, hours, minutes, seconds, milliseconds, zone } = berlinDate
+  const berlinTime = getZonedTime(utcDate, berlin)
+  expect(typeof berlinTime === 'object').toBeTruthy()
+  const { year, month, day, hours, minutes, seconds, milliseconds, zone, epoch } = berlinTime
   expect(year).toEqual(2018)
   expect(month).toEqual(7)
   expect(day).toEqual(2)
@@ -61,14 +63,15 @@ it('accepts a Date object instead of a numeric UNIX time', () => {
   expect(typeof zone === 'object').toBeTruthy()
   expect(zone.abbreviation).toEqual('CEST')
   expect(zone.offset).toEqual(-120)
+  expect(epoch).toEqual(1530523815234)
 })
 
 it('optimizes conversion to UTC', () => {
   const utc = findTimeZone('Etc/UTC')
   const utcDate = new Date(Date.UTC(2018, 6, 2, 9, 30, 15, 234))
-  const berlinDate = getZonedTime(utcDate, utc)
-  expect(typeof berlinDate === 'object').toBeTruthy()
-  const { year, month, day, hours, minutes, seconds, milliseconds, zone } = berlinDate
+  const berlinTime = getZonedTime(utcDate, utc)
+  expect(typeof berlinTime === 'object').toBeTruthy()
+  const { year, month, day, hours, minutes, seconds, milliseconds, zone, epoch } = berlinTime
   expect(year).toEqual(2018)
   expect(month).toEqual(7)
   expect(day).toEqual(2)
@@ -79,4 +82,5 @@ it('optimizes conversion to UTC', () => {
   expect(typeof zone === 'object').toBeTruthy()
   expect(zone.abbreviation).toEqual('UTC')
   expect(zone.offset).toEqual(0)
+  expect(epoch).toEqual(1530523815234)
 })
