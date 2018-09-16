@@ -26,6 +26,7 @@ Lightweight time zone listing and date converting. Intended for adding time zone
   - [Format a date/time to a custom string](#format-a-datetime-to-a-custom-string)
   - [Parse a date/time from a custom string](#parse-a-datetime-from-a-custom-string)
   - [Set time zone to a zone-less date](#set-time-zone-to-a-zone-less-date)
+  - [Get UTC offset for a specific time zone](#get-utc-offset-for-a-specific-time-zone)
 - [API Reference](#api-reference)
 - [Library Integrations](#library-integrations)
 - [Contributing](#contributing)
@@ -138,7 +139,7 @@ const berlinTime = getZonedTime(unixTime, berlin)
 
 ### Convert a date from a specific time zone to UTC
 
-Dates are supposed to be displayed in a time zone chosen by the user, but they are usually stored in UTC. The result of the conversion can be stored safely to prevent the time zone information from being lost.
+Dates are usually entered in a time zone chosen by the user, but they are supposed to be stored in UTC. The result of the conversion can be stored safely to prevent the time zone information from being lost.
 
 ```js
 const { findTimeZone, getUnixTime } = require('timezone-support')
@@ -214,6 +215,28 @@ const zonedTime = setTimeZone(zonelessLocalDate, berlin, { useUTC: false })
 
 See the function [formatZonedTime](#formatzonedtime) for more information.
 
+### Get UTC offset for a specific date and time zone
+
+Libraries usually provide all what is needed to parse, format, compare or manipulate a date value. They accept the native `Date` object, which offers access to date and time parts in the local time zone and UTC. The UTC offset of an arbitrary time zone can be used to construct a `Date` instance, which returns its date and time parts in the specified time zone. Such instance can be used for formatting, except for its timestamp and time zone offset, which are wrong.
+
+```js
+const { findTimeZone, getUTCOffset } = require('timezone-support')
+const berlin = findTimeZone('Europe/Berlin')
+
+// Date timestamp in UTC
+const unixTime = Date.UTC(2018, 8, 2, 10, 0)
+// Request the UTC offset for this day in the "Europe/Berlin" time zone
+const { offset } = getUTCOffset(unixTime, berlin)
+// Create a new Date instance with date and time parts in the "Europe/Berlin" time zone
+const berlinDate = new Date(unixTime - offset)
+// Returns "2018-9-2 12:00:00" across the globe
+const formattedDate = berlinDate.toLocaleString()
+// Only date and time part getters are allowed to be used on this Date instance:
+// getFullYear, getMonth, getDate, getHours, getMinutes, getSeconds and getMilliseconds
+```
+
+See the function [getUTCOffset](#getutcoffset) for more information.
+
 ## API Reference
 
 The API consists of functions only. They are divided to three modules, which you can load depending on your usage scenario.
@@ -229,9 +252,10 @@ Provides the same functions as the module `timezone-support/dist/index`, but doe
 #### populateTimeZones
 #### listTimeZones
 #### findTimeZone
-#### setTimeZone
+#### getUTCOffset
 #### getZonedTime
 #### getUnixTime
+#### setTimeZone
 
 ### timezone-support/dist/parse-format
 
@@ -242,8 +266,8 @@ Offers a minimal date parsing and formatting support, if you want to use this li
 
 ## Library Integrations
 
-### Day.js
-### date-fns
+* [Day.js] - [timeZone plugin] supplies parsing from and formatting to an arbitrary time zone
+* [date-fns]
 
 ## Contributing
 
@@ -251,6 +275,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2018-09-16   v1.1.0   Add a new getUTCOffset method for more lightweight integrations.
 * 2018-09-02   v1.0.0   Initial release
 
 ## License
@@ -262,5 +287,6 @@ Licensed under the MIT license.
 [Node.js]: http://nodejs.org/
 [NPM]: https://www.npmjs.com/
 [RequireJS]: https://requirejs.org/
-[day.js]: https://github.com/iamkun/dayjs
+[Day.js]: https://github.com/iamkun/dayjs
 [date-fns]: https://github.com/date-fns/date-fns
+[timeZone plugin]: https://github.com/prantlf/dayjs/blob/combined/docs/en/Plugin.md#timezone

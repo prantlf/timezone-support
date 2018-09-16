@@ -1,6 +1,6 @@
 import { populateTimeZones, listTimeZones, findTimeZone } from './lookup/lookup'
-import { setTimeZone, getZonedTime, getUnixTime } from './convert/convert'
+import { getUTCOffset, getZonedTime, getUnixTime, setTimeZone } from './convert/convert'
 
 export {
-  populateTimeZones, listTimeZones, findTimeZone, setTimeZone, getZonedTime, getUnixTime
+  populateTimeZones, listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone
 }

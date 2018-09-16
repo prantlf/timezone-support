@@ -18,5 +18,5 @@ function formatZonedTimeUsingDate () {
 
 createSuite('Formatting a string with a local time...')
   .add('Date:toString', formatZonedTimeUsingDate)
-  .add('formatZonedTime', () => formatZonedTime(time, 'D.M.Y H:MM:ss.SSS Z'))
+  .add('formatZonedTime', () => formatZonedTime(time, 'D.M.Y H:MM:ss.SSS [GMT]Z (z)'))
   .start()

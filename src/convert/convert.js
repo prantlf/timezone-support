@@ -20,18 +20,10 @@ function attachEpoch (time, unixTime) {
   Object.defineProperty(time, 'epoch', { value: unixTime })
 }
 
-function setTimeZone (time, timeZone, options) {
-  if (time instanceof Date) {
-    time = getDateTime(time, options)
-  } else {
-    const { year, month, day, hours, minutes, seconds = 0, milliseconds = 0 } = time
-    time = { year, month, day, hours, minutes, seconds, milliseconds }
-  }
-  const unixTime = getUnixTimeFromUTC(time)
+function getUTCOffset (date, timeZone) {
+  const unixTime = typeof date === 'number' ? date : date.valueOf()
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
-  time.zone = { abbreviation, offset }
-  attachEpoch(time, unixTime + offset * 60000)
-  return time
+  return { abbreviation, offset }
 }
 
 function getZonedTime (date, timeZone) {
@@ -69,4 +61,18 @@ function getUnixTime (time, timeZone) {
   return unixTime + zone.offset * 60000
 }
 
-export { setTimeZone, getZonedTime, getUnixTime }
+function setTimeZone (time, timeZone, options) {
+  if (time instanceof Date) {
+    time = getDateTime(time, options)
+  } else {
+    const { year, month, day, hours, minutes, seconds = 0, milliseconds = 0 } = time
+    time = { year, month, day, hours, minutes, seconds, milliseconds }
+  }
+  const unixTime = getUnixTimeFromUTC(time)
+  const { abbreviation, offset } = getTransition(unixTime, timeZone)
+  time.zone = { abbreviation, offset }
+  attachEpoch(time, unixTime + offset * 60000)
+  return time
+}
+
+export { getUTCOffset, getZonedTime, getUnixTime, setTimeZone }

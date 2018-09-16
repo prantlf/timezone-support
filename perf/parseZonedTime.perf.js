@@ -2,7 +2,7 @@ const createSuite = require('./createSuite')
 const { parseZonedTime } = require('../dist/parse-format')
 
 const nativeInput = new Date('2018-09-01T18:01:36.386Z').toString()
-const localInput = '1.9.2018 18:01:36.386 +02:00'
+const localInput = '1.9.2018 18:01:36.386 GMT+02:00 (CET)'
 
 function parseZonedTimeUsingDate () {
   const date = new Date(nativeInput)
@@ -19,5 +19,5 @@ function parseZonedTimeUsingDate () {
 
 createSuite('Parsing a string with a local time...')
   .add('Date:constructor', parseZonedTimeUsingDate)
-  .add('parseZonedTime', () => parseZonedTime(localInput, 'D.M.Y H:MM:ss.SSS Z'))
+  .add('parseZonedTime', () => parseZonedTime(localInput, 'D.M.Y H:MM:ss.SSS [GMT]Z (z)'))
   .start()
