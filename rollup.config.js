@@ -1,4 +1,5 @@
-import { terser } from 'rollup-plugin-terser'
+import babel from 'rollup-plugin-babel'
+import { uglify } from 'rollup-plugin-uglify'
 import { cjs } from './rollup.config-cjs'
 
 export default cjs.concat([
@@ -11,7 +12,8 @@ export default cjs.concat([
       sourcemap: true
     },
     plugins: [
-      terser()
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
     ]
   },
   {
@@ -23,7 +25,8 @@ export default cjs.concat([
       sourcemap: true
     },
     plugins: [
-      terser()
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
     ]
   },
   {
@@ -35,7 +38,8 @@ export default cjs.concat([
       sourcemap: true
     },
     plugins: [
-      terser()
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
     ]
   }
 ])
