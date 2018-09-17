@@ -228,7 +228,7 @@ const unixTime = Date.UTC(2018, 8, 2, 10, 0)
 // Request the UTC offset for this day in the "Europe/Berlin" time zone
 const { offset } = getUTCOffset(unixTime, berlin)
 // Create a new Date instance with date and time parts in the "Europe/Berlin" time zone
-const berlinDate = new Date(unixTime - offset)
+const berlinDate = new Date(unixTime - offset * 60 * 1000)
 // Returns "2018-9-2 12:00:00" across the globe
 const formattedDate = berlinDate.toLocaleString()
 // Only date and time part getters are allowed to be used on this Date instance:
