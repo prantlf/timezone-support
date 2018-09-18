@@ -7,12 +7,13 @@ it('is exported as a function', () => {
 })
 
 it('parses a string with no padding needed', () => {
-  const time = parseZonedTime('PM 2 18 17 11 15 11 2017 HST -10:00', 'A S s m h D M Y z Z')
+  const time = parseZonedTime('PM 2 18 17 11 3 15 11 2017 HST -10:00', 'A S s m h d D M Y z Z')
   expect(typeof time === 'object').toBeTruthy()
-  const { year, month, day, hours, minutes, seconds, milliseconds, zone } = time
+  const { year, month, day, dayOfWeek, hours, minutes, seconds, milliseconds, zone } = time
   expect(year).toEqual(2017)
   expect(month).toEqual(11)
   expect(day).toEqual(15)
+  expect(dayOfWeek).toEqual(3)
   expect(hours).toEqual(23)
   expect(minutes).toEqual(17)
   expect(seconds).toEqual(18)

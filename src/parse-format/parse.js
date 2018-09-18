@@ -124,6 +124,9 @@ addExpressionToken('HH', match2)
 addExpressionToken('hh', match2)
 addParseToken(['H', 'HH', 'h', 'hh'], 'hours')
 
+addExpressionToken('d', match1)
+addParseToken('d', 'dayOfWeek')
+
 addExpressionToken('D', match1to2)
 addExpressionToken('DD', match2)
 addParseToken(['D', 'DD'], 'day')

@@ -69,6 +69,8 @@ function setTimeZone (time, timeZone, options) {
     time = { year, month, day, hours, minutes, seconds, milliseconds }
   }
   const unixTime = getUnixTimeFromUTC(time)
+  const utcDate = new Date(unixTime)
+  time.dayOfWeek = utcDate.getUTCDay()
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   time.zone = { abbreviation, offset }
   attachEpoch(time, unixTime + offset * 60000)

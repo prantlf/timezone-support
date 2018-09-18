@@ -11,6 +11,7 @@ it('formats a time object to a string with no padding needed', () => {
     year: 2017,
     month: 11,
     day: 15,
+    dayOfWeek: 3,
     hours: 23,
     minutes: 17,
     seconds: 18,
@@ -20,8 +21,8 @@ it('formats a time object to a string with no padding needed', () => {
       offset: 600
     }
   }
-  const string = formatZonedTime(honoluluTime, 'A S SS SSS s ss m mm h hh H HH D DD M MM Y YY YYYY z Z ZZ')
-  expect(string).toEqual('PM 2 23 234 18 18 17 17 11 11 23 23 15 15 11 11 2017 17 2017 HST -10:00 -1000')
+  const string = formatZonedTime(honoluluTime, 'A S SS SSS s ss m mm h hh H HH d D DD M MM Y YY YYYY z Z ZZ')
+  expect(string).toEqual('PM 2 23 234 18 18 17 17 11 11 23 23 3 15 15 11 11 2017 17 2017 HST -10:00 -1000')
 })
 
 it('pads single digits with zeros', () => {
@@ -67,4 +68,10 @@ it('leaves non-token parts of the format intact', () => {
 it('formats 00:00 as 12:00 AM', () => {
   const string = formatZonedTime({ hours: 0 }, 'h')
   expect(string).toEqual('12')
+})
+
+it('uses formatters cached from a previously used format', () => {
+  formatZonedTime({ year: 2018 }, 'YYYY')
+  const string = formatZonedTime({ year: 2018 }, 'YYYY')
+  expect(string).toEqual('2018')
 })

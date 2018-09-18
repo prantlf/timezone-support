@@ -46,8 +46,8 @@ const timeZones = listTimeZones()
 // Find a particular time zone: { name: 'Europe/Berlin', ... }
 const berlin = findTimeZone('Europe/Berlin')
 
-// Convert a date to a specific time zone: { year, month, day, hours,
-//   minutes, seconds, milliseconds, zone: { abbreviation, offset } }
+// Convert a date to a specific time zone: { year, month, day, dayOfWeek,
+//   hours, minutes, seconds, milliseconds, zone: { abbreviation, offset } }
 const nativeDate = new Date()
 const berlinTime = getZonedTime(nativeDate, berlin)
 
@@ -243,7 +243,7 @@ The API consists of functions only. They are divided to three modules, which you
 
 ### timezone-support/dist/index
 
-Main package module. The most usually chosen module with time zone lookup and date conversion functionality. Loads the bundled time zone database automatically. Includes all functions from the emodule `timezone-support/dist/lookup-convert` except for [populateTimeZones](#populatetimezones).
+Main package module. The most usually chosen module with time zone lookup and date conversion functionality. Loads the bundled time zone database automatically. Includes all functions from the module `timezone-support/dist/lookup-convert` except for [populateTimeZones](#populatetimezones).
 
 ### timezone-support/dist/lookup-convert
 
@@ -275,7 +275,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 2018-09-16   v1.1.0   Add a new getUTCOffset method for more lightweight integrations.
+* 2018-09-18   v1.3.0   Maintain the property dayOfWeek in the time object.
+* 2018-09-16   v1.2.0   Add a new getUTCOffset method for more lightweight integrations.
+* 2018-09-03   v1.1.0   Set the property epoch to the time object.
 * 2018-09-02   v1.0.0   Initial release
 
 ## License
