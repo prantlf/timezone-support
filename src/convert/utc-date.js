@@ -2,6 +2,10 @@ function getUnixTimeFromUTC ({ year, month, day, hours, minutes, seconds = 0, mi
   return Date.UTC(year, month - 1, day, hours, minutes, seconds, milliseconds)
 }
 
+function getDateFromTime ({ year, month, day, hours, minutes, seconds = 0, milliseconds = 0 }) {
+  return new Date(year, month - 1, day, hours, minutes, seconds, milliseconds)
+}
+
 function getUTCTime (date) {
   const year = date.getUTCFullYear()
   const month = date.getUTCMonth() + 1
@@ -39,4 +43,4 @@ function getDateTime (date, options) {
   return extract(date)
 }
 
-export { getUnixTimeFromUTC, getUTCTime, getDateTime }
+export { getUnixTimeFromUTC, getDateFromTime, getUTCTime, getLocalTime, getDateTime }

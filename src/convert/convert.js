@@ -1,4 +1,4 @@
-import { getUnixTimeFromUTC, getUTCTime, getDateTime } from './utc-date'
+import { getUnixTimeFromUTC, getDateFromTime, getUTCTime, getLocalTime, getDateTime } from './utc-date'
 
 function findTransitionIndex (unixTime, timeZone) {
   const { untils } = timeZone
@@ -77,4 +77,30 @@ function setTimeZone (time, timeZone, options) {
   return time
 }
 
-export { getUTCOffset, getZonedTime, getUnixTime, setTimeZone }
+function convertTimeToDate (time) {
+  const { epoch } = time
+  if (epoch !== undefined) {
+    return new Date(epoch)
+  }
+  const { offset } = time.zone || {}
+  if (offset === undefined) {
+    return getDateFromTime(time)
+  }
+  const unixTime = getUnixTimeFromUTC(time)
+  return new Date(unixTime + offset * 60000)
+}
+
+function convertDateToTime (date) {
+  const time = getLocalTime(date)
+  const match = /\(([^)]+)\)$/.exec(date.toTimeString())
+  time.zone = {
+    abbreviation: match ? match[1]
+      // istanbul ignore next
+      : '???',
+    offset: date.getTimezoneOffset()
+  }
+  attachEpoch(time, date.valueOf())
+  return time
+}
+
+export { getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime }
