@@ -66,8 +66,13 @@ it('leaves non-token parts of the format intact', () => {
 })
 
 it('formats 00:00 as 12:00 AM', () => {
-  const string = formatZonedTime({ hours: 0 }, 'h')
-  expect(string).toEqual('12')
+  const string = formatZonedTime({ hours: 0 }, 'h a')
+  expect(string).toEqual('12 am')
+})
+
+it('formats 12:00 as 12:00 PM', () => {
+  const string = formatZonedTime({ hours: 12 }, 'h a')
+  expect(string).toEqual('12 pm')
 })
 
 it('uses formatters cached from a previously used format', () => {

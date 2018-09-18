@@ -40,6 +40,7 @@ const addFormatToken = function (token, padded, property) {
 }
 
 addFormatToken('A', 0, function () { return this.hours < 12 ? 'AM' : 'PM' })
+addFormatToken('a', 0, function () { return this.hours < 12 ? 'am' : 'pm' })
 addFormatToken('S', 0, function () { return Math.floor(this.milliseconds / 100) })
 addFormatToken(0, ['SS', 2], function () { return Math.floor(this.milliseconds / 10) })
 addFormatToken(0, ['SSS', 3], 'milliseconds')

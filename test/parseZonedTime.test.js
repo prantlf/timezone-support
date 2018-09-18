@@ -57,14 +57,14 @@ it('parses a string with padded numbers, 24-hour mode', () => {
 })
 
 it('recognizes midnight', () => {
-  const time = parseZonedTime('12 AM', 'h A')
+  const time = parseZonedTime('12 am', 'h a')
   expect(typeof time === 'object').toBeTruthy()
   const { hours } = time
   expect(hours).toEqual(0)
 })
 
 it('recognizes noon', () => {
-  const time = parseZonedTime('12 PM', 'hh A')
+  const time = parseZonedTime('12 pm', 'hh a')
   expect(typeof time === 'object').toBeTruthy()
   const { hours } = time
   expect(hours).toEqual(12)
