@@ -1,6 +1,6 @@
 /* global beforeAll, it, expect */
 
-const { findTimeZone, getUnixTime } = require('../dist/index')
+import { findTimeZone, getUnixTime } from '../src/index'
 
 let berlin
 

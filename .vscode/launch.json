@@ -15,7 +15,6 @@
         "browser.test.js"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "preLaunchTask": "build:debug",
       "skipFiles": [
         "<node_internals>/**/*.js"
       ]

@@ -1,59 +1,69 @@
 const { readFile, outputFile } = require('fs-extra')
-const { promisify } = require('util')
+const { promisify } = require('es6-promisify')
 const { join } = require('path')
-const glob = require('tiny-glob')
+const glob = require('fast-glob')
 let rimraf = require('rimraf')
 
 rimraf = promisify(rimraf)
 
 const tests = join(__dirname, '../test')
 const browserTests = join(tests, 'browser')
+const importExpression = /import ({[^}]+}) from '..\/src\/([^']+)'/
 
-async function readTemplate () {
+function readTemplate () {
   console.log(`Reading browser test template...`)
-  const template = await readFile(join(tests, 'browser.html'), { encoding: 'utf-8' })
-  return template.split('\n')
+  return readFile(join(tests, 'browser.html'), { encoding: 'utf-8' })
+    .then(template => template.split('\n'))
 }
 
-async function readTest (file) {
-  let content = await readFile(join(tests, file), { encoding: 'utf-8' })
-  content = content.split('\n')
-  return content.slice(2, content.length - 1)
+function readTest (file) {
+  return readFile(join(tests, file), { encoding: 'utf-8' })
+    .then(content => {
+      content = content.split('\n')
+      return content.slice(2, content.length - 1)
+    })
 }
 
 function formatPage (template, contentIndex, content) {
   const module = content[0]
-  const match = /require\('..\/dist\/([^']+)'\)/.exec(module)
+  const match = importExpression.exec(module)
   if (!match) {
     throw new Error('Statement requiring the code module not found.')
   }
-  const name = match[1]
+  const name = match[2]
   const variable = name === 'index' ? 'support' : name
-  content[0] = module.replace(/require\('..\/dist\/[^']+'\)/, 'window[\'timezone-' + variable + '\']')
+  content[0] = module.replace(importExpression, `const $1 = window['timezone-${variable}']`)
   return template.slice(0, contentIndex)
     .concat('', '<script src="../../dist/' + name + '.umd.js"></script>', '',
       '<script>', '(function () {', content, '})()', '</script>')
     .concat(template.slice(contentIndex))
 }
 
-(async function () {
-  try {
-    console.log(`Deleting existing browser tests...`)
-    await rimraf(browserTests)
-    const template = await readTemplate()
+console.log(`Deleting existing browser tests...`)
+let template
+rimraf(browserTests)
+  .then(() => readTemplate())
+  .then(result => {
+    template = result
+    return glob('*.test.js', { cwd: tests })
+  })
+  .then(files => {
     const scriptIndex = template.indexOf('</head>')
-    const files = await glob('*.test.js', { cwd: tests })
-    for (let file of files) {
-      if (file !== 'browser.test.js') {
+    files
+      .filter(file => file !== 'browser.test.js')
+      .reduce((promise, file) => {
         console.log(`Processing test ${file}...`)
-        let content = await readTest(file)
-        content = formatPage(template, scriptIndex, content)
-        file = join(browserTests, file.substr(0, file.length - 2) + 'html')
-        await outputFile(file, content.join('\n'))
-      }
-    }
-  } catch (error) {
+        return promise.then(() =>
+          readTest(file)
+            .then(content => {
+              content = formatPage(template, scriptIndex, content)
+              file = join(browserTests, file.substr(0, file.length - 2) + 'html')
+              return outputFile(file, content.join('\n'))
+            })
+        )
+      }, Promise.resolve())
+  })
+  .catch(error => {
     console.error(error)
     process.exitCode = 1
-  }
-})()
+  })

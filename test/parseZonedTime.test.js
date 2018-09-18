@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { parseZonedTime } = require('../dist/parse-format')
+import { parseZonedTime } from '../src/parse-format'
 
 it('is exported as a function', () => {
   expect(typeof parseZonedTime === 'function').toBeTruthy()

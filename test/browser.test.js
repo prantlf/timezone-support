@@ -29,40 +29,52 @@ beforeAll(done => {
   jasmine.addMatchers(customMatchers)
   server = connect()
     .use(serve(join(__dirname, '..'), { etag: false }))
-    .listen(port, async () => {
-      browser = await puppeteer.launch({
-        headless: true,
-        args: process.env.TRAVIS === 'true' ? [ '--no-sandbox' ] : []
-      })
-      page = await browser.newPage()
-      done()
+    .listen(port, () => {
+      puppeteer
+        .launch({
+          headless: true,
+          args: process.env.TRAVIS === 'true' ? [ '--no-sandbox' ] : []
+        })
+        .then(result => {
+          browser = result
+          return browser.newPage()
+        })
+        .then(result => {
+          page = result
+          done()
+        })
     })
 })
 
-afterAll(async done => {
-  await browser.close()
-  server.close(done)
+afterAll(done => {
+  browser
+    .close()
+    .then(() => server.close(done))
 })
 
 const tests = readdirSync(join(__dirname, 'browser'))
 for (let test of tests) {
-  it(`Execute ${test}`, async () => {
-    await page.goto(`http://localhost:${port}/test/browser/${test}`)
-    await page.waitForSelector('.jasmine-overall-result')
-    const result = await page.evaluate(x => {
-      const result = document.querySelector('.jasmine-overall-result')
-      return result.classList.contains('jasmine-passed')
-    })
-    const {
-      summary, duration, results
-    } = await page.evaluate(x => {
-      const summary = document.querySelector('.jasmine-overall-result').innerText
-      const duration = document.querySelector('.jasmine-duration').innerText
-      const results = document.querySelector('.jasmine-results').innerText
-      return {
-        summary, duration, results
-      }
-    })
-    expect(result).toPass(`${summary}; ${duration}\n${results}`)
+  it(`Execute ${test}`, done => {
+    let result
+    page
+      .goto(`http://localhost:${port}/test/browser/${test}`)
+      .then(() => page.waitForSelector('.jasmine-overall-result'))
+      .then(() => page.evaluate(() => {
+        const result = document.querySelector('.jasmine-overall-result')
+        return result.classList.contains('jasmine-passed')
+      }))
+      .then(output => {
+        result = output
+        return page.evaluate(() => {
+          const summary = document.querySelector('.jasmine-overall-result').innerText
+          const duration = document.querySelector('.jasmine-duration').innerText
+          const results = document.querySelector('.jasmine-results').innerText
+          return { summary, duration, results }
+        })
+      })
+      .then(({ summary, duration, results }) => {
+        expect(result).toPass(`${summary}; ${duration}\n${results}`)
+        done()
+      })
   })
 }

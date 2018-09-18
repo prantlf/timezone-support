@@ -1,8 +1,28 @@
 import babel from 'rollup-plugin-babel'
 import { uglify } from 'rollup-plugin-uglify'
-import { cjs } from './rollup.config-cjs'
 
-export default cjs.concat([
+export default [
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/index.js',
+      format: 'cjs'
+    }
+  },
+  {
+    input: 'src/lookup-convert.js',
+    output: {
+      file: 'dist/lookup-convert.js',
+      format: 'cjs'
+    }
+  },
+  {
+    input: 'src/parse-format.js',
+    output: {
+      file: 'dist/parse-format.js',
+      format: 'cjs'
+    }
+  },
   {
     input: 'src/index.js',
     output: {
@@ -42,4 +62,4 @@ export default cjs.concat([
       uglify()
     ]
   }
-])
+]

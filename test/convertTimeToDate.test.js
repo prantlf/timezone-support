@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { convertTimeToDate } = require('../dist/index')
+import { convertTimeToDate } from '../src/lookup-convert'
 
 it('is exported as a function', () => {
   expect(typeof convertTimeToDate === 'function').toBeTruthy()

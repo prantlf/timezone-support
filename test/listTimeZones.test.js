@@ -1,6 +1,6 @@
 /* global it, expect */
 
-const { listTimeZones } = require('../dist/index')
+import { listTimeZones } from '../src/index'
 
 it('is exported as a function', () => {
   expect(typeof listTimeZones === 'function').toBeTruthy()
