@@ -23,7 +23,7 @@
     "url": "https://github.com/prantlf/timezone-support/issues"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=6"
   },
   "main": "dist/index.js",
   "scripts": {
