@@ -267,7 +267,7 @@ Offers a minimal date parsing and formatting support, if you want to use this li
 ## Library Integrations
 
 * [Day.js] - [timeZone plugin] supplies parsing from and formatting to an arbitrary time zone
-* [date-fns]
+* [date-fns] - [date-fns-timezone] provides functions for parsing from and formatting to an arbitrary time zone and time zone conversions for the native `Date` object.
 
 ## Contributing
 
@@ -292,3 +292,4 @@ Licensed under the MIT license.
 [Day.js]: https://github.com/iamkun/dayjs
 [date-fns]: https://github.com/date-fns/date-fns
 [timeZone plugin]: https://github.com/prantlf/dayjs/blob/combined/docs/en/Plugin.md#timezone
+[date-fns-timezone]: https://github.com/prantlf/date-fns-timezone
