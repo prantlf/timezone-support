@@ -385,4 +385,4 @@ const berlinTime = setTimeZone(date, berlin, { useUTC: true })
 `Date` objects in the last two scenarios are initialized only for formatting or conversion purposes, because other methods, than the date part getters, deliver wrong results. Such "invalid" `Date` instances should exist only temporarily in a restricted scope. They should not be shared widely in the application to prevent mistakes from happening. The local time in a valid `Date` object has to match the UTC time maintained by the same object.
 
 [time object]: ./design.md#time-object
-[IANA time zonet]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[IANA time zones]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
