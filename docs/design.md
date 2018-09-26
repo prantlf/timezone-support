@@ -7,6 +7,8 @@ The purpose of this library is to offer an efficient support for time zone handl
 * Reliable - generated from the fresh official time zone database version 2018e. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Customizable - named exports and functions divided to separate modules allow tree-shaking. Alternative time zone data can be supplied to reduce the library size.
 
+### Table of Contents
+
 - [Basics](#basics)
 - [UNIX Timestamp](#unix-timestamp)
 - [Time Object](#time-object)

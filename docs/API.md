@@ -2,6 +2,9 @@
 
 This library contains pure, immutable functions to query time zones, convert dates among them and parse and form date strings. The functions are grouped in three modules according to their usage scenarios.
 
+### Table of Contents
+
+- [Loading](#loading)
 - [Modules](#modules)
   - [index](#index)
   - [lookup-convert](#lookup-convert)
@@ -18,6 +21,35 @@ This library contains pure, immutable functions to query time zones, convert dat
   - [parseZonedTime](#parsezonedtime)
   - [populateTimeZones](#populatetimezones)
   - [setTimeZone](#settimezone)
+
+## Loading
+
+Load the main module in an application using CommonJS modules:
+
+```js
+const { findTimeZone, getZonedTime } = require('timezone-support')
+```
+
+Load the main module in an application using ES6 modules:
+
+```js
+import {
+  findTimeZone, getZonedTime
+} from './node_modules/timezone-support/src/index.js'
+```
+
+Load the main module in the browser with plain JavaScript:
+
+```html
+<script src="./node_modules/timezone-support/dist/index.umd.js"></script>
+<script>
+  (() => {
+    const { findTimeZone, getZonedTime } = window['timezone-support']
+  })()
+</script>
+```
+
+You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@1.3.2/dist/index.umd.js.
 
 ## Modules
 

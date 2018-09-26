@@ -2,6 +2,8 @@
 
 The minimal, but powerful API of this module provides functionality for both date/time-supporting libraries and end-user applications.
 
+### Table of Contents
+
 - [List all available time zones](#list-all-available-time-zones)
 - [Convert a date from UTC to a specific time zone](#convert-a-date-from-utc-to-a-specific-time-zone)
 - [Convert a date from a specific time zone to UTC](#convert-a-date-from-a-specific-time-zone-to-utc)

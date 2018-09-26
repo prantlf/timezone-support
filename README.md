@@ -16,9 +16,10 @@ Lightweight time zone listing and date converting. Intended for adding time zone
 * Generated from the official time zone database version 2018e. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Minimal interface for time zone lookup and conversions. Parsing, formatting and manipulating dates is usually the task for a higher-level date library.
 
+### Table of Contents
+
 - [Synopsis](#synopsis)
-- [Installation and Loading](#installation-and-loading)
-  - [Specific Environments](#specific-environments)
+- [Installation and Getting Started](#installation-and-getting-started)
 - [Usage Scenarios](./docs/usage.md#usage-scenarios)
 - [Design Concepts](./docs/design.md#design-concepts)
 - [API Reference](./docs/API.md#api-reference)
@@ -50,7 +51,7 @@ const berlinTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0 }
 const nativeDate = new Date(getUnixTime(berlinTime, berlin))
 ```
 
-## Installation and Loading
+## Installation and Getting Started
 
 This module can be installed in your project using [NPM]. Make sure, that you use [Node.js] version 6 or newer.
 
@@ -58,42 +59,13 @@ This module can be installed in your project using [NPM]. Make sure, that you us
 $ npm i timezone-support --save
 ```
 
-### Specific Environments
-
-Load the main module in an application using CommonJS modules:
+Functions are exposed as named exports from the package modules, for example:
 
 ```js
 const { findTimeZone, getZonedTime } = require('timezone-support')
 ```
 
-Load the main module in an application using ES6 modules:
-
-```js
-import {
-  findTimeZone, getZonedTime
-} from './node_modules/timezone-support/src/index.js'
-```
-
-Load the main module in the browser with plain JavaScript:
-
-```html
-<script src="./node_modules/timezone-support/dist/index.umd.js"></script>
-<script>
-  (() => {
-    const { findTimeZone, getZonedTime } = window['timezone-support']
-  })()
-</script>
-```
-
-Load the main module in the browser with [RequireJS]:
-
-```html
-<script src="./node_modules/timezone-support/dist/index.umd.js"></script>
-<script>
-  require(['timezone-support'], ({ findTimeZone, getZonedTime }) => {
-  })
-</script>
-```
+You can read more about the [module loading](./docs/API.md#loading) in other environments, like ES6 or web browsers. [Usage scenarios](./docs/usage.md#usage-scenarios) demonstrate applications of this library in typical real-world scenarios. [Design concepts](./docs/design.md#design-concepts) explain the approach to time zone handling taken by tni library and types of values used ion the interface. Finally, the [API reference](./docs/API.md#api-reference) lists all functions with description of their functionality.
 
 ## Library Integrations
 
