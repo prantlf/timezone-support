@@ -53,10 +53,14 @@ const nativeDate = new Date(getUnixTime(berlinTime, berlin))
 
 ## Installation and Getting Started
 
-This module can be installed in your project using [NPM]. Make sure, that you use [Node.js] version 6 or newer.
+This module can be installed in your project using [NPM] or [Yarn]. Make sure, that you use [Node.js] version 6 or newer.
 
 ```sh
 $ npm i timezone-support --save
+```
+
+```sh
+$ yarn add timezone-support
 ```
 
 Functions are exposed as named exports from the package modules, for example:
@@ -65,7 +69,7 @@ Functions are exposed as named exports from the package modules, for example:
 const { findTimeZone, getZonedTime } = require('timezone-support')
 ```
 
-You can read more about the [module loading](./docs/API.md#loading) in other environments, like ES6 or web browsers. [Usage scenarios](./docs/usage.md#usage-scenarios) demonstrate applications of this library in typical real-world scenarios. [Design concepts](./docs/design.md#design-concepts) explain the approach to time zone handling taken by tni library and types of values used ion the interface. Finally, the [API reference](./docs/API.md#api-reference) lists all functions with description of their functionality.
+You can read more about the [module loading](./docs/API.md#loading) in other environments, like with ES6 or in web browsers. [Usage scenarios](./docs/usage.md#usage-scenarios) demonstrate applications of this library in typical real-world scenarios. [Design concepts](./docs/design.md#design-concepts) explain the approach to time zone handling taken by tni library and types of values used ion the interface. Finally, the [API reference](./docs/API.md#api-reference) lists all functions with a description of their functionality.
 
 ## Library Integrations
 
