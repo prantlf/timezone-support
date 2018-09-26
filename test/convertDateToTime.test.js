@@ -19,7 +19,7 @@ it('converts a date to time', () => {
   expect(minutes).toEqual(30)
   expect(seconds).toEqual(15)
   expect(milliseconds).toEqual(234)
-  expect(epoch).toEqual(date.valueOf())
+  expect(epoch).toEqual(date.getTime())
   expect(typeof zone === 'object').toBeTruthy()
   const { abbreviation, offset } = zone
   expect(/\w+/.test(abbreviation)).toBeTruthy()

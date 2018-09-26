@@ -33,7 +33,7 @@ it('converts the UNIX time to the correct time object', () => {
 
 it('recognizes daylight-saving time', () => {
   const unixTime = Date.UTC(2018, 6, 2, 9, 30, 15, 234)
-  const berlinTime = getZonedTime(unixTime.valueOf(), berlin)
+  const berlinTime = getZonedTime(unixTime, berlin)
   expect(typeof berlinTime === 'object').toBeTruthy()
   const { year, month, day, dayOfWeek, hours, minutes, seconds, milliseconds, zone, epoch } = berlinTime
   expect(year).toEqual(2018)

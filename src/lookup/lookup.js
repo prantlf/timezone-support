@@ -5,14 +5,14 @@ let names
 let links
 let instances
 
-function populateTimeZones (data) {
+function populateTimeZones ({ zones: zoneData, links: linkData }) {
   zones = {}
-  names = data.zones.map(packed => {
+  names = zoneData.map(packed => {
     const name = packed.substr(0, packed.indexOf('|'))
     zones[name] = packed
     return name
   })
-  links = data.links.reduce((result, packed) => {
+  links = linkData.reduce((result, packed) => {
     const [ name, alias ] = packed.split('|')
     result[alias] = name
     return result
@@ -21,7 +21,7 @@ function populateTimeZones (data) {
 }
 
 function listTimeZones () {
-  return names
+  return names.slice()
 }
 
 function findTimeZone (alias) {

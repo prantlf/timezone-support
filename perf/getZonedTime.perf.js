@@ -1,7 +1,7 @@
 const createSuite = require('./createSuite')
 const { findTimeZone, getZonedTime } = require('../dist')
 
-const unixTime = new Date(2018, 9, 1, 18, 1, 36, 386).valueOf()
+const unixTime = new Date(2018, 9, 1, 18, 1, 36, 386).getTime()
 const berlin = findTimeZone('Europe/Berlin')
 
 function getZonedTimeUsingDate () {

@@ -21,14 +21,14 @@ function attachEpoch (time, unixTime) {
 }
 
 function getUTCOffset (date, timeZone) {
-  const unixTime = typeof date === 'number' ? date : date.valueOf()
+  const unixTime = typeof date === 'number' ? date : date.getTime()
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   return { abbreviation, offset }
 }
 
 function getZonedTime (date, timeZone) {
   const gotUnixTime = typeof date === 'number'
-  const unixTime = gotUnixTime ? date : date.valueOf()
+  const unixTime = gotUnixTime ? date : date.getTime()
   const { abbreviation, offset } = getTransition(unixTime, timeZone)
   if (gotUnixTime || offset) {
     date = new Date(unixTime - offset * 60000)
@@ -99,7 +99,7 @@ function convertDateToTime (date) {
       : '???',
     offset: date.getTimezoneOffset()
   }
-  attachEpoch(time, date.valueOf())
+  attachEpoch(time, date.getTime())
   return time
 }
 
