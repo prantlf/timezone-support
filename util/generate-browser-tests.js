@@ -55,9 +55,9 @@ function formatDataImport (input) {
 }
 
 function formatPage (template, contentIndex, content) {
-  const { functionCodeLine, functionScriptElement } = formatFunctionImport (content[0])
+  const { functionCodeLine, functionScriptElement } = formatFunctionImport(content[0])
   content[0] = functionCodeLine
-  const { dataCodeLine, dataScriptElement } = formatDataImport (content[1])
+  const { dataCodeLine, dataScriptElement } = formatDataImport(content[1])
   if (dataCodeLine) {
     content[1] = dataCodeLine
   }
