@@ -82,6 +82,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2018-09-30   v1.4.0   Add limited data for just the current decade - years 2012-2022.
 * 2018-09-18   v1.3.0   Maintain the property dayOfWeek in the time object.
 * 2018-09-16   v1.2.0   Add a new getUTCOffset method for more lightweight integrations.
 * 2018-09-03   v1.1.0   Set the property epoch to the time object.

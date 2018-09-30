@@ -180,8 +180,8 @@ Data for 2012-2022:  27 KB minified,  6.5 KB gzipped
 Custom time zone data can be used if the module `lookup-convert` is loaded instead of the default `index` module.
 
 ```html
-<script src="https://unpkg.com/timezone-support@1.4.2/dist/lookup-convert.umd.js"></script>
-<script src="https://unpkg.com/timezone-support@1.4.2/dist/data-2012-2022.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.4.0/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.4.0/dist/data-2012-2022.umd.js"></script>
 <script>
   (() => {
     const { populateTimeZones, findTimeZone, getZonedTime } = window['timezone-lookup-convert']
