@@ -12,7 +12,7 @@
 Lightweight time zone listing and date converting. Intended for adding time zone support to high-level date libraries, but also for direct application usage.
 
 * Tiny code base - 3.5 KB minified, 1.5 KB gzipped. Do not pack unnecessary weight in your application.
-* Packed time zone data - 175 KB minified, 22.5 KB gzipped. Single time zones are unpacked on demand.
+* Packed time zone data - 178 KB minified, 22.5 KB gzipped. Single time zones are unpacked on demand.
 * Generated from the official time zone database version 2018e. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Minimal interface for time zone lookup and conversions. Parsing, formatting and manipulating dates is usually the task for a higher-level date library.
 

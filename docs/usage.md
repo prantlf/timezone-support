@@ -12,6 +12,7 @@ The minimal, but powerful API of this module provides functionality for both dat
 - [Set time zone to a zone-less date](#set-time-zone-to-a-zone-less-date)
 - [Get UTC offset for a specific time zone](#get-utc-offset-for-a-specific-time-zone)
 - [Use the native Date object](#use-the-native-date-object)
+- [Limit the loaded time zone data](#limit-the-loaded-time-zone-data)
 
 ## List all available time zones
 
@@ -143,11 +144,11 @@ const formattedDate = berlinDate.toLocaleString()
 // getFullYear, getMonth, getDate, getHours, getMinutes, getSeconds and getMilliseconds
 ```
 
+See the function [getUTCOffset](./API.md#getutcoffset) for more information.
+
 ## Use the native Date object
 
 Most libraries use the native `Date` object on their interface. UNIX timestamp can be passed directory to its constructor and can be obtained from a `Date` instance by calling `Date.prototype.getTime`. Time object can be exchanged for a `Date` object by using conversion functions.
-
-See the function [getUTCOffset](./API.md#getutcoffset) for more information.
 
 ```js
 const { convertDateToTime, convertTimeToDate } = require('timezone-support')
@@ -164,3 +165,36 @@ const berlinTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
 const localDate = convertTimeToDate(berlinTime)
 // This converts the time zone of the time object to the local time zone.
 ```
+
+See the functions [convertDateToTime](./API.md#convertdatetotime) and [convertTimeToDate](./API.md#converttimetodate) for more information.
+
+## Limit the loaded time zone data
+
+The full time zone data cover all dates between 1970 and 2018. If you process dates only from a limited time period, you can initialize this library with a subset of time zone data and decrease the loading time of your application. For example, the difference between the full time zone data and the date for this decade:
+
+```
+Data for 1970-2018: 178 KB minified, 22.5 KB gzipped
+Data for 2012-2022:  27 KB minified,  6.5 KB gzipped
+```
+
+Custom time zone data can be used if the module `lookup-convert` is loaded instead of the default `index` module.
+
+```html
+<script src="https://unpkg.com/timezone-support@1.4.2/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.4.2/dist/data-2012-2022.umd.js"></script>
+<script>
+  (() => {
+    const { populateTimeZones, findTimeZone, getZonedTime } = window['timezone-lookup-convert']
+    const data = window['timezone-data-2012-2022']
+
+    populateTimeZones(data)
+
+    const berlin = findTimeZone('Europe/Berlin')
+    const isoString = '2018-09-09:19:17.276Z'
+    const berlinTime = getZonedTime(new Date(isoString), berlin)
+  })()
+</script>
+```
+
+
+See the function [populateTimeZones](./API.md#populatetimezones) for more information.

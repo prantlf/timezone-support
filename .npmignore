@@ -3,6 +3,6 @@
 .npmignore
 .vscode
 perf
-rollup.config*
+rollup.config.js
 test
 util

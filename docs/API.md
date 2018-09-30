@@ -49,7 +49,7 @@ Load the main module in the browser with plain JavaScript:
 </script>
 ```
 
-You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@1.3.2/dist/index.umd.js.
+You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@1.4.2/dist/index.umd.js.
 
 ## Modules
 
@@ -355,11 +355,23 @@ const data = {
 }
 ```
 
-See the [moment-timezone's latest data] as an example of the full data, which you can take a smaller part of to your application.
+See the [moment-timezone's latest data](../util/data/packed.json) as an example of the full data, which you can take a smaller part of to your application. This library includes [limited data for this decade](http://unpkg.com/timezone-support/dist/data-2012-2022.js) as an example. See also the script [wrap-limited-data](../util/wrap-limited-data.js), which produced the module with the limited data and which can be used to generate data for other time period too.
 
 If this function is called later, than during the application startup, the behaviour of this module may be unpredictable. Some time zone data might be used and cached in the application. You should avoid re-initialization to prevent hidden errors.
 
-This function is not exported form the `index` module to prevent usage mistakes, because that module includes the complete time zone data already.
+This function is not exported from the `index` module to prevent usage mistakes, because that module includes the complete time zone data already.
+
+```js
+const { populateTimeZones, findTimeZone, getZonedTime } = require('timezone-support/dist/lookup-convert')
+const data = require('timezone-support/dist/data-2012-2022')
+
+// Get the time zone support ready to handle dates from years 2012-2022.
+populateTimeZones(data)
+
+const berlin = findTimeZone('Europe/Berlin')
+const isoString = '2018-09-30T09:19:17.276Z'
+const berlinTime = getZonedTime(new Date(isoString), berlin)
+```
 
 ### setTimeZone
 
