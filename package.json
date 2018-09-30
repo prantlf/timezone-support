@@ -29,7 +29,7 @@
   "scripts": {
     "prepare": "npm run build",
     "lint": "standard --verbose",
-    "generate": "node util/wrap-data-minified",
+    "generate": "node util/wrap-data && node util/wrap-limited-data",
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
     "build": "run-s lint generate compile",
@@ -72,7 +72,7 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
+    "@babel/core": "^7.1.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "benchmark": "^2.1.4",
@@ -99,7 +99,7 @@
     "semantic-release": "^15.9.16",
     "serve-static": "^1.13.2",
     "standard": "^12.0.1",
-    "travis-deploy-once": "^5.0.8"
+    "travis-deploy-once": "^5.0.9"
   },
   "keywords": [
     "timezone",
