@@ -170,7 +170,7 @@ See the functions [convertDateToTime](./API.md#convertdatetotime) and [convertTi
 
 ## Limit the loaded time zone data
 
-The full time zone data cover all dates between 1970 and 2018. If you process dates only from a limited time period, you can initialize this library with a subset of time zone data and decrease the loading time of your application. For example, the difference between the full time zone data and the date for this decade:
+The full time zone data cover all dates between 1970 and 2018. If you process dates only from a limited time period, you can initialize this library with a subset of time zone data and decrease the loading time of your application. For example, the difference between the full time zone data and the data for this decade only:
 
 ```
 Data for 1970-2018: 178 KB minified, 22.5 KB gzipped
