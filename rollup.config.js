@@ -10,6 +10,13 @@ export default [
     }
   },
   {
+    input: 'src/index-2012-2022.js',
+    output: {
+      file: 'dist/index-2012-2022.js',
+      format: 'cjs'
+    }
+  },
+  {
     input: 'src/lookup-convert.js',
     output: {
       file: 'dist/lookup-convert.js',
@@ -34,6 +41,19 @@ export default [
     input: 'src/index.js',
     output: {
       file: 'dist/index.umd.js',
+      format: 'umd',
+      name: 'timezone-support',
+      sourcemap: true
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
+    ]
+  },
+  {
+    input: 'src/index-2012-2022.js',
+    output: {
+      file: 'dist/index-2012-2022.umd.js',
       format: 'umd',
       name: 'timezone-support',
       sourcemap: true
