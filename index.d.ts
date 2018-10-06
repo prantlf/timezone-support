@@ -47,6 +47,22 @@ declare module 'timezone-support' {
   }
 }
 
+declare module 'timezone-support/dist/parse-format' {
+  function parseZonedTime (input: string, format: string): Time
+  function formatZonedTime (time: Time, format: string): string
+
+  export { parseZonedTime, formatZonedTime }
+}
+
+interface PackedTimeZones {
+  [ key: string ]: string
+}
+
+interface TimeZoneData {
+  zones: PackedTimeZones
+  links: Array<string>
+}
+
 declare module 'timezone-support/dist/lookup-convert' {
   interface PackedTimeZones {
     [ key: string ]: string
@@ -64,11 +80,16 @@ declare module 'timezone-support/dist/lookup-convert' {
   }
 }
 
-declare module 'timezone-support/dist/parse-format' {
-  function parseZonedTime (input: string, format: string): Time
-  function formatZonedTime (time: Time, format: string): string
+declare module 'timezone-support/dist/data-2012-2022' {
+  const data: TimeZoneData
 
-  export { parseZonedTime, formatZonedTime }
+  export default data
+}
+
+declare module 'timezone-support/dist/index-2012-2022' {
+  export {
+    listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
+  }
 }
 
 // export as namespace timezoneSupport;
