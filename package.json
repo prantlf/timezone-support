@@ -26,6 +26,7 @@
     "node": ">=6"
   },
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "lint": "standard --verbose",
@@ -33,11 +34,12 @@
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
     "build": "run-s lint generate compile",
+    "compile:tests": "tsc --lib es6 test/typings.test.ts",
     "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
     "check:browser": "jest --testPathPattern browser.test.js",
     "benchmark": "node perf",
     "coverage": "test `node --version | cut -c 2` -eq 8 && cat coverage/lcov.info | coveralls",
-    "test": "run-s check generate:browser-tests check:browser",
+    "test": "run-s compile:tests check generate:browser-tests check:browser",
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
@@ -99,7 +101,8 @@
     "semantic-release": "^15.9.16",
     "serve-static": "^1.13.2",
     "standard": "^12.0.1",
-    "travis-deploy-once": "^5.0.9"
+    "travis-deploy-once": "^5.0.9",
+    "typescript": "^3.1.1"
   },
   "keywords": [
     "timezone",

@@ -3,3 +3,4 @@ dist
 node_modules
 src/lookup/data*.js
 test/browser
+test/typings.test.js

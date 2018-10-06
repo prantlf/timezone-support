@@ -8,6 +8,7 @@ rimraf = promisify(rimraf)
 
 const tests = join(__dirname, '../test')
 const browserTests = join(tests, 'browser')
+const nonBrowserTests = ['browser.test.js', 'typings.test.js']
 const importFunctionsExpression = /import ({[^}]+}) from '..\/src\/([^']+)'/
 const importDataExpression = /import (\w+) from '..\/src\/lookup\/([^']+)'/
 
@@ -81,7 +82,7 @@ rimraf(browserTests)
   .then(files => {
     const scriptIndex = template.indexOf('</head>')
     files
-      .filter(file => file !== 'browser.test.js')
+      .filter(file => !nonBrowserTests.includes(file))
       .reduce((promise, file) => {
         console.log(`Processing test ${file}...`)
         return promise.then(() =>
