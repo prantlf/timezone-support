@@ -32,7 +32,7 @@ function formatFunctionImport (input) {
     throw new Error('Statement requiring the code module not found.')
   }
   const name = match[2]
-  const variable = name === 'index' ? 'support' : name
+  const variable = name.startsWith('index') ? 'support' : name
   const functionCodeLine = input.replace(importFunctionsExpression,
     `const $1 = window['timezone-${variable}']`)
   const functionScriptElement = [
