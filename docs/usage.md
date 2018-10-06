@@ -180,8 +180,8 @@ Data for 2012-2022:  27 KB minified,  6.5 KB gzipped
 Custom time zone data can be used if the module `lookup-convert` is loaded instead of the default `index` module.
 
 ```html
-<script src="https://unpkg.com/timezone-support@1.4.0/dist/lookup-convert.umd.js"></script>
-<script src="https://unpkg.com/timezone-support@1.4.0/dist/data-2012-2022.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.5.1/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.5.1/dist/data-2012-2022.umd.js"></script>
 <script>
   (() => {
     const { populateTimeZones, findTimeZone, getZonedTime } = window['timezone-lookup-convert']
@@ -196,5 +196,19 @@ Custom time zone data can be used if the module `lookup-convert` is loaded inste
 </script>
 ```
 
+If you want to use the time zone data for years 2012-2022 published by this project, you can simplify your code by using a bundled package with both data and code.
+
+```html
+<script src="https://unpkg.com/timezone-support@1.5.1/dist/index-2012-2022.umd.js"></script>
+<script>
+  (() => {
+    const { findTimeZone, getZonedTime } = window['timezone-support']
+
+    const berlin = findTimeZone('Europe/Berlin')
+    const isoString = '2018-09-09:19:17.276Z'
+    const berlinTime = getZonedTime(new Date(isoString), berlin)
+  })()
+</script>
+```
 
 See the function [populateTimeZones](./API.md#populatetimezones) for more information.
