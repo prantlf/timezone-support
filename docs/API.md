@@ -133,7 +133,7 @@ const date = convertTimeToDate(date, berlin)
 ### findTimeZone
 
 ```
-findTimeZone(name: String) : Object
+findTimeZone(name: string) : object
 ```
 
 Returns an object with time zone data for the given canonical time zone name. Recognizes deprecated time zone names too. Throws an error, if no time zone can be found for the given name.
@@ -151,7 +151,7 @@ See [IANA time zones] for the complete available list.
 ### formatZonedTime
 
 ```
-formatZonedTime(time: Time, format: String) : String
+formatZonedTime(time: Time, format: string) : string
 ```
 
 Formats a [time object] using a custom format pattern to a string.
@@ -199,7 +199,7 @@ To escape characters in the format string, wrap them in square brackets (e.g. `[
 ### getUnixTime
 
 ```
-getUnixTime(time: Time, timeZone: Object) : Number
+getUnixTime(time: Date|Time, timeZone?: object) : number
 ```
 
 Returns a Unix timestamp (UTC) for the given incomplete [time object] converted from the given time zone.
@@ -222,7 +222,7 @@ The returned object is supposed to be passed to other functions, which use it to
 ### getUTCOffset
 
 ```
-getUTCOffset(date: Number|Date, timeZone: Object) : Object
+getUTCOffset(date: number|Date, timeZone: object) : object
 ```
 
 Returns the offset to UTC for a given date and the specific time zone, together with the time zone abbreviation.
@@ -246,7 +246,7 @@ The `abbreviation` value contains a string with the time zone abbreviation as it
 ### getZonedTime
 
 ```
-getZonedTime(date: Number|Date, timeZone: Object) : Time
+getZonedTime(date: number|Date, timeZone: object) : Time
 ```
 
 Returns a complete [time object] for the given date converted to the given time zone. The conversion uses the UNIX timestamp (UTC) of the date.
@@ -269,7 +269,7 @@ const time = getZonedTime(date, berlin)
 ### listTimeZones
 
 ```
-listTimeZones() : Array<String>
+listTimeZones() : Array<string>
 ```
 
 Returns a list of canonical time zone names recognized by this library. Either included in the [`index`](#index) module (see the [moment-timezone's latest data]), or initialized by the [`populateTimeZones`](#populatetimezones) method.
@@ -288,7 +288,7 @@ See [IANA time zones] for the complete available list.
 ### parseZonedTime
 
 ```
-parseZonedTime(input: String, format: String) : Time
+parseZonedTime(input: string, format: string) : Time
 ```
 
 Parses a date string using a custom format pattern to a [time object]. If the string does not contain a time zone offset, it can be added by [setTimeZone](#settimezone).
@@ -335,7 +335,7 @@ To escape characters in the format string, wrap them in square brackets (e.g. `[
 ### populateTimeZones
 
 ```
-populateTimeZones(data: Object)
+populateTimeZones(data: object)
 ```
 
 Initializes the time zone data and should be called just once, when the application starts. Needed only if you load the `lookup-convert` module instead of the `index` module.
@@ -376,13 +376,15 @@ const berlinTime = getZonedTime(new Date(isoString), berlin)
 ### setTimeZone
 
 ```
-setTimeZone(time: Date|Time, timeZone: Object) : Time
+setTimeZone(time: Date|Time, timeZone: object, options?: object) : Time
 ```
 
 Returns a new complete [time object] for the given one completed with the given time zone. The completion will add the UNIX timestamp (UTC) and the time zone information.
 
 * `time` - a `Date` object or a source [time object]
 * `timeZone` - the time zone object returned by [`findTimeZone`](#findtimezone)
+* `options` - an object with options for the function call
+* `options.useUTC` - a boolean flag to choose getters of the `Date` instance; `true` will choose the UTC getters (`getUTCFullYear`, `getUTCMonth`, ...) and `false` will choose the local-time getters (`getFullYear`, `getMonth`, ...)
 
 ```js
 const { findTimeZone, setTimeZone } = require('timezone-support')
@@ -398,7 +400,7 @@ const berlinTime = setTimeZone(time, berlin)
 
 This method is supposed to be used with incomplete time objects, which are entered by the user, or parsed from date strings without time zone information.
 
-Another possibility is to supply the time by a `Date` object, from which the date parts can be obtained by the corresponding getters (`getFullYear`, `getMonth`, ...):
+Another possibility is to supply the time by a `Date` object, from which the date parts can be obtained by the corresponding local-time getters (`getFullYear`, `getMonth`, ...):
 
 ```js
 const { findTimeZone, setTimeZone } = require('timezone-support')
@@ -412,7 +414,7 @@ const berlinTime = setTimeZone(date, berlin, { useUTC: false })
 // }
 ```
 
-Finally the source `Date` object, from which the date parts can be obtained by the corresponding getters (`getFullYear`, `getMonth`, ...):
+Finally the source `Date` object, from which the date parts can be obtained by the corresponding UTC getters (`getUTCFullYear`, `getUTCMonth`, ...):
 
 ```js
 const { findTimeZone, setTimeZone } = require('timezone-support')
