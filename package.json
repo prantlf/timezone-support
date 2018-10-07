@@ -29,7 +29,9 @@
   "types": "index.d.ts",
   "scripts": {
     "prepare": "npm run build",
-    "lint": "standard --verbose",
+    "lint": "run-s lint:js lint:ts",
+    "lint:js": "standard --verbose",
+    "lint:ts": "tslint -t stylish index.d.ts test/typings.test.ts",
     "generate": "node util/wrap-data && node util/wrap-limited-data",
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
@@ -51,7 +53,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "jest": {
     "roots": [
@@ -102,6 +105,8 @@
     "serve-static": "^1.13.2",
     "standard": "^12.0.1",
     "travis-deploy-once": "^5.0.9",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
     "typescript": "^3.1.1"
   },
   "keywords": [
