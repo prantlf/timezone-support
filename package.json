@@ -35,7 +35,7 @@
     "prepare": "npm run build",
     "lint": "run-s lint:js lint:ts",
     "lint:js": "standard --verbose",
-    "lint:ts": "tslint -t stylish index.d.ts test/typings.test.ts",
+    "lint:ts": "tslint -t stylish src/*.ts src/lookup/*.ts test/*.ts",
     "generate": "node util/wrap-data && node util/wrap-limited-data",
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
