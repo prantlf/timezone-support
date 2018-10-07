@@ -26,7 +26,11 @@
     "node": ">=6"
   },
   "main": "dist/index.js",
-  "types": "index.d.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "prepare": "npm run build",
     "lint": "run-s lint:js lint:ts",
@@ -35,7 +39,8 @@
     "generate": "node util/wrap-data && node util/wrap-limited-data",
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
-    "build": "run-s lint generate compile",
+    "copy:typings": "cpy src/*.d.ts dist && cpy src/lookup/*.d.ts dist",
+    "build": "run-s lint generate compile copy:typings",
     "compile:tests": "tsc --lib es6 test/typings.test.ts",
     "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
     "check:browser": "jest --testPathPattern browser.test.js",
@@ -51,11 +56,6 @@
       "src/lookup/data.js"
     ]
   },
-  "files": [
-    "dist",
-    "src",
-    "index.d.ts"
-  ],
   "jest": {
     "roots": [
       "test"
@@ -83,6 +83,7 @@
     "benchmark": "^2.1.4",
     "connect": "^3.6.6",
     "coveralls": "^3.0.2",
+    "cpy-cli": "^2.0.0",
     "es6-promisify": "^6.0.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
