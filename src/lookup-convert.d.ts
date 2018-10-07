@@ -35,7 +35,7 @@ interface TimeZoneData {
   links: Array<string>
 }
 
-declare function populateTimeZones (TimeZoneData)
+declare function populateTimeZones (TimeZoneData): void
 declare function listTimeZones (): Array<string>
 declare function findTimeZone (name: string): TimeZoneInfo
 
