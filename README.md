@@ -83,7 +83,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 2018-10-08   v1.5.4   Fix compatibility with IE. Thanks, [Andrii](https://github.com/AndriiDidkivsky)!
+* 2018-10-08   v1.5.5   Fix compatibility with IE. Thanks, [Andrii](https://github.com/AndriiDidkivsky)!
 * 2018-10-06   v1.5.0   Add TypeScript export declarations.
 * 2018-09-30   v1.4.0   Add limited data for just the current decade - years 2012-2022.
 * 2018-09-18   v1.3.0   Maintain the property dayOfWeek in the time object.
