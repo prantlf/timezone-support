@@ -7,35 +7,50 @@ export default [
     output: {
       file: 'dist/index.js',
       format: 'cjs'
-    }
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' })
+    ]
   },
   {
     input: 'src/index-2012-2022.js',
     output: {
       file: 'dist/index-2012-2022.js',
       format: 'cjs'
-    }
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' })
+    ]
   },
   {
     input: 'src/lookup-convert.js',
     output: {
       file: 'dist/lookup-convert.js',
       format: 'cjs'
-    }
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' })
+    ]
   },
   {
     input: 'src/lookup/data-2012-2022.js',
     output: {
       file: 'dist/data-2012-2022.js',
       format: 'cjs'
-    }
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' })
+    ]
   },
   {
     input: 'src/parse-format.js',
     output: {
       file: 'dist/parse-format.js',
       format: 'cjs'
-    }
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' })
+    ]
   },
   {
     input: 'src/index.js',
