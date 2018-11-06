@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import clean from 'rollup-plugin-clean'
 import { uglify } from 'rollup-plugin-uglify'
 
 export default [
@@ -9,7 +10,8 @@ export default [
       format: 'cjs'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' })
+      babel({ exclude: 'node_modules/**' }),
+      clean()
     ]
   },
   {
@@ -19,7 +21,19 @@ export default [
       format: 'cjs'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' })
+      babel({ exclude: 'node_modules/**' }),
+      clean()
+    ]
+  },
+  {
+    input: 'src/index-1900-2050.js',
+    output: {
+      file: 'dist/index-1900-2050.js',
+      format: 'cjs'
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      clean()
     ]
   },
   {
@@ -29,7 +43,8 @@ export default [
       format: 'cjs'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' })
+      babel({ exclude: 'node_modules/**' }),
+      clean()
     ]
   },
   {
@@ -39,7 +54,19 @@ export default [
       format: 'cjs'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' })
+      babel({ exclude: 'node_modules/**' }),
+      clean()
+    ]
+  },
+  {
+    input: 'src/lookup/data-1900-2050.js',
+    output: {
+      file: 'dist/data-1900-2050.js',
+      format: 'cjs'
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      clean()
     ]
   },
   {
@@ -49,7 +76,8 @@ export default [
       format: 'cjs'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' })
+      babel({ exclude: 'node_modules/**' }),
+      clean()
     ]
   },
   {
@@ -79,6 +107,19 @@ export default [
     ]
   },
   {
+    input: 'src/index-1900-2050.js',
+    output: {
+      file: 'dist/index-1900-2050.umd.js',
+      format: 'umd',
+      name: 'timezone-support',
+      sourcemap: true
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
+    ]
+  },
+  {
     input: 'src/lookup-convert.js',
     output: {
       file: 'dist/lookup-convert.umd.js',
@@ -97,6 +138,19 @@ export default [
       file: 'dist/data-2012-2022.umd.js',
       format: 'umd',
       name: 'timezone-data-2012-2022',
+      sourcemap: true
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
+    ]
+  },
+  {
+    input: 'src/lookup/data-1900-2050.js',
+    output: {
+      file: 'dist/data-1900-2050.umd.js',
+      format: 'umd',
+      name: 'timezone-data-1900-2050',
       sourcemap: true
     },
     plugins: [
