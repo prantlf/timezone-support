@@ -3,13 +3,25 @@ const { readJson, outputFile } = require('fs-extra')
 const tz = require('../node_modules/moment-timezone/moment-timezone-utils').tz
 const groupLeaders = require('./data/group-leaders.json')
 
-const start = 2012
-const end = 2022
+let data, start, end
+
+function prepare2012 () {
+  start = 2012
+  end = 2022
+  return data
+}
+
+function prepare1900 () {
+  start = 1900
+  end = 2050
+  return data
+}
 
 function readData () {
   console.log(`Reading unpacked time zone data source...`)
   const file = join(__dirname, './data/unpacked.json')
-  return readJson(file)
+  data = readJson(file)
+  return data
 }
 
 function limitData (data) {
@@ -23,6 +35,10 @@ function writeScript (data) {
 }
 
 readData()
+  .then(prepare2012)
+  .then(limitData)
+  .then(writeScript)
+  .then(prepare1900)
   .then(limitData)
   .then(writeScript)
   .catch(error => {
