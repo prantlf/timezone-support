@@ -11,10 +11,10 @@
 
 Lightweight time zone listing and date converting. Intended for adding time zone support to high-level date libraries, but also for direct application usage.
 
-* Tiny code base - 3.5 KB minified, 1.5 KB gzipped. Do not pack unnecessary weight in your application.
-* Packed time zone data - 178 KB minified, 22.5 KB gzipped. Single time zones are unpacked on demand.
-* Even smaller version with limited, 2012-2022 timezone data - 31 KB minified, 8K gzipped.
-* Generated from the official time zone database version 2018e. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
+* Tiny code base - 4.6 KB minified, 1.7 KB gzipped. Do not pack unnecessary weight in your application.
+* Packed time zone data - 923 KB minified, 33.3 KB gzipped. Single time zones are unpacked on demand.
+* Smaller bundles with limited data - 1900-2050 (204 kB minified, 25.2 kB gzipped) and 2012-2022 (31.2 KB minified, 8.2 kB gzipped).
+* Generated from the official time zone database version 2018g. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Minimal interface for time zone lookup and conversions. Parsing, formatting and manipulating dates is usually the task for a higher-level date library.
 
 ### Table of Contents
@@ -83,6 +83,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2018-11-06   v1.6.0   Upgrade the time zone database to the version 2018g.
 * 2018-10-08   v1.5.5   Fix compatibility with IE. Thanks, [Andrii](https://github.com/AndriiDidkivsky)!
 * 2018-10-06   v1.5.0   Add TypeScript export declarations.
 * 2018-09-30   v1.4.0   Add limited data for just the current decade - years 2012-2022.

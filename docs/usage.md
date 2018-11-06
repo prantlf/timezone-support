@@ -170,18 +170,20 @@ See the functions [convertDateToTime](./API.md#convertdatetotime) and [convertTi
 
 ## Limit the loaded time zone data
 
-The full time zone data cover all dates between 1970 and 2018. If you process dates only from a limited time period, you can initialize this library with a subset of time zone data and decrease the loading time of your application. For example, the difference between the full time zone data and the data for this decade only:
+If you process dates only from a limited time period, you can initialize this library with a subset of the [IANA time zone database] and decrease the loading time of your application. For example, the difference between the full time zone data and the data for this decade only:
 
-```
-Data for 1970-2018: 178 KB minified, 22.5 KB gzipped
+```txt
+Full IANA TZ data:  923 KB minified, 33.3 KB gzipped
+Data for 1900-2050: 200 KB minified, 23.3 KB gzipped
+Data for 1970-2018: 106 KB minified, 13.1 KB gzipped
 Data for 2012-2022:  27 KB minified,  6.5 KB gzipped
 ```
 
 Custom time zone data can be used if the module `lookup-convert` is loaded instead of the default `index` module.
 
 ```html
-<script src="https://unpkg.com/timezone-support@1.5.5/dist/lookup-convert.umd.js"></script>
-<script src="https://unpkg.com/timezone-support@1.5.5/dist/data-2012-2022.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.6.0/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.6.0/dist/data-2012-2022.umd.js"></script>
 <script>
   (() => {
     const { populateTimeZones, findTimeZone, getZonedTime } = window['timezone-lookup-convert']
@@ -199,7 +201,7 @@ Custom time zone data can be used if the module `lookup-convert` is loaded inste
 If you want to use the time zone data for years 2012-2022 published by this project, you can simplify your code by using a bundled package with both data and code.
 
 ```html
-<script src="https://unpkg.com/timezone-support@1.5.5/dist/index-2012-2022.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@1.6.0/dist/index-2012-2022.umd.js"></script>
 <script>
   (() => {
     const { findTimeZone, getZonedTime } = window['timezone-support']
@@ -211,4 +213,22 @@ If you want to use the time zone data for years 2012-2022 published by this proj
 </script>
 ```
 
+The following data modules ara published within this project:
+
+```txt
+dist/data.umd.js
+dist/data-1900-2050.umd.js
+dist/data-2012-2022.umd.js
+```
+
+The following complete (code+data) modules ara published within this project:
+
+```txt
+dist/index.umd.js
+dist/index-1900-2050.umd.js
+dist/index-2012-2022.umd.js
+```
+
 See the function [populateTimeZones](./API.md#populatetimezones) for more information.
+
+[IANA time zone database]: https://www.iana.org/time-zones
