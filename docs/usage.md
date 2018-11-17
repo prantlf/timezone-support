@@ -13,6 +13,7 @@ The minimal, but powerful API of this module provides functionality for both dat
 - [Get UTC offset for a specific time zone](#get-utc-offset-for-a-specific-time-zone)
 - [Use the native Date object](#use-the-native-date-object)
 - [Limit the loaded time zone data](#limit-the-loaded-time-zone-data)
+- [Generate custom time zone data](#generate-custom-time-zone-data)
 
 ## List all available time zones
 
@@ -175,7 +176,7 @@ If you process dates only from a limited time period, you can initialize this li
 ```txt
 Full IANA TZ data:  923 KB minified, 33.3 KB gzipped
 Data for 1900-2050: 200 KB minified, 23.3 KB gzipped
-Data for 1970-2018: 106 KB minified, 13.1 KB gzipped
+Data for 1970-2038: 135 KB minified, 13.9 KB gzipped
 Data for 2012-2022:  27 KB minified,  6.5 KB gzipped
 ```
 
@@ -218,6 +219,7 @@ The following data modules ara published within this project:
 ```txt
 dist/data.umd.js
 dist/data-1900-2050.umd.js
+dist/data-1970-2038.umd.js
 dist/data-2012-2022.umd.js
 ```
 
@@ -226,9 +228,12 @@ The following complete (code+data) modules ara published within this project:
 ```txt
 dist/index.umd.js
 dist/index-1900-2050.umd.js
+dist/index-1970-2038.umd.js
 dist/index-2012-2022.umd.js
 ```
 
 See the function [populateTimeZones](./API.md#populatetimezones) for more information.
+
+## Generate custom time zone data
 
 [IANA time zone database]: https://www.iana.org/time-zones

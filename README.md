@@ -13,7 +13,7 @@ Lightweight time zone listing and date converting. Intended for adding time zone
 
 * Tiny code base - 4.6 KB minified, 1.7 KB gzipped. Do not pack unnecessary weight in your application.
 * Packed time zone data - 923 KB minified, 33.3 KB gzipped. Single time zones are unpacked on demand.
-* Smaller bundles with limited data - 1900-2050 (204 kB minified, 25.2 kB gzipped) and 2012-2022 (31.2 KB minified, 8.2 kB gzipped).
+* Smaller bundles with limited data - 1900-2050 (204 kB minified, 25.2 kB gzipped), 1970-2038 (204 kB minified, 25.2 kB gzipped) and 2012-2022 (31.2 KB minified, 8.2 kB gzipped).
 * Generated from the official time zone database version 2018g. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Minimal interface for time zone lookup and conversions. Parsing, formatting and manipulating dates is usually the task for a higher-level date library.
 
@@ -70,7 +70,7 @@ Functions are exposed as named exports from the package modules, for example:
 const { findTimeZone, getZonedTime } = require('timezone-support')
 ```
 
-You can read more about the [module loading](./docs/API.md#loading) in other environments, like with ES6 or in web browsers. [Usage scenarios](./docs/usage.md#usage-scenarios) demonstrate applications of this library in typical real-world scenarios. [Design concepts](./docs/design.md#design-concepts) explain the approach to time zone handling taken by tni library and types of values used ion the interface. Finally, the [API reference](./docs/API.md#api-reference) lists all functions with a description of their functionality.
+You can read more about the [module loading](./docs/API.md#loading) in other environments, like with ES6 or in web browsers. [Usage scenarios](./docs/usage.md#usage-scenarios) demonstrate applications of this library in typical real-world scenarios. [Design concepts](./docs/design.md#design-concepts) explain the approach to time zone handling taken by tni library and types of values used ion the interface. [Generating custom time zone data](./docs/usage.md#generate-custom-time-zone-data) will allow you to save the overall package size by limiting the supported year span. Finally, the [API reference](./docs/API.md#api-reference) lists all functions with a description of their functionality.
 
 ## Library Integrations
 
@@ -83,6 +83,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2018-11-17   v1.7.0   Include full time zone data separately and data for years 1970-2038.
 * 2018-11-06   v1.6.0   Upgrade the time zone database to the version 2018g.
 * 2018-10-08   v1.5.5   Fix compatibility with IE. Thanks, [Andrii](https://github.com/AndriiDidkivsky)!
 * 2018-10-06   v1.5.0   Add TypeScript export declarations.

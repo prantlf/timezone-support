@@ -355,7 +355,7 @@ const data = {
 }
 ```
 
-See the [moment-timezone's latest data](../util/data/packed.json) as an example of the full data, which you can take a smaller part of to your application. This library includes [limited data for this decade](http://unpkg.com/timezone-support/dist/data-2012-2022.js) as an example. See also the script [wrap-limited-data](../util/wrap-limited-data.js), which produced the module with the limited data and which can be used to generate data for other time period too.
+See the [moment-timezone's latest data](../util/data/packed.json) as an example of the full data, which you can take a smaller part of to your application. This library includes [limited data for this decade](http://unpkg.com/timezone-support/dist/data-2012-2022.js) and [two other year spans](../src/lookup/). Read also abot [generation of custom time zone data](./usage.md#generate-custom-time-zone-data), which allows production of a module with smaller, limited time zone data for other time periods.
 
 If this function is called later, than during the application startup, the behaviour of this module may be unpredictable. Some time zone data might be used and cached in the application. You should avoid re-initialization to prevent hidden errors.
 

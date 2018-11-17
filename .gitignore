@@ -1,10 +1,9 @@
+.DS_Store
 coverage
 dist
 node_modules
 src/lookup/data*.js
-src/index-1900-2050.d.ts
-src/index-2012-2022.d.ts
-src/lookup/data-1900-2050.d.ts
-src/lookup/data-2012-2022.d.ts
+src/index-*.d.ts
+src/lookup/data-*.d.ts
 test/browser
 test/typings.test.js

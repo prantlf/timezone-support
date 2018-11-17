@@ -15,6 +15,17 @@ export default [
     ]
   },
   {
+    input: 'src/index-1970-2038.js',
+    output: {
+      file: 'dist/index-1970-2038.js',
+      format: 'cjs'
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      clean()
+    ]
+  },
+  {
     input: 'src/index-2012-2022.js',
     output: {
       file: 'dist/index-2012-2022.js',
@@ -51,6 +62,17 @@ export default [
     input: 'src/lookup/data.js',
     output: {
       file: 'dist/data.js',
+      format: 'cjs'
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      clean()
+    ]
+  },
+  {
+    input: 'src/lookup/data-1970-2038.js',
+    output: {
+      file: 'dist/data-1970-2038.js',
       format: 'cjs'
     },
     plugins: [
@@ -105,6 +127,19 @@ export default [
     ]
   },
   {
+    input: 'src/index-1970-2038.js',
+    output: {
+      file: 'dist/index-1970-2038.umd.js',
+      format: 'umd',
+      name: 'timezone-support',
+      sourcemap: true
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
+    ]
+  },
+  {
     input: 'src/index-2012-2022.js',
     output: {
       file: 'dist/index-2012-2022.umd.js',
@@ -149,6 +184,19 @@ export default [
       file: 'dist/data.umd.js',
       format: 'umd',
       name: 'timezone-data',
+      sourcemap: true
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
+    ]
+  },
+  {
+    input: 'src/lookup/data-1970-2038.js',
+    output: {
+      file: 'dist/data-1970-2038.umd.js',
+      format: 'umd',
+      name: 'timezone-data-1970-2038',
       sourcemap: true
     },
     plugins: [
