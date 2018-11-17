@@ -48,6 +48,17 @@ export default [
     ]
   },
   {
+    input: 'src/lookup/data.js',
+    output: {
+      file: 'dist/data.js',
+      format: 'cjs'
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      clean()
+    ]
+  },
+  {
     input: 'src/lookup/data-2012-2022.js',
     output: {
       file: 'dist/data-2012-2022.js',
@@ -125,6 +136,19 @@ export default [
       file: 'dist/lookup-convert.umd.js',
       format: 'umd',
       name: 'timezone-lookup-convert',
+      sourcemap: true
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      uglify()
+    ]
+  },
+  {
+    input: 'src/lookup/data.js',
+    output: {
+      file: 'dist/data.umd.js',
+      format: 'umd',
+      name: 'timezone-data',
       sourcemap: true
     },
     plugins: [
