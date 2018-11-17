@@ -83,7 +83,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 2018-11-17   v1.7.0   Include full time zone data separately and data for years 1970-2038.
+* 2018-11-17   v1.8.0   Include time zone data for years 1970-2038.
+* 2018-11-17   v1.7.0   Include full time zone data separately loadable.
 * 2018-11-06   v1.6.0   Upgrade the time zone database to the version 2018g.
 * 2018-10-08   v1.5.5   Fix compatibility with IE. Thanks, [Andrii](https://github.com/AndriiDidkivsky)!
 * 2018-10-06   v1.5.0   Add TypeScript export declarations.

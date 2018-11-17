@@ -7,6 +7,9 @@
     "email": "prantlf@gmail.com",
     "url": "http://prantl.tk"
   },
+  "contributors": [
+    "CrisColamb <andrii.didkivsky@infopulse.com>"
+  ],
   "license": "MIT",
   "licenses": [
     {
