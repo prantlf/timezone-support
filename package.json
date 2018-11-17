@@ -58,7 +58,7 @@
   },
   "standard": {
     "ignore": [
-      "src/lookup/data.js"
+      "src/lookup/data*.js"
     ]
   },
   "jest": {
