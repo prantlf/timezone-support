@@ -72,10 +72,16 @@ it('recognizes noon', () => {
 
 it('format parser caching code works', () => {
   parseZonedTime('2018', 'YYYY')
-  const time = parseZonedTime('2018', 'YYYY')
   expect(typeof time === 'object').toBeTruthy()
   const { year } = time
   expect(year).toEqual(2018)
+})
+
+it('recognizes ISO UTC timezone', () => {
+  const time = parseZonedTime('Z', 'Z')
+  const { zone } = time
+
+  expect(zone.offset).toEqual(0)
 })
 
 it('leaves non-token parts of the format intact', () => {

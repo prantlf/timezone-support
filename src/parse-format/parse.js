@@ -8,7 +8,7 @@ const match1to2 = /\d\d?/ // 0 - 99
 const matchUpperAMPM = /[AP]M/
 const matchLowerAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
-const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
+const matchOffset = /([+-]\d\d:?\d\d|Z)/ // +00:00 -00:00 +0000, -0000 or Z
 const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
 const parseTokenExpressions = {}
@@ -92,6 +92,10 @@ function addParseToken (tokens, property) {
 }
 
 function offsetFromString (string) {
+  if (string === 'Z') {
+    return 0
+  }
+
   const parts = string.match(/([+-]|\d\d)/g)
   const minutes = +(parts[1] * 60) + +parts[2]
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes
