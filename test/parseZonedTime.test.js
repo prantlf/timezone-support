@@ -72,6 +72,7 @@ it('recognizes noon', () => {
 
 it('format parser caching code works', () => {
   parseZonedTime('2018', 'YYYY')
+  const time = parseZonedTime('2018', 'YYYY')
   expect(typeof time === 'object').toBeTruthy()
   const { year } = time
   expect(year).toEqual(2018)
