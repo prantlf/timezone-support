@@ -6,14 +6,15 @@ cache:
 notifications:
   email: false
 node_js:
+  - '12'
   - '10'
   - '8'
   - '6'
 before_install:
   - npm i -g npm
 after_success:
-  - npm run coverage
-  - npm run travis-deploy-once "npm run semantic-release"
+  - test `node --version | cut -c 2` -eq 8 && npm run coverage
+  - npx semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
