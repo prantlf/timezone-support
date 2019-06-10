@@ -78,6 +78,13 @@ it('format parser caching code works', () => {
   expect(year).toEqual(2018)
 })
 
+it('recognizes ISO UTC timezone', () => {
+  const time = parseZonedTime('Z', 'Z')
+  const { zone } = time
+
+  expect(zone.offset).toEqual(0)
+})
+
 it('leaves non-token parts of the format intact', () => {
   const time = parseZonedTime(' S:/-.() SS h ', ' [S]:/-.()[ SS h ]')
   expect(typeof time === 'object').toBeTruthy()
