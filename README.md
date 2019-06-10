@@ -12,12 +12,12 @@
 Lightweight time zone listing and date converting. Intended for adding time zone support to high-level date libraries, but also for direct application usage.
 
 * Tiny code base - 4.6 KB minified, 1.7 KB gzipped. Do not pack unnecessary weight in your application.
-* Packed time zone data - 923 KB minified, 33.3 KB gzipped. Single time zones are unpacked on demand.
-* Smaller bundles with limited data - 1900-2050 (204 kB minified, 25.2 kB gzipped), 1970-2038 (204 kB minified, 25.2 kB gzipped) and 2012-2022 (31.2 KB minified, 8.2 kB gzipped).
-* Generated from the official time zone database version 2018g. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
+* Packed time zone data - 924 KB minified, 33.6 KB gzipped. Single time zones are unpacked on demand.
+* Smaller bundles of code with limited data - 1900-2050 (206 kB minified, 25.4 kB gzipped), 1970-2038 (141 kB minified, 15.8 kB gzipped) and 2012-2022 (31.3 KB minified, 8.25 kB gzipped).
+* Generated from the official time zone database version 2019a. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Minimal interface for time zone lookup and conversions. Parsing, formatting and manipulating dates is usually the task for a higher-level date library.
 
-**Attention**: export identifiers in vanilla browser modules changed in the version 2.0.0. See the [migration guide] for more information.
+**Attention**: exported identifiers in vanilla browser modules changed in the version 2.0.0. See the [migration guide] for more information.
 
 ### Table of Contents
 
@@ -85,6 +85,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2018-06-11   v2.0.2   Upgrade the time zone database to the version 2019a.
+* 2018-06-11   v2.0.1   Default to midnight, if the time part of a date is missing.
 * 2018-06-10   v2.0.0   Use proper identifiers in vanilla browser modules.
 * 2018-11-17   v1.8.0   Include time zone data for years 1970-2038.
 * 2018-11-17   v1.7.0   Include full time zone data separately loadable.
@@ -110,4 +112,4 @@ Licensed under the MIT license.
 [date-fns]: https://github.com/date-fns/date-fns
 [timeZone plugin]: https://github.com/prantlf/dayjs/blob/combined/docs/en/Plugin.md#timezone
 [date-fns-timezone]: https://github.com/prantlf/date-fns-timezone
-[migration guide]: docs/migration.md
+[migration guide]: docs/migration.md#migration-from-1x-to-2x

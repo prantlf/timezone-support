@@ -50,7 +50,7 @@ Load the main module in the browser with plain JavaScript:
 </script>
 ```
 
-You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@2.0.0/dist/index.umd.js.
+You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@2.0.2/dist/index.umd.js.
 
 ## Modules
 
