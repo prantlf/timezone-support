@@ -8,7 +8,10 @@
     "url": "http://prantl.tk"
   },
   "contributors": [
-    "CrisColamb <andrii.didkivsky@infopulse.com>"
+    "Andrii Didkivsky <andrii.didkivsky@infopulse.com>",
+    "Jason Yu <me@ycmjason.com>",
+    "Luci Furtun <lucianfurtun@gmail.com>",
+    "Pascal Honegger <pascal.honegger@bluewin.ch>"
   ],
   "license": "MIT",
   "licenses": [
