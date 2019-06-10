@@ -140,3 +140,19 @@ it('checks, that other time zone is not requested if epoch is included', () => {
   }
   expect(() => getUnixTime(berlinTime, berlin)).toThrow()
 })
+
+it('if time (hours, minutes and seconds) is not provided, defaults to midnight', () => {
+  const berlinTime = {
+    year: 2018,
+    month: 7,
+    day: 2,
+    zone: {
+      abbreviation: 'CEST',
+      offset: -120
+    }
+  }
+  const unixTime = getUnixTime(berlinTime)
+  expect(typeof unixTime === 'number').toBeTruthy()
+  const epoch = Date.UTC(2018, 6, 1, 22, 0)
+  expect(unixTime).toEqual(epoch)
+})

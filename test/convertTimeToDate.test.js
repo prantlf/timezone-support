@@ -57,3 +57,14 @@ it('converts a time without epoch and zone to date', () => {
   const expectedDate = new Date(2018, 0, 2, 10, 30)
   expect(actualDate).toEqual(expectedDate)
 })
+
+it('if time (hours, minutes and seconds) is not provided, defaults to midnight', () => {
+  const time = {
+    year: 2018,
+    month: 1,
+    day: 2
+  }
+  const actualDate = convertTimeToDate(time)
+  const expectedDate = new Date(2018, 0, 2, 0, 0)
+  expect(actualDate).toEqual(expectedDate)
+})

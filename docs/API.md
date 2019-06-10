@@ -216,7 +216,7 @@ const date = getZonedTime(date, berlin)
 // Returns the UNIX timestamp (UTC) in milliseconds
 ```
 
-This method is usually used with incomplete time objects, which are entered by the user, or parsed from date strings without time zone information. (A complete [time object] contains properties `epoch` with the UTC time and `zone` with the time zone information.)
+This method is usually used with incomplete time objects, which are entered by the user, or parsed from date strings without time zone information. (A complete [time object] contains properties `epoch` with the UTC time and `zone` with the time zone information. An incomplete one has to contain the date at least - year, month and day.)
 
 The returned object is supposed to be passed to other functions, which use it to convert dates. It is not supposed to be inspected outside of this library.
 

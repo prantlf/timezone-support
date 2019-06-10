@@ -1,8 +1,8 @@
-function getUnixTimeFromUTC ({ year, month, day, hours, minutes, seconds = 0, milliseconds = 0 }) {
+function getUnixTimeFromUTC ({ year, month, day, hours = 0, minutes = 0, seconds = 0, milliseconds = 0 }) {
   return Date.UTC(year, month - 1, day, hours, minutes, seconds, milliseconds)
 }
 
-function getDateFromTime ({ year, month, day, hours, minutes, seconds = 0, milliseconds = 0 }) {
+function getDateFromTime ({ year, month, day, hours = 0, minutes = 0, seconds = 0, milliseconds = 0 }) {
   return new Date(year, month - 1, day, hours, minutes, seconds, milliseconds)
 }
 
