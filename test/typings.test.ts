@@ -4,8 +4,6 @@ import {
 import { populateTimeZones } from '../dist/lookup-convert'
 import { parseZonedTime, formatZonedTime } from '../dist/parse-format'
 
-declare function test (label: string, callback: Function)
-
 test('Type declarations for TypeScript', () => {
   const timestamp = 1538822326765
   const date = new Date(timestamp)
