@@ -8,7 +8,7 @@ const match1to2 = /\d\d?/ // 0 - 99
 const matchUpperAMPM = /[AP]M/
 const matchLowerAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
-const matchOffset = /([+-]\d\d:?\d\d|Z)/ // +00:00 -00:00 +0000 -0000 or Z
+const matchOffset = /(?:[+-]\d\d:?\d\d|Z)/ // +00:00 -00:00 +0000 -0000 or Z
 const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
 const parseTokenExpressions = {}
