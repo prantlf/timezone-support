@@ -32,9 +32,14 @@ function formatFunctionImport (input) {
     throw new Error('Statement requiring the code module not found.')
   }
   const name = match[2]
-  const variable = name.startsWith('index') ? 'support' : name
+  let variable
+  if (name.startsWith('parse-format')) {
+    variable = 'ParseFormat'
+  } else {
+    variable = 'Support'
+  }
   const functionCodeLine = input.replace(importFunctionsExpression,
-    `const $1 = window['timezone-${variable}']`)
+    `const $1 = window.timezone${variable}`)
   const functionScriptElement = [
     '<script src="../../dist/' + name + '.umd.js"></script>'
   ]
@@ -48,7 +53,7 @@ function formatDataImport (input) {
   }
   const name = match[2]
   const dataCodeLine = input.replace(importDataExpression,
-    `const $1 = window['timezone-${name}']`)
+    'const $1 = window.timezoneData')
   const dataScriptElement = [
     '<script src="../../dist/' + name + '.umd.js"></script>'
   ]

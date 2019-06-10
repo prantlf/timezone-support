@@ -17,6 +17,8 @@ Lightweight time zone listing and date converting. Intended for adding time zone
 * Generated from the official time zone database version 2018g. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Minimal interface for time zone lookup and conversions. Parsing, formatting and manipulating dates is usually the task for a higher-level date library.
 
+**Attention**: export identifiers in vanilla browser modules changed in the version 2.0.0. See the [migration guide] for more information.
+
 ### Table of Contents
 
 - [Synopsis](#synopsis)
@@ -83,6 +85,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 2018-06-10   v2.0.0   Use proper identifiers in vanilla browser modules.
 * 2018-11-17   v1.8.0   Include time zone data for years 1970-2038.
 * 2018-11-17   v1.7.0   Include full time zone data separately loadable.
 * 2018-11-06   v1.6.0   Upgrade the time zone database to the version 2018g.
@@ -96,7 +99,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
 
-Copyright (c) 2018 Ferdinand Prantl
+Copyright (c) 2018-2019 Ferdinand Prantl
 
 Licensed under the MIT license.
 
@@ -107,3 +110,4 @@ Licensed under the MIT license.
 [date-fns]: https://github.com/date-fns/date-fns
 [timeZone plugin]: https://github.com/prantlf/dayjs/blob/combined/docs/en/Plugin.md#timezone
 [date-fns-timezone]: https://github.com/prantlf/date-fns-timezone
+[migration guide]: docs/migration.md

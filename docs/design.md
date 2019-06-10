@@ -1,6 +1,6 @@
 # Design Concepts
 
-The purpose of this library is to offer an efficient support for time zone handling in th esmallest package.
+The purpose of this library is to offer an efficient support for time zone handling in the smallest package.
 
 * Lightweight - nothing else is included. Thus serving well for other date & time libraries, but also for applications, which do not manipulate dates.
 * Tiny - use packed time zone data, unpacked on demand. Compromise between loading time and being ready to use immediately.

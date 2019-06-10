@@ -118,7 +118,7 @@ export default [
     output: {
       file: 'dist/index.umd.js',
       format: 'umd',
-      name: 'timezone-support',
+      name: 'timezoneSupport',
       sourcemap: true
     },
     plugins: [
@@ -131,7 +131,7 @@ export default [
     output: {
       file: 'dist/index-1970-2038.umd.js',
       format: 'umd',
-      name: 'timezone-support',
+      name: 'timezoneSupport',
       sourcemap: true
     },
     plugins: [
@@ -144,7 +144,7 @@ export default [
     output: {
       file: 'dist/index-2012-2022.umd.js',
       format: 'umd',
-      name: 'timezone-support',
+      name: 'timezoneSupport',
       sourcemap: true
     },
     plugins: [
@@ -157,7 +157,7 @@ export default [
     output: {
       file: 'dist/index-1900-2050.umd.js',
       format: 'umd',
-      name: 'timezone-support',
+      name: 'timezoneSupport',
       sourcemap: true
     },
     plugins: [
@@ -170,7 +170,7 @@ export default [
     output: {
       file: 'dist/lookup-convert.umd.js',
       format: 'umd',
-      name: 'timezone-lookup-convert',
+      name: 'timezoneSupport',
       sourcemap: true
     },
     plugins: [
@@ -183,7 +183,7 @@ export default [
     output: {
       file: 'dist/data.umd.js',
       format: 'umd',
-      name: 'timezone-data',
+      name: 'timezoneData',
       sourcemap: true
     },
     plugins: [
@@ -196,7 +196,7 @@ export default [
     output: {
       file: 'dist/data-1970-2038.umd.js',
       format: 'umd',
-      name: 'timezone-data-1970-2038',
+      name: 'timezoneData',
       sourcemap: true
     },
     plugins: [
@@ -209,7 +209,7 @@ export default [
     output: {
       file: 'dist/data-2012-2022.umd.js',
       format: 'umd',
-      name: 'timezone-data-2012-2022',
+      name: 'timezoneData',
       sourcemap: true
     },
     plugins: [
@@ -222,7 +222,7 @@ export default [
     output: {
       file: 'dist/data-1900-2050.umd.js',
       format: 'umd',
-      name: 'timezone-data-1900-2050',
+      name: 'timezoneData',
       sourcemap: true
     },
     plugins: [
@@ -235,7 +235,7 @@ export default [
     output: {
       file: 'dist/parse-format.umd.js',
       format: 'umd',
-      name: 'timezone-parse-format',
+      name: 'timezoneParseFormat',
       sourcemap: true
     },
     plugins: [

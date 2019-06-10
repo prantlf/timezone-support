@@ -45,12 +45,12 @@ Load the main module in the browser with plain JavaScript:
 <script src="./node_modules/timezone-support/dist/index.umd.js"></script>
 <script>
   (() => {
-    const { findTimeZone, getZonedTime } = window['timezone-support']
+    const { findTimeZone, getZonedTime } = window.timezoneSupport
   })()
 </script>
 ```
 
-You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@1.8.0/dist/index.umd.js.
+You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@2.0.0/dist/index.umd.js.
 
 ## Modules
 
@@ -446,7 +446,7 @@ Options:
   -c, --as-cjs-module       format the time zone data as a CommonJS module
   -d, --as-amd-module       format the time zone data as an AMD module
   -m, --as-module           format the time zone data as a JavaScript module
-  -n, --umd-name <name>     UMD global export name, if not "timeZoneData"
+  -n, --umd-name <name>     UMD global export name, if not "timezoneData"
   -o, --output-file <file>  write the time zone data to a file
   -u, --as-umd-module       format the time zone data as an UMD module
   -o, --output-file <file>  write the time zone data to a file
