@@ -1,0 +1,60 @@
+{
+  "name": "timezone-support-example-browser-separate",
+  "version": "0.0.1",
+  "description": "Demonstrates how to load timezone-support as a separate script in the browser, with either complete or limited time zone data.",
+  "author": {
+    "name": "Ferdinand Prantl",
+    "email": "prantlf@gmail.com",
+    "url": "http://prantl.tk"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/prantlf/timezone-support/blob/master/LICENSE"
+    }
+  ],
+  "homepage": "https://github.com/prantlf/timezone-support#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prantlf/timezone-support.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prantlf/timezone-support/issues"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "prepare": "run-s build:complete",
+    "lint": "standard --verbose",
+    "lint:fix": "standard --verbose --fix",
+    "compile": "rollup -c",
+    "copy:pages": "cpy src/app.html out",
+    "copy:complete": "cpy node_modules/timezone-support/dist/index.umd.js out --rename=timezone-support.js && cpy node_modules/timezone-support/dist/index.umd.js.map out --rename=timezone-support.js.map",
+    "copy:limited": "cpy node_modules/timezone-support/dist/index-1970-2038.umd.js out --rename=timezone-support.js && cpy node_modules/timezone-support/dist/index-1970-2038.umd.js.map out --rename=timezone-support.js.map",
+    "copy": "run-s copy:pages copy:scripts",
+    "build:complete": "run-s lint copy:pages copy:complete compile",
+    "build:limited": "run-s lint copy:pages copy:limited compile"
+  },
+  "standard": {
+    "ignore": [
+      "out"
+    ]
+  },
+  "dependencies": {
+    "timezone-support": "2.0.x"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.5",
+    "babel-core": "7.0.0-bridge.0",
+    "cpy-cli": "2.0.0",
+    "npm-run-all": "4.1.5",
+    "regenerator-runtime": "0.13.2",
+    "rollup": "1.14.6",
+    "rollup-plugin-babel": "4.3.2",
+    "rollup-plugin-uglify": "6.0.2",
+    "serve-static": "1.14.1",
+    "standard": "12.0.1"
+  }
+}

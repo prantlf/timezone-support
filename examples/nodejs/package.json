@@ -1,0 +1,58 @@
+{
+  "name": "timezone-support-complete-example",
+  "version": "0.0.1",
+  "description": "Demonstrates how to use timezone-support in a Node.js application, with either complete or limited time zone data.",
+  "author": {
+    "name": "Ferdinand Prantl",
+    "email": "prantlf@gmail.com",
+    "url": "http://prantl.tk"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/prantlf/timezone-support/blob/master/LICENSE"
+    }
+  ],
+  "homepage": "https://github.com/prantlf/timezone-support#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prantlf/timezone-support.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prantlf/timezone-support/issues"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "prepare": "run-s build:complete",
+    "lint": "standard --verbose",
+    "lint:fix": "standard --verbose --fix",
+    "compile:complete": "rollup -c rollup-complete.config.js",
+    "compile:limited": "rollup -c rollup-limited.config.js",
+    "build:complete": "run-s lint compile:complete",
+    "build:limited": "run-s lint compile:limited"
+  },
+  "standard": {
+    "ignore": [
+      "out"
+    ]
+  },
+  "main": "out/app.js",
+  "dependencies": {
+    "timezone-support": "2.0.x"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.5",
+    "babel-core": "7.0.0-bridge.0",
+    "cpy-cli": "2.0.0",
+    "npm-run-all": "4.1.5",
+    "regenerator-runtime": "0.13.2",
+    "rollup": "1.14.6",
+    "rollup-plugin-babel": "4.3.2",
+    "rollup-plugin-clean": "1.0.0",
+    "rollup-plugin-includepaths": "0.2.3",
+    "standard": "12.0.1"
+  }
+}

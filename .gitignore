@@ -1,6 +1,7 @@
 .DS_Store
 coverage
 dist
+examples/**/out
 node_modules
 src/lookup/data*.js
 src/index-*.d.ts

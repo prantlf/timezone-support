@@ -3,6 +3,7 @@
 .gitignore
 .npmignore
 .vscode
+examples
 perf
 rollup.config.js
 test

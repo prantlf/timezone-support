@@ -74,6 +74,8 @@ const { findTimeZone, getZonedTime } = require('timezone-support')
 
 You can read more about the [module loading](./docs/API.md#loading) in other environments, like with ES6 or in web browsers. [Usage scenarios](./docs/usage.md#usage-scenarios) demonstrate applications of this library in typical real-world scenarios. [Design concepts](./docs/design.md#design-concepts) explain the approach to time zone handling taken by tni library and types of values used ion the interface. [Generating custom time zone data](./docs/usage.md#generate-custom-time-zone-data) will allow you to save the overall package size by limiting the supported year span. Finally, the [API reference](./docs/API.md#api-reference) lists all functions with a description of their functionality.
 
+You can see [complete sample applications] too, which can help you start with integration of this library.
+
 ## Library Integrations
 
 * [Day.js] - [timeZone plugin] supplies parsing from and formatting to an arbitrary time zone
@@ -113,3 +115,4 @@ Licensed under the MIT license.
 [timeZone plugin]: https://github.com/prantlf/dayjs/blob/combined/docs/en/Plugin.md#timezone
 [date-fns-timezone]: https://github.com/prantlf/date-fns-timezone
 [migration guide]: docs/migration.md#migration-from-1x-to-2x
+[complete sample applications]: examples#readme
