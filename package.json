@@ -58,9 +58,7 @@
     "check:browser": "jest --testPathPattern browser.test.js",
     "benchmark": "node perf",
     "coverage": "cat coverage/lcov.info | coveralls",
-    "test": "run-s compile:tests check generate:browser-tests check:browser",
-    "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "test": "run-s compile:tests check generate:browser-tests check:browser"
   },
   "standard": {
     "ignore": [
