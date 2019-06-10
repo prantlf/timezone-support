@@ -162,7 +162,7 @@ const { formatZonedTime } = require('timezone-support/dist/parse-format')
 
 const time = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
                zone: { abbreviation: 'CEST', offset: -120 } }
-const format = 'D.M.YYYY H:mm:ss [z]Z'
+const format = 'D.M.YYYY H:mm zZ'
 const output = formatZonedTime(time, format)
 // Returns "2.9.2018 10:00 CEST+02:00"
 ```
@@ -298,7 +298,7 @@ Parses a date string using a custom format pattern to a [time object]. If the st
 const { parseZonedTime } = require('timezone-support/dist/parse-format')
 
 const input = '2.9.2018 10:00 CEST+02:00'
-const format = 'D.M YYYY H:mm:ss [z]Z'
+const format = 'D.M.YYYY H:mm zZ'
 const time = parseZonedTime(input, format)
 // Returns { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
 //           zone: { abbreviation: 'CEST', offset: -120 } }
