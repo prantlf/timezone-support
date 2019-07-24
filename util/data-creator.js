@@ -1,5 +1,5 @@
 const { outputFile: writeFile } = require('fs-extra')
-const tz = require('../node_modules/moment-timezone/moment-timezone-utils').tz
+const tz = require('moment-timezone/moment-timezone-utils').tz
 const groupLeaders = require('./data/group-leaders.json')
 const unpackedTimeZoneData = require('./data/unpacked.json')
 const packedTimeZoneData = require('./data/packed.json')
