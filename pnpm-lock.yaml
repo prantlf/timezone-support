@@ -22,6 +22,9 @@ specifiers:
   timezone-support: 'link:'
   typescript: 4.9.3
 
+dependencies:
+  moment-timezone: 0.5.39
+
 devDependencies:
   '@babel/core': 7.20.5
   '@babel/preset-env': 7.20.2_@babel+core@7.20.5
@@ -35,7 +38,6 @@ devDependencies:
   fast-glob: 3.2.12
   jasmine-core: 4.5.0
   jest: 29.3.1
-  moment-timezone: 0.5.39
   puppeteer: 19.3.0
   rollup: 3.5.1
   rollup-plugin-cleanup: 3.2.1_rollup@3.5.1
@@ -3358,11 +3360,11 @@ packages:
     resolution: {integrity: sha512-hoB6suq4ISDj7BDgctiOy6zljBsdYT0++0ZzZm9rtxIvJhIbQ3nmbgSWe7dNFGurl6/7b1OUkHlmN9JWgXVz7w==}
     dependencies:
       moment: 2.29.4
-    dev: true
+    dev: false
 
   /moment/2.29.4:
     resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
-    dev: true
+    dev: false
 
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
