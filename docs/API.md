@@ -127,7 +127,7 @@ const { findTimeZone, convertTimeToDate } = require('timezone-support')
 const berlin = findTimeZone('Europe/Berlin')
 const berlinTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
                      zone: { abbreviation: 'CEST', offset: -120 } }
-const date = convertTimeToDate(date, berlin)
+const date = convertTimeToDate(berlinTime, berlin)
 // Returns a date in the local time
 ```
 
