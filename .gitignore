@@ -3,7 +3,7 @@ coverage
 dist
 examples/**/out
 node_modules
-src/lookup/data*.js
+src/lookup/data-*.js
 src/index-*.d.ts
 src/lookup/data-*.d.ts
 test/browser
