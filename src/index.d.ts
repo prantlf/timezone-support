@@ -2,6 +2,8 @@ type DateInput = Date | number
 
 interface TimeZoneInfo {
   name: string
+  untils: number[]
+  offsets: number[]
 }
 
 interface TimeZoneOffset {
