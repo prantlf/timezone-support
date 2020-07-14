@@ -101,10 +101,9 @@ Returns a complete [time object] equal to the given date using the the local tim
 * `date` - a source `Date` object
 
 ```js
-const { findTimeZone, convertDateToTime } = require('timezone-support')
-const berlin = findTimeZone('Europe/Berlin')
+const { convertDateToTime } = require('timezone-support')
 const date = new Date()
-const berlinTime = convertDateToTime(date, berlin)
+const localTime = convertDateToTime(date)
 // Returns {
 //   year, month, day, hours, minutes, seconds, milliseconds,
 //   dayOfWeek, epoch,
