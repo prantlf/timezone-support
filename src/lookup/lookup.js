@@ -24,6 +24,10 @@ function listTimeZones () {
   return names.slice()
 }
 
+function getTimeZoneLinks () {
+  return Object.assign({}, links)
+}
+
 function findTimeZone (alias) {
   const name = links[alias] || alias
   let timeZone = instances[name]
@@ -37,4 +41,4 @@ function findTimeZone (alias) {
   return timeZone
 }
 
-export { populateTimeZones, listTimeZones, findTimeZone }
+export { populateTimeZones, listTimeZones, getTimeZoneLinks, findTimeZone }
