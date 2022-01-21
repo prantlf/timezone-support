@@ -37,6 +37,7 @@ interface TimeZoneData {
 
 declare function populateTimeZones (TimeZoneData): void
 declare function listTimeZones (): Array<string>
+declare function getTimeZoneLinks (): { [alias: string]: string }
 declare function findTimeZone (name: string): TimeZoneInfo
 
 declare function getUTCOffset (date: DateInput, timeZone: TimeZoneInfo): TimeZoneOffset
@@ -48,7 +49,7 @@ declare function convertTimeToDate (time: Time): Date
 declare function convertDateToTime (date: Date): Time
 
 export {
-  populateTimeZones, listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
+  populateTimeZones, listTimeZones, getTimeZoneLinks, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
 }
 
 // export as namespace timezoneLookupConvert;
