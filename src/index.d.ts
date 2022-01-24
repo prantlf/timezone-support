@@ -32,6 +32,7 @@ interface SetTimeZoneOptions {
 }
 
 declare function listTimeZones (): Array<string>
+declare function getTimeZoneLinks (): { [alias: string]: string }
 declare function findTimeZone (name: string): TimeZoneInfo
 
 declare function getUTCOffset (date: DateInput, timeZone: TimeZoneInfo): TimeZoneOffset
@@ -43,7 +44,7 @@ declare function convertTimeToDate (time: Time): Date
 declare function convertDateToTime (date: Date): Time
 
 export {
-  listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
+  listTimeZones, getTimeZoneLinks, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
 }
 
 // export as namespace timezoneSupport;
