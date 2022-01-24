@@ -25,7 +25,7 @@ function listTimeZones () {
 }
 
 function getTimeZoneLinks () {
-  return links
+  return Object.assign({}, links);
 }
 
 function findTimeZone (alias) {
