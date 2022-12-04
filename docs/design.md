@@ -4,7 +4,7 @@ The purpose of this library is to offer an efficient support for time zone handl
 
 * Lightweight - nothing else is included. Thus serving well for other date & time libraries, but also for applications, which do not manipulate dates.
 * Tiny - use packed time zone data, unpacked on demand. Compromise between loading time and being ready to use immediately.
-* Reliable - generated from the fresh official time zone database version 2019a. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
+* Reliable - generated from the fresh official time zone database version 2022f. Canonical time zone names, aliases, UTC offsets, and daylight-saving time changes.
 * Customizable - named exports and functions divided to separate modules allow tree-shaking. Alternative time zone data can be supplied to reduce the library size.
 
 ### Table of Contents

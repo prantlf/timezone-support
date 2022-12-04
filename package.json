@@ -1,6 +1,6 @@
 {
   "name": "timezone-support",
-  "version": "0.0.0-development",
+  "version": "2.0.2",
   "description": "Lightweight time zone support for your applications or other date libraries.",
   "author": {
     "name": "Ferdinand Prantl",
@@ -8,6 +8,7 @@
     "url": "http://prantl.tk"
   },
   "contributors": [
+    "Aaron Ross <superhawk610@gmail.com>",
     "Andrii Didkivsky <andrii.didkivsky@infopulse.com>",
     "Jason Yu <me@ycmjason.com>",
     "Luci Furtun <lucianfurtun@gmail.com>",
@@ -29,41 +30,79 @@
     "url": "https://github.com/prantlf/timezone-support/issues"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=14.8"
   },
   "bin": {
-    "create-timezone-data": "./bin/create-timezone-data"
+    "create-timezone-data": "bin/create-timezone-data.js"
   },
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./index": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./data": {
+      "require": "./dist/data.js",
+      "import": "./dist/data.mjs"
+    },
+    "./lookup-convert": {
+      "require": "./dist/lookup-convert.js",
+      "import": "./dist/lookup-convert.mjs"
+    },
+    "./parse-format": {
+      "require": "./dist/parse-format.js",
+      "import": "./dist/parse-format.mjs"
+    },
+    "./index-1900-2050": {
+      "require": "./dist/index-1900-2050.js",
+      "import": "./dist/index-1900-2050.mjs"
+    },
+    "./data-1900-2050": {
+      "require": "./dist/data-1900-2050.js",
+      "import": "./dist/data-1900-2050.mjs"
+    },
+    "./index-1970-2038": {
+      "require": "./dist/index-1970-2038.js",
+      "import": "./dist/index-1970-2038.mjs"
+    },
+    "./data-1970-2038": {
+      "require": "./dist/data-1970-2038.js",
+      "import": "./dist/data-1970-2038.mjs"
+    },
+    "./index-2012-2022": {
+      "require": "./dist/index-2012-2022.js",
+      "import": "./dist/index-2012-2022.mjs"
+    },
+    "./data-2012-2022": {
+      "require": "./dist/data-2012-2022.js",
+      "import": "./dist/data-2012-2022.mjs"
+    }
+  },
   "files": [
     "bin",
     "dist",
-    "src",
-    "util"
+    "util/data",
+    "util/data-creator.js"
   ],
   "scripts": {
     "prepare": "npm run build",
-    "lint": "run-s lint:js lint:ts",
-    "lint:fix": "standard --verbose --fix bin/create-timezone-data perf/*.js 'src/**/*.js' test/*.js util/*.js",
-    "lint:js": "standard --verbose bin/create-timezone-data perf/*.js 'src/**/*.js' test/*.js util/*.js",
-    "lint:ts": "tslint -t stylish src/*.ts src/lookup/*.ts test/*.ts",
-    "generate": "bin/create-timezone-data -ma -o src/lookup/data.js && bin/create-timezone-data -m 2012 2022 -o src/lookup/data-2012-2022.js && bin/create-timezone-data -m 1900 2050 -o src/lookup/data-1900-2050.js && bin/create-timezone-data -m 1970 2038 -o src/lookup/data-1970-2038.js",
+    "lint": "denolint",
+    "generate": "bin/create-timezone-data.js -ma -o src/lookup/data.js && bin/create-timezone-data.js -m 2012 2022 -o src/lookup/data-2012-2022.js && bin/create-timezone-data.js -m 1900 2050 -o src/lookup/data-1900-2050.js && bin/create-timezone-data.js -m 1970 2038 -o src/lookup/data-1970-2038.js",
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
-    "copy:typings": "cpy src/index.d.ts src --rename=index-2012-2022.d.ts && cpy src/index.d.ts src --rename=index-1970-2038.d.ts && cpy src/index.d.ts src --rename=index-1900-2050.d.ts && cpy 'src/*.d.ts' dist && cpy src/lookup/data.d.ts src/lookup --rename=data-2012-2022.d.ts && cpy src/lookup/data.d.ts src/lookup --rename=data-1970-2038.d.ts && cpy src/lookup/data.d.ts src/lookup --rename=data-1900-2050.d.ts && cpy 'src/lookup/*.d.ts' dist",
-    "build": "run-s lint generate compile copy:typings",
-    "compile:tests": "tsc --lib es6 test/typings.test.ts",
-    "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage",
+    "copy:types": "cp.js src/index.d.ts src/index-2012-2022.d.ts && cp.js src/index.d.ts src/index-1970-2038.d.ts && cp.js src/index.d.ts src/index-1900-2050.d.ts && cp.js src/*.d.ts dist && cp.js src/lookup/data.d.ts src/lookup/data-2012-2022.d.ts && cp.js src/lookup/data.d.ts src/lookup/data-1970-2038.d.ts && cp.js src/lookup/data.d.ts src/lookup/data-1900-2050.d.ts && cp.js src/lookup/*.d.ts dist",
+    "build": "npm run generate && rollup -c && npm run copy:types",
+    "compile:tests": "tsc --lib es6 test/types.test.ts",
+    "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage && node test/cjs.test.cjs && node test/esm.test.mjs",
     "check:browser": "jest --testPathPattern browser.test.js",
     "benchmark": "node perf",
-    "coverage": "cat coverage/lcov.info | coveralls",
-    "test": "run-s compile:tests check generate:browser-tests check:browser"
-  },
-  "standard": {
-    "ignore": [
-      "src/lookup/data*.js"
-    ]
+    "test": "denolint && npm run compile:tests && npm run check && npm run generate:browser-tests && npm run check:browser"
   },
   "jest": {
     "roots": [
@@ -83,47 +122,32 @@
         "functions": 100,
         "lines": 100
       }
-    }
-  },
-  "dependencies": {
-    "commander": "2.20.0"
+    },
+    "setupFilesAfterEnv": [
+      "./test/setup-jest.js"
+    ]
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/preset-env": "7.4.5",
-    "@types/jest": "24.0.13",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "24.8.0",
+    "@babel/core": "7.20.5",
+    "@babel/preset-env": "7.20.2",
+    "@rollup/plugin-babel": "6.0.3",
+    "@types/jest": "29.2.3",
+    "@unixcompat/cp.js": "1.0.0",
+    "babel-jest": "29.3.1",
     "benchmark": "2.1.4",
     "connect": "3.7.0",
-    "coveralls": "3.0.4",
-    "cpy-cli": "2.0.0",
-    "es6-promisify": "6.0.1",
-    "eslint-config-standard": "12.0.0",
-    "eslint-plugin-import": "2.17.3",
-    "eslint-plugin-node": "9.1.0",
-    "eslint-plugin-promise": "4.1.1",
-    "eslint-plugin-standard": "4.0.0",
-    "fast-glob": "2.2.7",
-    "fs-extra": "8.0.1",
-    "i": "0.3.6",
-    "jasmine-core": "3.4.0",
-    "jest": "24.8.0",
-    "moment-timezone": "0.5.25",
-    "npm": "6.9.0",
-    "npm-run-all": "4.1.5",
-    "puppeteer": "1.17.0",
-    "regenerator-runtime": "0.13.2",
-    "rimraf": "2.6.3",
-    "rollup": "1.14.6",
-    "rollup-plugin-babel": "4.3.2",
-    "rollup-plugin-clean": "1.0.0",
-    "rollup-plugin-uglify": "6.0.2",
-    "serve-static": "1.14.1",
-    "standard": "12.0.1",
-    "tslint": "5.17.0",
-    "tslint-config-standard": "8.0.1",
-    "typescript": "3.5.1"
+    "denolint": "2.0.5",
+    "fast-glob": "3.2.12",
+    "jasmine-core": "4.5.0",
+    "jest": "29.3.1",
+    "moment-timezone": "0.5.39",
+    "puppeteer": "19.3.0",
+    "rollup": "3.5.1",
+    "rollup-plugin-cleanup": "3.2.1",
+    "rollup-plugin-swc-minify": "1.0.5",
+    "serve-static": "1.15.0",
+    "timezone-support": "link:",
+    "typescript": "4.9.3"
   },
   "keywords": [
     "timezone",

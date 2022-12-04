@@ -12,21 +12,7 @@ let server
 let browser
 let page
 
-const customMatchers = {
-  toPass: function () {
-    return {
-      compare: function (result, message) {
-        return {
-          pass: result,
-          message: () => message
-        }
-      }
-    }
-  }
-}
-
 beforeAll(done => {
-  jasmine.addMatchers(customMatchers)
   server = connect()
     .use(serve(join(__dirname, '..'), { etag: false }))
     .listen(port, () => {
@@ -53,7 +39,7 @@ afterAll(done => {
 })
 
 const tests = readdirSync(join(__dirname, 'browser'))
-for (let test of tests) {
+for (const test of tests) {
   it(`Execute ${test}`, done => {
     let result
     page
@@ -72,9 +58,8 @@ for (let test of tests) {
           return { summary, duration, results }
         })
       })
-      .then(({ summary, duration, results }) => {
-        expect(result).toPass(`${summary}; ${duration}\n${results}`)
-        done()
-      })
+      .then(({ summary, duration, results }) =>
+        expect(result).toPass(`${summary}; ${duration}\n${results}`))
+      .finally(() => done())
   })
 }

@@ -1,6 +1,7 @@
 import {
-  listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
-} from '..'
+  listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime,
+  setTimeZone, convertTimeToDate, convertDateToTime
+} from 'timezone-support'
 import { populateTimeZones } from '../dist/lookup-convert'
 import { parseZonedTime, formatZonedTime } from '../dist/parse-format'
 
@@ -21,17 +22,14 @@ test('Type declarations for TypeScript', () => {
     ]
   }
 
-  let berlin
-  let berlinTime
-
   listTimeZones()
 
-  berlin = findTimeZone('Europe/Berlin')
+  const berlin = findTimeZone('Europe/Berlin')
 
   getUTCOffset(date, berlin)
   getUTCOffset(timestamp, berlin)
 
-  berlinTime = getZonedTime(date, berlin)
+  const berlinTime = getZonedTime(date, berlin)
   getZonedTime(timestamp, berlin)
 
   getUnixTime(time, berlin)

@@ -86,7 +86,7 @@ function addParseToken (tokens, property) {
   const callback = typeof property === 'string' ? function (input) {
     this[property] = +input
   } : property
-  for (let token of tokens) {
+  for (const token of tokens) {
     parseTokenFunctions[token] = callback
   }
 }

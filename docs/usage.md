@@ -80,7 +80,7 @@ See the function [getUnixTime](./API.md#getunixtime) for more information.
 Some applications let their users freely configure, how dates will be formatted. While date formatting is usually supplied by higher-level libraries, which support locales and include other functionality to manipulate dates, very simple formatting is available in this library too.
 
 ```js
-const { formatZonedTime } = require('timezone-support/dist/parse-format')
+const { formatZonedTime } = require('timezone-support/parse-format')
 
 const zonedTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
                     zone: { abbreviation: 'CEST', offset: -120 } }
@@ -94,7 +94,7 @@ See the function [formatZonedTime](./API.md#formatzonedtime) for more informatio
 Some applications let their users freely configure, what date format will be used when parsing strings. While string parsing is usually supplied by higher-level libraries, which support locales and include other functionality to manipulate dates, very simple parsing is available in this library too.
 
 ```js
-const { parseZonedTime } = require('timezone-support/dist/parse-format')
+const { parseZonedTime } = require('timezone-support/parse-format')
 
 const displayTime = '2.9.2018 10:00 CET+02:00'
 const zonedTime = parseZonedTime(displayTime, 'D.M.YYYY H:mm zZ')
@@ -183,8 +183,8 @@ Data for 2012-2022:  27 KB minified,  6.5 KB gzipped
 Custom time zone data can be used if the module `lookup-convert` is loaded instead of the default `index` module.
 
 ```html
-<script src="https://unpkg.com/timezone-support@2.0.2/dist/lookup-convert.umd.js"></script>
-<script src="https://unpkg.com/timezone-support@2.0.2/dist/data-2012-2022.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@3.0.0/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@3.0.0/dist/data-2012-2022.umd.js"></script>
 <script>
   (() => {
     const { populateTimeZones, findTimeZone, getZonedTime } = window.timezoneSupport
@@ -202,7 +202,7 @@ Custom time zone data can be used if the module `lookup-convert` is loaded inste
 If you want to use the time zone data for years 2012-2022 published by this project, you can simplify your code by using a bundled package with both data and code.
 
 ```html
-<script src="https://unpkg.com/timezone-support@2.0.2/dist/index-2012-2022.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@3.0.0/dist/index-2012-2022.umd.js"></script>
 <script>
   (() => {
     const { findTimeZone, getZonedTime } = window.timezoneSupport
@@ -214,7 +214,16 @@ If you want to use the time zone data for years 2012-2022 published by this proj
 </script>
 ```
 
-The following data modules ara published within this project:
+The following data modules ara published within this project to be used in Node.js:
+
+```txt
+timezone-support/data
+timezone-support/data-1900-2050
+timezone-support/data-1970-2038
+timezone-support/data-2012-2022
+```
+
+and in the browser:
 
 ```txt
 dist/data.umd.js
@@ -223,7 +232,16 @@ dist/data-1970-2038.umd.js
 dist/data-2012-2022.umd.js
 ```
 
-The following complete (code+data) modules ara published within this project:
+The following complete (code+data) modules ara published within this project to be used in Node.js:
+
+```txt
+timezone-support/index
+timezone-support/index-1900-2050
+timezone-support/index-1970-2038
+timezone-support/index-2012-2022
+```
+
+and in the browser:
 
 ```txt
 dist/index.umd.js
@@ -244,10 +262,10 @@ For example, you can generate time zone data for years 1978-2028 and save it to 
 create-timezone-data -c -o custom-data-1978-2028.js 1978 2028
 ```
 
-And then load them instead of the default full time zone data. You need to require `timezone-support/dist/lookup-convert` instead of `timezone-support` everywhere in your application and populate the library with the custom data, when your application starts:
+And then load them instead of the default full time zone data. You need to require `timezone-support/lookup-convert` instead of `timezone-support` everywhere in your application and populate the library with the custom data, when your application starts:
 
 ```js
-const { populateTimeZones } = require('timezone-support/dist/lookup-convert')
+const { populateTimeZones } = require('timezone-support/lookup-convert')
 const data = require('./data-1978-2028')
 
 populateTimeZones(data)
@@ -262,7 +280,7 @@ create-timezone-data -u -o custom-data-1978-2028.js -n timezoneData10782028 1978
 And then load them at the beginning of a plain JavaScript application:
 
 ```html
-<script src="https://unpkg.com/timezone-support/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@3.0.0/dist/lookup-convert.umd.js"></script>
 <script src="./data-1978-2028.js"></script>
 <script>
   (() => {
@@ -277,7 +295,7 @@ Or load it in an application using AMD modules:
 
 ```html
 <script src="https://unpkg.com/requirejs/require.js"></script>
-<script src="https://unpkg.com/timezone-support/dist/lookup-convert.umd.js"></script>
+<script src="https://unpkg.com/timezone-support@3.0.0/dist/lookup-convert.umd.js"></script>
 <script src="./data-1978-2028.js"></script>
 <script>
   require([

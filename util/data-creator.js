@@ -1,5 +1,6 @@
-const { outputFile: writeFile } = require('fs-extra')
-const tz = require('../node_modules/moment-timezone/moment-timezone-utils').tz
+const { mkdir, writeFile } = require('fs/promises')
+const { dirname } = require('path')
+const tz = require('moment-timezone/moment-timezone-utils').tz
 const groupLeaders = require('./data/group-leaders.json')
 const unpackedTimeZoneData = require('./data/unpacked.json')
 const packedTimeZoneData = require('./data/packed.json')
@@ -35,7 +36,7 @@ function formatUMDModule (content, umdName) {
 })))`
 }
 
-function createTimeZoneData (options = {}) {
+async function createTimeZoneData (options = {}) {
   const {
     asModule, asCjsModule, asAmdModule, asUmdModule, umdName,
     firstYear, lastYear, outputFile
@@ -57,9 +58,11 @@ function createTimeZoneData (options = {}) {
     } else {
       console.log(`Writing all time zone data to "${outputFile}"...`)
     }
-    return writeFile(outputFile, content)
+    const outputDir = dirname(outputFile)
+    if (outputDir !== '.') await mkdir(outputDir, { recursive: true })
+    await writeFile(outputFile, content)
   }
-  return Promise.resolve(content)
+  return content
 }
 
 exports.createTimeZoneData = createTimeZoneData

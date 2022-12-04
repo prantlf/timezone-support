@@ -1,9 +1,6 @@
 const { join } = require('path')
-const { promisify } = require('util')
-let { readdir } = require('fs')
-let { exec } = require('child_process')
-
-readdir = promisify(readdir)
+const { readdir } = require('fs/promises')
+const { exec } = require('child_process')
 
 const benchmarks = join(__dirname, '../perf')
 
@@ -33,7 +30,7 @@ function runSuite (suite) {
 (async function () {
   try {
     const suites = await listSuites()
-    for (let suite of suites) {
+    for (const suite of suites) {
       await runSuite(suite)
       console.log()
     }
