@@ -122,11 +122,10 @@ Returns a `Date` object equal to the given [time object], converting the time zo
 * `time` - a complete [time object]
 
 ```js
-const { findTimeZone, convertTimeToDate } = require('timezone-support')
-const berlin = findTimeZone('Europe/Berlin')
-const berlinTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
-                     zone: { abbreviation: 'CEST', offset: -120 } }
-const date = convertTimeToDate(date, berlin)
+const { convertTimeToDate } = require('timezone-support')
+const localTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
+                    zone: { abbreviation: 'CEST', offset: -120 } }
+const date = convertTimeToDate(date)
 // Returns a date in the local time
 ```
 
