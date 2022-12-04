@@ -1,7 +1,7 @@
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import { uglify } from 'rollup-plugin-uglify'
+import { babel } from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import { minify } from 'rollup-plugin-swc-minify'
 
 export default [
   {
@@ -17,8 +17,8 @@ export default [
         sourceMap: false
       }),
       nodeResolve(),
-      babel({ exclude: 'node_modules/**' }),
-      uglify()
+      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      minify()
     ]
   }
 ]

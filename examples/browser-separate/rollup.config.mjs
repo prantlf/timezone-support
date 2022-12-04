@@ -1,5 +1,5 @@
-import babel from 'rollup-plugin-babel'
-import { uglify } from 'rollup-plugin-uglify'
+import { babel } from '@rollup/plugin-babel'
+import { minify } from 'rollup-plugin-swc-minify'
 
 export default [
   {
@@ -9,15 +9,15 @@ export default [
     ],
     output: {
       file: 'out/app.js',
-      format: 'cjs',
+      format: 'iife',
       globals: {
         'timezone-support': 'timezoneSupport'
       },
       sourcemap: true
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' }),
-      uglify()
+      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      minify()
     ]
   }
 ]

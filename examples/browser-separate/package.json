@@ -23,38 +23,30 @@
     "url": "https://github.com/prantlf/timezone-support/issues"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=14.8"
   },
   "scripts": {
-    "prepare": "run-s build:complete",
-    "lint": "standard --verbose",
-    "lint:fix": "standard --verbose --fix",
-    "compile": "rollup -c",
-    "copy:pages": "cpy src/app.html out",
-    "copy:complete": "cpy node_modules/timezone-support/dist/index.umd.js out --rename=timezone-support.js && cpy node_modules/timezone-support/dist/index.umd.js.map out --rename=timezone-support.js.map",
-    "copy:limited": "cpy node_modules/timezone-support/dist/index-1970-2038.umd.js out --rename=timezone-support.js && cpy node_modules/timezone-support/dist/index-1970-2038.umd.js.map out --rename=timezone-support.js.map",
-    "copy": "run-s copy:pages copy:scripts",
-    "build:complete": "run-s lint copy:pages copy:complete compile",
-    "build:limited": "run-s lint copy:pages copy:limited compile"
-  },
-  "standard": {
-    "ignore": [
-      "out"
-    ]
+    "prepare": "npm run build:complete",
+    "lint": "denolint",
+    "copy:complete": "cp.js node_modules/timezone-support/dist/index.umd.js out/timezone-support.js && cp.js node_modules/timezone-support/dist/index.umd.js.map out/timezone-support.js.map",
+    "copy:limited": "cp.js node_modules/timezone-support/dist/index-1970-2038.umd.js out/timezone-support.js && cp.js node_modules/timezone-support/dist/index-1970-2038.umd.js.map out/timezone-support.js.map",
+    "build:complete": "rollup -c && cp.js src/app.html out && npm run copy:complete",
+    "build:limited": "rollup -c && cp.js src/app.html out && npm run copy:limited",
+    "test": "denolint && node src/run"
   },
   "dependencies": {
-    "timezone-support": "2.0.x"
+    "timezone-support": "link:../.."
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "babel-core": "7.0.0-bridge.0",
-    "cpy-cli": "2.0.0",
-    "npm-run-all": "4.1.5",
-    "regenerator-runtime": "0.13.2",
-    "rollup": "1.14.6",
-    "rollup-plugin-babel": "4.3.2",
-    "rollup-plugin-uglify": "6.0.2",
-    "serve-static": "1.14.1",
-    "standard": "12.0.1"
+    "@babel/core": "7.20.5",
+    "@babel/preset-env": "7.20.2",
+    "@rollup/plugin-babel": "6.0.3",
+    "@unixcompat/cp.js": "1.0.0",
+    "colorette": "2.0.19",
+    "connect": "3.7.0",
+    "puppeteer": "19.3.0",
+    "rollup": "3.5.1",
+    "rollup-plugin-swc-minify": "1.0.5",
+    "serve-static": "1.15.0"
   }
 }

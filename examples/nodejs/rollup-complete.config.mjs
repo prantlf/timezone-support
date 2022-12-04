@@ -1,5 +1,4 @@
-import babel from 'rollup-plugin-babel'
-import clean from 'rollup-plugin-clean'
+import cleanup from 'rollup-plugin-cleanup'
 
 export default [
   {
@@ -12,8 +11,7 @@ export default [
       format: 'cjs'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' }),
-      clean()
+      cleanup()
     ]
   }
 ]
