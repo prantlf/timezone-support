@@ -18,7 +18,7 @@ function makeFormatter (format) {
   }
   return function (time) {
     let output = ''
-    for (let token of array) {
+    for (const token of array) {
       output += typeof token === 'function' ? token.call(time) : token
     }
     return output

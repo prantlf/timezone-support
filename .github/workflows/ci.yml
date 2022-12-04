@@ -1,0 +1,46 @@
+name: Test or Release
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test-or-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Sources
+      uses: actions/checkout@v2
+    - name: Install Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 'lts/*'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: '>=6'
+        run_install: |
+          - args: [--frozen-lockfile, --no-verify-store-integrity]
+    - name: Test
+      run: npm test
+    - name: Examples
+      run: |
+        cd examples/nodejs
+        pnpm i --frozen-lockfile --no-verify-store-integrity
+        npm test
+        cd ../browser-separate
+        pnpm i --frozen-lockfile --no-verify-store-integrity
+        npm test
+        cd ../browser-bundled
+        pnpm i --frozen-lockfile --no-verify-store-integrity
+        npm test
+    - name: Coverage
+      uses: codecov/codecov-action@v2
+    - name: Publish
+      uses: cycjimmy/semantic-release-action@v2
+      with:
+        semantic_version: 18
+        branches: master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

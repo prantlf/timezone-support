@@ -1,25 +1,21 @@
-const { readFile, outputFile } = require('fs-extra')
-const { promisify } = require('es6-promisify')
+const { mkdir, readFile, rm, writeFile } = require('fs/promises')
 const { join } = require('path')
 const glob = require('fast-glob')
-let rimraf = require('rimraf')
-
-rimraf = promisify(rimraf)
 
 const tests = join(__dirname, '../test')
 const browserTests = join(tests, 'browser')
-const nonBrowserTests = ['browser.test.js', 'typings.test.js']
+const nonBrowserTests = ['browser.test.js', 'types.test.js']
 const importFunctionsExpression = /import ({[^}]+}) from '..\/src\/([^']+)'/
 const importDataExpression = /import (\w+) from '..\/src\/lookup\/([^']+)'/
 
 function readTemplate () {
   console.log(`Reading browser test template...`)
-  return readFile(join(tests, 'browser.html'), { encoding: 'utf-8' })
+  return readFile(join(tests, 'browser.html'), 'utf8')
     .then(template => template.split('\n'))
 }
 
 function readTest (file) {
-  return readFile(join(tests, file), { encoding: 'utf-8' })
+  return readFile(join(tests, file), 'utf8')
     .then(content => {
       content = content.split('\n')
       return content.slice(2, content.length - 1)
@@ -78,7 +74,8 @@ function formatPage (template, contentIndex, content) {
 
 console.log(`Deleting existing browser tests...`)
 let template
-rimraf(browserTests)
+rm(browserTests, { recursive: true, force: true })
+  .then(() => mkdir(browserTests, { recursive: true }))
   .then(() => readTemplate())
   .then(result => {
     template = result
@@ -95,7 +92,7 @@ rimraf(browserTests)
             .then(content => {
               content = formatPage(template, scriptIndex, content)
               file = join(browserTests, file.substr(0, file.length - 2) + 'html')
-              return outputFile(file, content.join('\n'))
+              return writeFile(file, content.join('\n'))
             })
         )
       }, Promise.resolve())

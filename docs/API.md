@@ -34,9 +34,7 @@ const { findTimeZone, getZonedTime } = require('timezone-support')
 Load the main module in an application using ES6 modules:
 
 ```js
-import {
-  findTimeZone, getZonedTime
-} from './node_modules/timezone-support/src/index.js'
+import { findTimeZone, getZonedTime } from 'timezone-support'
 ```
 
 Load the main module in the browser with plain JavaScript:
@@ -50,11 +48,19 @@ Load the main module in the browser with plain JavaScript:
 </script>
 ```
 
-You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@2.0.2/dist/index.umd.js.
+You can also load a specific version from CDN, for example: https://unpkg.com/timezone-support@3.0.0/dist/index.umd.js.
+
+Load the main module in Node.js older than 14.8, which didn't support `exports` in `package.json`:
+
+```js
+import {
+  findTimeZone, getZonedTime
+} from './node_modules/timezone-support/dist/index.mjs'
+```
 
 ## Modules
 
-Modules in the `src` directory require ES6 including the new module syntax, as available in Node.js 8 and newer. Modules in the `dist` directory require ES5 and follow the CommonJS standard for older Node.js releases. Files `dist/*.umd.js` require ES5, are minified and follow the UMD standard to work well in web browsers.
+Modules `dist/*.mjs` require ES6 including the new module syntax, as available in Node.js 8 and newer. Modules `dist/*.js` require ES5 and follow the CommonJS standard for older Node.js releases. Files `dist/*.umd.js` require ES5, are minified and follow the UMD standard to work well in web browsers.
 
 ### index
 
@@ -62,8 +68,14 @@ Main package module. The most usually chosen module with time zone lookup and da
 
 ```
 const { ... } = require('timezone-support')
-import { ... } from './node_modules/timezone-support/src/index.js'
+import { ... } from 'timezone-support'
 <script src="./node_modules/timezone-support/dist/index.umd.js"></script>
+```
+
+Importing in Node.js older than 14.8, which didn't support `exports` in `package.json`:
+
+```
+import { ... } from './node_modules/timezone-support/dist/index.mjs'
 ```
 
 ### lookup-convert
@@ -72,8 +84,14 @@ Offers the time zone lookup and date conversion functionality, like the `index` 
 
 ```
 const { ... } = require('timezone-support/dist/lookup-convert')
-import { ... } from './node_modules/timezone-support/src/lookup-convert.js'
+import { ... } from 'timezone-support/lookup-convert'
 <script src="./node_modules/timezone-support/dist/lookup-convert.umd.js"></script>
+```
+
+Importing in Node.js older than 14.8, which didn't support `exports` in `package.json`:
+
+```
+import { ... } from './node_modules/timezone-support/dist/lookup-convert.mjs'
 ```
 
 ### parse-format
@@ -82,8 +100,14 @@ Offers a minimal date parsing and formatting support, if you want to use this li
 
 ```
 const { ... } = require('timezone-support/dist/parse-format')
-import { ... } from './node_modules/timezone-support/src/parse-format.js'
+import { ... } from 'timezone-support/parse-format'
 <script src="./node_modules/timezone-support/dist/parse-format.umd.js"></script>
+```
+
+Importing in Node.js older than 14.8, which didn't support `exports` in `package.json`:
+
+```
+import { ... } from './node_modules/timezone-support/dist/parse-format.mjs'
 ```
 
 ## Functions
@@ -156,7 +180,7 @@ formatZonedTime(time: Time, format: string) : string
 Formats a [time object] using a custom format pattern to a string.
 
 ```js
-const { formatZonedTime } = require('timezone-support/dist/parse-format')
+const { formatZonedTime } = require('timezone-support/parse-format')
 
 const time = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0,
                zone: { abbreviation: 'CEST', offset: -120 } }
@@ -293,7 +317,7 @@ parseZonedTime(input: string, format: string) : Time
 Parses a date string using a custom format pattern to a [time object]. If the string does not contain a time zone offset, it can be added by [setTimeZone](#settimezone).
 
 ```js
-const { parseZonedTime } = require('timezone-support/dist/parse-format')
+const { parseZonedTime } = require('timezone-support/parse-format')
 
 const input = '2.9.2018 10:00 CEST+02:00'
 const format = 'D.M.YYYY H:mm zZ'
@@ -354,15 +378,15 @@ const data = {
 }
 ```
 
-See the [moment-timezone's latest data](../util/data/packed.json) as an example of the full data, which you can take a smaller part of to your application. This library includes [limited data for this decade](http://unpkg.com/timezone-support/dist/data-2012-2022.js) and [two other year spans](../src/lookup/). Read also abot [generation of custom time zone data](./usage.md#generate-custom-time-zone-data), which allows production of a module with smaller, limited time zone data for other time periods.
+See the [moment-timezone's latest data](../util/data/packed.json) as an example of the full data, which you can take a smaller part of to your application. This library includes [limited data for this decade](http://unpkg.com/timezone-support@3.0.0/dist/data-2012-2022.js) and [two other year spans](../src/lookup/). Read also abot [generation of custom time zone data](./usage.md#generate-custom-time-zone-data), which allows production of a module with smaller, limited time zone data for other time periods.
 
 If this function is called later, than during the application startup, the behaviour of this module may be unpredictable. Some time zone data might be used and cached in the application. You should avoid re-initialization to prevent hidden errors.
 
 This function is not exported from the `index` module to prevent usage mistakes, because that module includes the complete time zone data already.
 
 ```js
-const { populateTimeZones, findTimeZone, getZonedTime } = require('timezone-support/dist/lookup-convert')
-const data = require('timezone-support/dist/data-2012-2022')
+const { populateTimeZones, findTimeZone, getZonedTime } = require('timezone-support/lookup-convert')
+const data = require('timezone-support/data-2012-2022')
 
 // Get the time zone support ready to handle dates from years 2012-2022.
 populateTimeZones(data)

@@ -48,7 +48,8 @@ declare function convertTimeToDate (time: Time): Date
 declare function convertDateToTime (date: Date): Time
 
 export {
-  populateTimeZones, listTimeZones, findTimeZone, getUTCOffset, getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
+  populateTimeZones, listTimeZones, findTimeZone, getUTCOffset, getZonedTime,
+  getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
 }
 
 // export as namespace timezoneLookupConvert;
