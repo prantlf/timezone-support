@@ -1,6 +1,6 @@
 {
   "name": "timezone-support",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Lightweight time zone support for your applications or other date libraries.",
   "author": {
     "name": "Ferdinand Prantl",

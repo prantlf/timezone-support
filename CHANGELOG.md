@@ -1,3 +1,19 @@
+# [2.2.0](https://github.com/prantlf/timezone-support/compare/v2.1.1...v2.2.0) (2022-12-04)
+
+
+### Bug Fixes
+
+* Moving moment-timezone to general dependencies ([38ed217](https://github.com/prantlf/timezone-support/commit/38ed217a442642f923fd79285d1bdb01de1d3057))
+* TimeZoneInfo type ([b857fac](https://github.com/prantlf/timezone-support/commit/b857fac3216682f70c291910b48fc104abf8c6b6))
+* TimeZoneInfo type ([9058a1c](https://github.com/prantlf/timezone-support/commit/9058a1c0c2957c4b0d33191152a81a2549aec2c5))
+
+
+### Features
+
+* Expose alias timezones links ([7177547](https://github.com/prantlf/timezone-support/commit/7177547ae136c23684bda66eebab3b2b2a49406c))
+
+
+
 ## [2.1.1](https://github.com/prantlf/timezone-support/compare/v2.0.2...v2.1.1) (2022-12-04)
 
 
