@@ -10,6 +10,9 @@
   "contributors": [
     "Aaron Ross <superhawk610@gmail.com>",
     "Andrii Didkivsky <andrii.didkivsky@infopulse.com>",
+    "econdepe <econdepe@protonmail.com>",
+    "edu san <33841139+econdepe@users.noreply.github.com>",
+    "Everton Ribeiro <nuxlli@gmail.com>",
     "Jason Yu <me@ycmjason.com>",
     "Luci Furtun <lucianfurtun@gmail.com>",
     "Pascal Honegger <pascal.honegger@bluewin.ch>"
@@ -88,7 +91,7 @@
   },
   "dependencies": {
     "commander": "2.20.0",
-    "moment-timezone": "^0.5.26"
+    "moment-timezone": "0.5.26"
   },
   "devDependencies": {
     "@babel/core": "7.4.5",
