@@ -1,5 +1,5 @@
 {
-  "name": "timezone-support",
+  "name": "@zenchef/timezone-support",
   "version": "2.0.2",
   "description": "Lightweight time zone support for your applications or other date libraries.",
   "author": {
@@ -47,45 +47,53 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
-    "./index": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+    "./dist/index": {
+      "require": "./dist/index-2023-2028.js",
+      "import": "./dist/index-2023-2028.mjs"
     },
-    "./data": {
-      "require": "./dist/data.js",
-      "import": "./dist/data.mjs"
+    "./dist/data": {
+      "require": "./dist/data-2023-2028.js",
+      "import": "./dist/data-2023-2028.mjs"
     },
-    "./lookup-convert": {
+    "./dist/lookup-convert": {
       "require": "./dist/lookup-convert.js",
       "import": "./dist/lookup-convert.mjs"
     },
-    "./parse-format": {
+    "./dist/parse-format": {
       "require": "./dist/parse-format.js",
       "import": "./dist/parse-format.mjs"
     },
-    "./index-1900-2050": {
+    "./dist/index-1900-2050": {
       "require": "./dist/index-1900-2050.js",
       "import": "./dist/index-1900-2050.mjs"
     },
-    "./data-1900-2050": {
+    "./dist/data-1900-2050": {
       "require": "./dist/data-1900-2050.js",
       "import": "./dist/data-1900-2050.mjs"
     },
-    "./index-1970-2038": {
+    "./dist/index-1970-2038": {
       "require": "./dist/index-1970-2038.js",
       "import": "./dist/index-1970-2038.mjs"
     },
-    "./data-1970-2038": {
+    "./dist/data-1970-2038": {
       "require": "./dist/data-1970-2038.js",
       "import": "./dist/data-1970-2038.mjs"
     },
-    "./index-2012-2022": {
+    "./dist/index-2012-2022": {
       "require": "./dist/index-2012-2022.js",
       "import": "./dist/index-2012-2022.mjs"
     },
-    "./data-2012-2022": {
+    "./dist/data-2012-2022": {
       "require": "./dist/data-2012-2022.js",
       "import": "./dist/data-2012-2022.mjs"
+    },
+    "./dist/index-2023-2028": {
+      "require": "./dist/index-2023-2028.js",
+      "import": "./dist/index-2023-2028.mjs"
+    },
+    "./dist/data-2023-2028": {
+      "require": "./dist/data-2023-2028.js",
+      "import": "./dist/data-2023-2028.mjs"
     }
   },
   "files": [
@@ -97,10 +105,10 @@
   "scripts": {
     "prepare": "npm run build",
     "lint": "denolint",
-    "generate": "bin/create-timezone-data.js -ma -o src/lookup/data.js && bin/create-timezone-data.js -m 2012 2022 -o src/lookup/data-2012-2022.js && bin/create-timezone-data.js -m 1900 2050 -o src/lookup/data-1900-2050.js && bin/create-timezone-data.js -m 1970 2038 -o src/lookup/data-1970-2038.js",
+    "generate": "bin/create-timezone-data.js -ma -o src/lookup/data.js && bin/create-timezone-data.js -m 2012 2022 -o src/lookup/data-2012-2022.js && bin/create-timezone-data.js -m 2023 2028 -o src/lookup/data-2023-2028.js && bin/create-timezone-data.js -m 1900 2050 -o src/lookup/data-1900-2050.js && bin/create-timezone-data.js -m 1970 2038 -o src/lookup/data-1970-2038.js",
     "generate:browser-tests": "node util/generate-browser-tests",
     "compile": "rollup -c",
-    "copy:types": "cp.js src/index.d.ts src/index-2012-2022.d.ts && cp.js src/index.d.ts src/index-1970-2038.d.ts && cp.js src/index.d.ts src/index-1900-2050.d.ts && cp.js src/*.d.ts dist && cp.js src/lookup/data.d.ts src/lookup/data-2012-2022.d.ts && cp.js src/lookup/data.d.ts src/lookup/data-1970-2038.d.ts && cp.js src/lookup/data.d.ts src/lookup/data-1900-2050.d.ts && cp.js src/lookup/*.d.ts dist",
+    "copy:types": "cp.js src/index.d.ts src/index-2012-2022.d.ts && cp.js src/index.d.ts src/index-2023-2028.d.ts && cp.js src/index.d.ts src/index-1970-2038.d.ts && cp.js src/index.d.ts src/index-1900-2050.d.ts && cp.js src/*.d.ts dist && cp.js src/lookup/data.d.ts src/lookup/data-2023-2028.d.ts && cp.js src/lookup/data.d.ts src/lookup/data-1970-2038.d.ts && cp.js src/lookup/data.d.ts src/lookup/data-1900-2050.d.ts && cp.js src/lookup/*.d.ts dist",
     "build": "npm run generate && rollup -c && npm run copy:types",
     "compile:tests": "tsc --lib es6 test/types.test.ts",
     "check": "jest --testPathIgnorePatterns \"browser.test.js\" --collectCoverage && node test/cjs.test.cjs && node test/esm.test.mjs",

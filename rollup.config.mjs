@@ -63,6 +63,24 @@ export default [
     ]
   },
   {
+    input: 'src/index-2023-2028.js',
+    output: [
+      {
+        file: 'dist/index-2023-2028.js',
+        format: 'cjs',
+        sourcemap: true
+      },
+      {
+        file: 'dist/index-2023-2028.mjs',
+        sourcemap: true
+      }
+    ],
+    plugins: [
+      babel(babelOptions),
+      cleanup()
+    ]
+  },
+  {
     input: 'src/index-1900-2050.js',
     output: [
       {
@@ -153,6 +171,24 @@ export default [
     ]
   },
   {
+    input: 'src/lookup/data-2023-2028.js',
+    output: [
+      {
+        file: 'dist/data-2023-2028.js',
+        format: 'cjs',
+        sourcemap: true
+      },
+      {
+        file: 'dist/data-2023-2028.mjs',
+        sourcemap: true
+      }
+    ],
+    plugins: [
+      babel(babelOptions),
+      cleanup()
+    ]
+  },
+  {
     input: 'src/lookup/data-1900-2050.js',
     output: [
       {
@@ -228,6 +264,19 @@ export default [
     ]
   },
   {
+    input: 'src/index-2023-2028.js',
+    output: {
+      file: 'dist/index-2023-2028.umd.js',
+      format: 'umd',
+      name: 'timezoneSupport',
+      sourcemap: true
+    },
+    plugins: [
+      babel(babelOptions),
+      minify()
+    ]
+  },
+  {
     input: 'src/index-1900-2050.js',
     output: {
       file: 'dist/index-1900-2050.umd.js',
@@ -283,6 +332,19 @@ export default [
     input: 'src/lookup/data-2012-2022.js',
     output: {
       file: 'dist/data-2012-2022.umd.js',
+      format: 'umd',
+      name: 'timezoneData',
+      sourcemap: true
+    },
+    plugins: [
+      babel(babelOptions),
+      minify()
+    ]
+  },
+  {
+    input: 'src/lookup/data-2023-2028.js',
+    output: {
+      file: 'dist/data-2023-2028.umd.js',
       format: 'umd',
       name: 'timezoneData',
       sourcemap: true
