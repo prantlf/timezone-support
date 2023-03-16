@@ -44,7 +44,8 @@ declare function convertDateToTime (date: Date): Time
 
 export {
   listTimeZones, getTimeZoneLinks, findTimeZone, getUTCOffset, getZonedTime,
-  getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
+  getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime,
+  DateInput, TimeZoneInfo, TimeZoneOffset, Time, SetTimeZoneOptions,
 }
 
 // export as namespace timezoneSupport;

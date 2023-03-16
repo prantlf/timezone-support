@@ -50,7 +50,8 @@ declare function convertDateToTime (date: Date): Time
 
 export {
   populateTimeZones, listTimeZones, getTimeZoneLinks, findTimeZone, getUTCOffset,
-  getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime
+  getZonedTime, getUnixTime, setTimeZone, convertTimeToDate, convertDateToTime,
+  DateInput, TimeZoneInfo, TimeZoneOffset, Time, SetTimeZoneOptions, PackedTimeZones, TimeZoneData,
 }
 
 // export as namespace timezoneLookupConvert;
