@@ -22,16 +22,16 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/prantlf/timezone-support/blob/master/LICENSE"
+      "url": "https://github.com/zenchef/timezone-support/blob/master/LICENSE"
     }
   ],
-  "homepage": "https://github.com/prantlf/timezone-support#readme",
+  "homepage": "https://github.com/zenchef/timezone-support#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prantlf/timezone-support.git"
+    "url": "https://github.com/zenchef/timezone-support.git"
   },
   "bugs": {
-    "url": "https://github.com/prantlf/timezone-support/issues"
+    "url": "https://github.com/zenchef/timezone-support/issues"
   },
   "engines": {
     "node": ">=14.8"
