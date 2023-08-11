@@ -48,17 +48,25 @@ function getUnixTime (time, timeZone) {
     return epoch
   }
   const unixTime = getUnixTimeFromUTC(time)
+  let convertedUnixTime;
   if (zone) {
     if (timeZone) {
       throw new Error('Both own and other time zones specified. Omit the other one.')
     }
+    convertedUnixTime = unixTime + zone.offset * 60000
   } else {
     if (!timeZone) {
       throw new Error('Missing other time zone.')
     }
     zone = getTransition(unixTime, timeZone)
+    convertedUnixTime = unixTime + zone.offset * 60000
+    const convertedZoneOffset = getTransition(convertedUnixTime, timeZone).offset
+    // check if the converted date may have moved to a different offset (probably because of a DST switch)
+    if (convertedZoneOffset !== zone.offset) {
+      convertedUnixTime = unixTime + convertedZoneOffset * 60000
+    }
   }
-  return unixTime + zone.offset * 60000
+  return convertedUnixTime
 }
 
 function setTimeZone (time, timeZone, options) {

@@ -84,6 +84,24 @@ it('recognizes daylight-saving time', () => {
   expect(unixTime).toEqual(epoch)
 })
 
+it('recognizes daylight-saving time switch point of explicit timezone', () => {
+  // This test depends on what local TZ it is being executed in!!!
+  // The local TZ has to be at least 2 hours closer to UTC than Melbourne
+  // The TZ where this has been confirmed was UTC+3 (Europe/Sofia)
+  // This test shall fail without the fix because the UTC moment is after the DST switch and the target moment is before that
+  const melbourneTime = {
+    year: 2023,
+    month: 10,
+    day: 1,
+    hours: 0,
+    minutes: 0
+  }
+  const unixTime = getUnixTime(melbourneTime, findTimeZone('Australia/Melbourne'))
+  expect(typeof unixTime === 'number').toBeTruthy()
+  const epoch = Date.UTC(2023, 8, 30, 14, 0)
+  expect(unixTime).toEqual(epoch)
+})
+
 it('checks, that other time zone is specified, if required', () => {
   const berlinTime = {
     year: 2018,

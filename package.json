@@ -152,7 +152,7 @@
     "rollup-plugin-cleanup": "3.2.1",
     "rollup-plugin-swc-minify": "1.0.5",
     "serve-static": "1.15.0",
-    "timezone-support": "link:",
+    "timezone-support": "file:",
     "typescript": "4.9.3"
   },
   "keywords": [
