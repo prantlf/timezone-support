@@ -234,7 +234,7 @@ Returns a Unix timestamp (UTC) for the given incomplete [time object] converted 
 const { findTimeZone, getUnixTime } = require('timezone-support')
 const berlin = findTimeZone('Europe/Berlin')
 const berlinTime = { year: 2018, month: 9, day: 2, hours: 10, minutes: 0 }
-const date = getZonedTime(berlinTime, berlin)
+const date = getUnixTime(berlinTime, berlin)
 // Returns the UNIX timestamp (UTC) in milliseconds
 ```
 
